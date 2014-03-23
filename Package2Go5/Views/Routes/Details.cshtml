@@ -1,0 +1,89 @@
+﻿@model Package2Go5.Models.ViewModels.RoutesView
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Details</h2>
+
+<fieldset>
+    <legend>RoutesView</legend>
+
+    @Html.Hidden("fromCoord", Model.fromCoord.Latitude)
+    @Html.Hidden("fromCoord", Model.fromCoord.Longitude)
+
+    <div id="waypoints">
+        <div>Montreal, QBC</div>
+        <div>Toronto, ONT</div>
+        <div>Chicago</div>
+        <div>Winnipeg</div>
+        <div>Fargo</div>
+        <div>Calgary</div>
+        <div>Spokane</div>
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.from)
+    </div>
+    <div class="display-field from">
+        @Html.DisplayFor(model => model.from)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.to)
+    </div>
+    <div class="display-field to">
+        @Html.DisplayFor(model => model.to)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.departure_time)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.departure_time)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.delivery_time)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.delivery_time)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.status_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.status_id)
+    </div>
+
+    <!-- This is the div that will contain the Google Map -->
+    
+</fieldset>
+
+<button type="button" onclick="addWayPoint()">Add Way Point</button>
+
+<style type="text/css">
+
+    * { font-family:Arial; }
+h2 { padding:0 0 5px 5px; }
+h2 a { color: #224f99; }
+a { color:#999; text-decoration: none; }
+a:hover { color:#802727; }
+p { padding:0 0 5px 0; }
+
+input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
+
+</style>
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
+    @Styles.Render("~/Content/GMapApi")
+}

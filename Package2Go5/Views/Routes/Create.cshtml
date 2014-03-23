@@ -1,0 +1,80 @@
+﻿@model Package2Go5.Models.ViewModels.RoutesView
+
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View1</h2>
+<div id="wrapper" style="position:relative">
+    <div id="map_canvas" style="height: 600px; width: 100%;"></div>
+    <div id="over_map" style="position:absolute; left:100px; top:0px;">
+        @using (Html.BeginForm("Create", "Routes", System.Web.Mvc.FormMethod.Post, new { @class="clearfix" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset style="float:left;">
+                <legend></legend>      
+        
+                <div class="editor-field">
+                    <ul id="waypoints">
+                        <li>
+                            @Html.EditorFor(model => model.from)
+                            @Html.ValidationMessageFor(model => model.from)
+                        </li>
+                        <li>
+                            <input class="waypoint" name="waypoint_1" type="text" value="" placeholder="Way Point">
+                            <a href="#" id="remWaypoint">Remove</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" id="addWaypoint">Add Another Input Box</a>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.departure_time)
+                </div>
+                <div class="editor-field">
+                    @Html.JQueryUI().DatepickerFor(model => model.departure_time)
+                    @Html.ValidationMessageFor(model => model.departure_time)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.delivery_time)
+                </div>
+                <div class="editor-field">
+                    @Html.JQueryUI().DatepickerFor(model => model.delivery_time)
+                    @Html.ValidationMessageFor(model => model.delivery_time)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.status_id)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.status_id, (System.Web.Mvc.SelectList)ViewBag.status)
+                    @Html.ValidationMessageFor(model => model.status_id)
+                </div>
+
+                <p>
+                    <input type="submit" value="Create" />
+                </p>
+
+            </fieldset>
+        }
+        <div id="summary" style="background:#fff;">
+            <div id="directions_panel" style="display:none"></div>
+            <div id="totalDirection_panel"></div>
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
+    @Styles.Render("~/Content/GMapApi")
+}

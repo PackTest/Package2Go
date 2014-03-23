@@ -1,0 +1,28 @@
+﻿@model Package2Go5.vw_messages
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>vw_messages</legend>
+
+    <p>
+         @Html.DisplayNameFor(model => model.from):
+        <a href="/UserProfile/Profile/@Model.from">@Html.DisplayFor(model => model.from)</a>
+    </p>
+
+    <p class="display-label">
+         @Html.DisplayNameFor(model => model.message):
+        <span>@Html.DisplayFor(model => model.message)</span>
+    </p>
+    <a href="#" title="replay">Replay</a>
+</fieldset>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

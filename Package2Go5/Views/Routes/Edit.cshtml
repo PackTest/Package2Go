@@ -1,0 +1,197 @@
+﻿@model Package2Go5.Models.ViewModels.RoutesView
+
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<table id="Items">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("id")
+            </th>
+            <th>
+                @Html.DisplayName("title")
+            </th>
+            <th>
+                @Html.DisplayName("delivery_address")
+            </th>
+            <th>
+                @Html.DisplayName("size")
+            </th>
+            <th>
+                @Html.DisplayName("delivery_price")
+            </th>
+            <th>
+                @Html.DisplayName("currency")
+            </th>
+            <th>
+                @Html.DisplayName("price, ")@ViewBag.userCurrency
+            </th>
+            <th>
+                @Html.DisplayName("note")
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items) {
+            <tr>
+                <td>@Html.Raw(item.id)</td>
+                <td>@Html.Raw(item.title)</td>
+                <td>@Html.Raw(item.delivery_address)</td>
+                <td>@Html.Raw(item.size)</td>
+                <td>@Html.Raw(item.delivery_price)</td>
+                <td>@Html.Raw(item.Currencies.code)</td>
+                <td>@ViewBag.ItemsPrices[item.id]</td>
+                <td>@Html.Raw(item.note)</td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && item.UsersItems.Where(ui=>ui.item_id == item.id).First().user_id == ViewBag.User_id)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id=item.id })
+                        @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                    }else
+                    {
+                        <a href="#" title="@item.id" id="Add">Add</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>
+                <input type="text" name="0" placeholder="id" />
+            </th>
+            <th>
+                <input type="text" name="1" placeholder="title" />
+            </th>
+            <th>
+                <input type="text" name="2" placeholder="delivery_address" />
+            </th>
+            <th>
+                <input type="text" name="3" placeholder="size"/>
+            </th>
+            <th>
+                <input type="text" id="min" placeholder="min"/><input type="text" id="max" placeholder="max"/>
+            </th>
+            <th>
+                <input type="text" name="5" placeholder="currency"/>
+            </th>     
+            <th>
+                <input type="text" id="userPriceMin" placeholder="min"/><input type="text" id="userPriceMax" placeholder="max"/>
+            </th>       
+            <th>
+                <input type="text" name="7" placeholder="note"/>
+            </th>
+            <th>
+                @Html.DropDownList("action", (System.Web.Mvc.SelectList)ViewBag.actionList)
+            </th>
+        </tr>
+    </tfoot>
+</table>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Routes</legend>
+
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.waypoints, new { id="" })
+        <input type="hidden" id="currency" value="@ViewBag.userCurrency"/>
+
+        <div class="editor-field">
+            <ul id="waypoints">
+                <li>
+                    @Html.EditorFor(model => model.from)
+                    @Html.ValidationMessageFor(model => model.from)
+                </li>
+            </ul>
+        </div>
+        <a href="#" id="addWaypoint">Add Another Input Box</a>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.departure_time)
+        </div>
+        <div class="editor-field">
+            @Html.JQueryUI().DatepickerFor(model => model.departure_time)
+            @Html.ValidationMessageFor(model => model.departure_time)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.delivery_time)
+        </div>
+        <div class="editor-field">
+            @Html.JQueryUI().DatepickerFor(model => model.delivery_time)
+            @Html.ValidationMessageFor(model => model.delivery_time)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status_id)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.status_id, (System.Web.Mvc.SelectList)ViewBag.status)
+            @Html.ValidationMessageFor(model => model.status_id)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div id="map_canvas" style="height: 600px; width: 600px; float:right;"></div>
+
+<div id="RouteSummary">
+    <a href="#" id="segments">Show Route Segments</a>
+    <div id="directions_panel" style="display:none"></div>
+    <div id="totalDirection_panel"></div>
+    <ul id="paymentsByCurrencies"></ul>
+
+    <div id="paymentsforservice"></div>
+    <div id="totalCost"></div>
+    <div id="travelCost"></div>
+
+    <label>Oil Price</label><br/>
+    <input id="oilPrice" type="text" placeholder="oil price"/><br/>
+    <label>Oil Per KM</label><br/>
+    <input id="oilperKm" type="text" placeholder="oil l/km"/>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTables")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#segments').click(function (e) {
+                e.preventDefault();
+                if ($('#directions_panel').css("display") == "none")
+                    $('#directions_panel').show();
+                else
+                    $('#directions_panel').hide();
+            });
+
+        });
+
+    </script> 
+
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
+    @Styles.Render("~/Content/GMapApi")
+
+}

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Package2Go5.Offers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+    <ul>
+    @foreach (var item in Model) {
+        <li>
+            <p>
+                @Html.DisplayNameFor(model => model.route_id): 
+                <a href="/Routes/Edit/@item.route_id">@Html.DisplayFor(modelItem => item.Routes.waypoints)</a>
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.item_id): 
+                <a href="/Items/Details/@item.id">@Html.DisplayFor(modelItem => item.Items.title)</a>
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.status_id): 
+                <span>@Html.DisplayFor(modelItem => item.OffersStatus.title)</span>
+            </p>
+            <a href="#" title="accept">Accept</a>
+            <hr>
+        </li>
+    }
+    </ul>

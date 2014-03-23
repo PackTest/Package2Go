@@ -1,0 +1,127 @@
+﻿@model Package2Go5.Models.EditModels.UserProfileEdit
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "UserProfile", FormMethod.Post, new { id = "ProfileForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Profile</legend>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        
+
+        @{
+            //string path = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/Profiles/" + Model.image);
+
+            if (ViewBag.image != null)
+            {
+                <img src="@ViewBag.image" alt="Profile photo" />
+            }
+        }
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.newPassword)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.newPassword)
+            @Html.ValidationMessageFor(model => model.newPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.confirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.confirmPassword)
+            @Html.ValidationMessageFor(model => model.confirmPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.lastname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lastname)
+            @Html.ValidationMessageFor(model => model.lastname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gender)
+        </div>
+        <div class="editor-field">
+            @Html.Label(Package2Go5.Constants.CProfile.genderType.Man.ToString())
+            @Html.RadioButtonFor(model => model.gender, (int)Package2Go5.Constants.CProfile.genderType.Man)
+
+            @Html.Label(Package2Go5.Constants.CProfile.genderType.Women.ToString())
+            @Html.RadioButtonFor(model => model.gender, (int)Package2Go5.Constants.CProfile.genderType.Women)
+            @Html.ValidationMessageFor(model => model.gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.birthday)
+        </div>
+        <div class="editor-field">
+            @Html.JQueryUI().DatepickerFor(model => model.birthday)
+            @Html.ValidationMessageFor(model => model.birthday)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.currency_id)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.currency_id, (System.Web.Mvc.SelectList)ViewBag.currencies)
+            @Html.ValidationMessageFor(model => model.currency_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.phone_nr)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.phone_nr)
+            @Html.ValidationMessageFor(model => model.phone_nr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.image)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.image, new { type = "file", accept = "image/*" })
+            @Html.ValidationMessageFor(model => model.image)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

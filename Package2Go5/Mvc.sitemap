@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+  
+  <mvcSiteMapNode title="Home" controller="Home" action="Index" >
+    <mvcSiteMapNode title="Profile" controller="UserProfile" action="Edit" />
+    <mvcSiteMapNode title="Routes" controller="Routes" action="Index">
+      <mvcSiteMapNode title="Create" controller="Routes" action="Create"/>
+      <mvcSiteMapNode title="Routes" controller="Routes" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Items" controller="Items" action="Index" >
+      <mvcSiteMapNode title="Index" controller="Items" action="Index"/>
+      <mvcSiteMapNode title="Create" controller="Items" action="Create"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Login" controller="UserProfile" action="Login" />
+    <mvcSiteMapNode title="Create" controller="UserProfile" action="Create" area="Admin"/>
+    <mvcSiteMapNode title="LogOut" controller="UserProfile" action="LogOut" />
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

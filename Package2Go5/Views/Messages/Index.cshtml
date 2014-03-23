@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Package2Go5.vw_messages>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Messages</h2>
+
+    <ul>
+    @foreach (var item in Model) {
+        <li>
+            <p>
+                @Html.DisplayNameFor(model => model.from): <a href="/UserProfile/Profile/@item.from">@Html.DisplayFor(modelItem => item.from)</a>
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.date): <span>@Html.DisplayFor(modelItem => item.date)</span>
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.message): <span>@Html.DisplayFor(modelItem => item.message)</span>
+            </p>
+            <a href="#" title="replay">Replay</a>
+            <hr>
+        </li>
+    }
+    </ul>

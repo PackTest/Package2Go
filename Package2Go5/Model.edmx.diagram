@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a56eb5759b0842cb85eef2eeaed7588c" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="Package2GoModel.Currencies" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.Items" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.ItemsRoutes" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.Messages" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.MessagesStatus" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.Offers" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.OffersStatus" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.Roles" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.Routes" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.RouteStatus" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.UserProfile" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.UsersItems" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.UsersMessages" Width="1.5" PointX="12.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Package2GoModel.UsersRoutes" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Package2GoModel.FK_Items_Currencies" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UserProfile_Currencies" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_ItemsRoutes_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_Offers_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UsersItems_Items" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_ItemsRoutes_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_Messages_MessagesStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UsersMessages_Messages" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_Offers_OffersStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_Offers_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_Routes_RouteStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UsersRoutes_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UsersItems_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.FK_UsersRoutes_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="Package2GoModel.UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Package2GoModel.vw_messages" Width="1.5" PointX="8.75" PointY="13.625" />
+        <EntityTypeShape EntityType="Package2GoModel.vw_routes" Width="1.5" PointX="6.75" PointY="13.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

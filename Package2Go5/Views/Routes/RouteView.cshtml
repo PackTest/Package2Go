@@ -1,0 +1,12 @@
+﻿@model Package2Go5.Routes
+
+@Html.HiddenFor(model=> model.from)
+
+<ul id="waypoints" onload="calcRoute()">
+    @foreach (string waypoint in Model.waypoints.Split(';')) 
+    {
+        <li>
+            <input type="hidden" value="@waypoint" name="waypoint_" class="waypoint"/>
+        </li>
+    }
+</ul>

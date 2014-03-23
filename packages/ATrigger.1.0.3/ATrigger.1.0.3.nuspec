@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ATrigger</id>
+    <version>1.0.3</version>
+    <title>ATrigger</title>
+    <authors>ATrigger.com Team</authors>
+    <owners>ATrigger.com Team</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The timer object for the web.</description>
+    <releaseNotes />
+    <copyright>Copyright 2013 ATrigger.com</copyright>
+    <language />
+    <tags>atrigger scheduling timer</tags>
+  </metadata>
+</package>

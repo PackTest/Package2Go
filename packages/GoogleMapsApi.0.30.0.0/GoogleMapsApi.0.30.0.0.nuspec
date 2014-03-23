@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>GoogleMapsApi</id>
+    <version>0.30.0.0</version>
+    <title>Google Maps Web Services API wrapper for .NET</title>
+    <authors>Maxim Novak</authors>
+    <owners>Maxim Novak</owners>
+    <licenseUrl>https://github.com/maximn/google-maps/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/maximn/google-maps/</projectUrl>
+    <iconUrl>http://code.google.com/p/google-maps/logo?cct=1335784301</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library wraps Google maps API.
+
+You can easily query Google maps for Geocoding, Directions, Elevation, and Places.
+
+You can easily show the results on a Static Google Map!
+
+This Library is well documented and easy to use.</description>
+    <summary>Google Maps Web Services API wrapper for .NET
+* Geocoding, Directions, Elevation, and Places
+* Static maps</summary>
+    <releaseNotes>- Corrected parameter name for the "location" query string
+- Arranged members alphabetically.
+- Added price level, utc offset and website values.
+- Changed PriceLevel to strongly typed enum.
+- Adde opening hours to places details query.
+- Added missing Places Details result status code enum values.
+- Add Places\Response\Geometry source
+- Add the Geometry property to Responses Result</releaseNotes>
+    <copyright />
+    <language>en-US</language>
+    <tags>Map Geo Places Elevation Geocode Directions Maps</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="" />
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data.DataSetExtensions" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

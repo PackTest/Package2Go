@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+
+</head>
+<body>
+    <div id="wrapper" style="height: 100%; position:relative">
+        @Html.Action("Header", "Home")
+
+        @RenderBody()
+
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('a[title=messages]').append(" " + $('#messages li').length)
+
+            $('#messages li:gt(2)').hide();
+
+            $('a[title=messages]').click(function (e) {
+                e.preventDefault();
+                if ($('#messages').is(":hidden"))
+                    $('#messages').show()
+            });
+
+            $('a[title=new_message]').click(function (e) {
+                e.preventDefault();
+                if ($('#message').is(":hidden"))
+                    $('#message').show()
+            });
+
+            $("input[name=to]").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/FindUser", type: "POST", dataType: "json",
+                        data: { to: request.to },
+
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.username, value: item.username };
+                            }));
+                        },
+                    });
+                },
+            });
+
+            $('a[title=replay]').click(function (e) {
+                e.preventDefault();
+                $("#messages").hide();
+                $('#message').show()
+                $('#message').find('input[name=to]').val($(this).prev().prev().prev().children().text());
+            });
+        });
+
+        $('a[title=hide]').click(function (e) {
+            e.preventDefault();
+
+            if ($(this).parent().hasClass("offer")) {
+                var url = "/Offers/Edit/" + $(this).prev().prev().prev().prev().prev().val();
+                $.get(url, null, function () { });
+            }
+            else {
+                var url = "/Messages/Edit/" + $(this).prev().prev().prev().prev().prev().prev().val();
+                $.get(url, null, null);
+            }
+
+            $(this).parent().hide();
+            var messagesA = $('a[title=messages]');
+            messagesA.text(messagesA.text().split(" ")[0] + " " + (messagesA.text().split(" ")[1] - 1));
+
+        });
+
+        $(document).mouseup(function (e) {
+            if (!$("#messages").is(e.target) && $("#messages").has(e.target).length === 0)
+                $("#messages").hide();
+
+            if (!$("#message").is(e.target) && $("#message").has(e.target).length === 0)
+                $("#message").hide();
+        });
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

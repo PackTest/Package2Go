@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "AddItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddItem</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Items</legend>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.title)*@
+        </div>
+        <div class="editor-field">
+@*            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)*@
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div id="map_canvas" style="height: 600px; width: 600px; float:right;"></div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
+    @Styles.Render("~/Content/GMapApi")
+}

@@ -1,0 +1,69 @@
+﻿@model Package2Go5.UserProfile
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<fieldset>
+    <legend>UserProfile</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Username)
+    </div>
+
+    <div class="display-field">
+        <img src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lastname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lastname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gender)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gender)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.birthday)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.birthday)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.phone_nr)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.phone_nr)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.rate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

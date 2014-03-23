@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Package2Go5.Offers>
+
+<div id="map_canvas"></div>
+
+<div id="header" class="clearfix">
+    <nav>
+        @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")
+    </nav>
+    @if(User.Identity.IsAuthenticated){
+        <div class="HeaderRight">
+            <div class="messages">
+                <a href="#" title="new_message">New Messages</a>
+                <div id="message" style="display:none">
+                    <form  method="post" action="/Messages/Create">
+                        @Html.TextBox("to", null, new { @placeholder="Send To" })<br>
+                        <textarea cols="40" rows="7" name="message" placeholder="Message"></textarea><br>
+                        <input type="submit" value="Send" /><br>
+                    </form>
+                </div>
+            </div>
+            <div class="messages">
+                <a href="#" title="messages">Messages</a>
+                <ul id="messages" style="display:none">
+                    @foreach (Package2Go5.vw_messages message in @ViewBag.Messages) 
+                    {
+                        <li>
+                            <input type="hidden" value="@message.id" />
+                            <p>From: <span>@message.from</span></p>  
+                            <p>Date: <span>@message.date</span></p>  
+                            <p>Message:<span>@message.message</span></p>
+                            <a href="#" title="replay">Replay</a>
+                            <a href="/Messages/Details/@message.id">More</a>
+                            <a href="#" title="hide">Hide</a>
+                            <hr>
+                        </li>
+                    }
+                    @foreach(Package2Go5.Offers offer in Model)
+                    {
+                        <li class="offer">
+                            <input type="hidden" value="@offer.id" />
+                            <p>Item: @offer.Items.title</p>
+                            <p>To: @offer.Items.delivery_address</p>
+                            <p>Price: @offer.Items.delivery_price @offer.Items.Currencies.code</p>
+                            <a href="/Routes/Edit/@offer.route_id?item=@offer.item_id">Look</a>  
+                            <a href="#" title="hide">Hide</a>
+                            <a href="#" title="Accept">Accept</a>
+                            <hr> 
+                        </li>
+                    }
+                    <a href="/Messages">Show All Messages</a>
+                    <a href="/Offers">Show All Offers</a>
+                </ul>
+            </div>
+        </div>
+    }
+</div>

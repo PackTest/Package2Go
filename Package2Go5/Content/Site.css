@@ -1,0 +1,192 @@
+﻿.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}
+
+html, body {
+    height:100%;
+}
+
+body {
+    font-size: 14px;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+#wrapper {
+    width:90%;
+    margin:auto;
+    position:relative;
+}
+
+a:hover {
+    text-decoration:none;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+/*Header*/
+#header {
+    /*background:#f2f2f2;*/
+    margin-top:10px;
+    width:90%;
+    position:absolute;
+    left:5%; 
+    top:0px;
+}
+
+#header nav {
+    width:70%;
+    float:left;
+}
+
+#header .navbar {
+    margin:0px;
+}
+
+#header .navbar-inner li {
+    float:left;
+    background:#f2f2f2;
+    margin-right:10px;
+}
+
+.dropdown-menu {
+    background:#f2f2f2;
+}
+
+.dropdown-menu li {
+    width:100%;
+}
+
+#header .nav a, a[title=new_message], a[title=messages] {
+    color:#808080;
+    font-weight:bold;
+}
+
+#header .HeaderRight {
+    position:absolute;
+    left:70%;
+    height:100%;
+    width:30%;
+    padding-top:10px;
+}
+
+#map_canvas {
+    display:none; 
+    height: 100%; 
+    width: 100%;
+}
+
+/**/
+#over_map {
+    position:absolute; 
+    left:5%;
+    right:5%;
+    top:65px;
+    background:#f2f2f2;
+    padding:20px;
+}
+
+.display-label {
+    font-weight:bold;
+    margin:5px 0;
+}
+
+/*Messages*/
+.messages {
+    margin-left:30px;
+    right:0px;
+    position:absolute;
+}
+
+.messages a {
+    background:#ebebeb;
+    padding:12px;
+}
+
+.messages:first-child {
+    right:110px;
+}
+
+#messages, #message {
+    min-width:250px;
+    margin-top:10px;
+    padding:10px 10px;
+    background:#ebebeb;
+    position:absolute;
+    z-index:9999;
+}
+
+#messages a {
+    font-size:10pt;
+    padding:0px;
+}
+
+#messages hr{
+    background:#ddd;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+
+#waypoints li {
+    padding:5px;
+}
+
+tfoot th {
+    min-width : 110px;
+}
+
+tfoot th:first-child, td:first-child, tr:first-child {
+    min-width : 0px;
+}
+
+tfoot #max, tfoot #min, tfoot #userPriceMin, tfoot #userPriceMax {
+    width: 40px;
+    margin:5px;
+}

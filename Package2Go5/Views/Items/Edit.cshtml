@@ -1,0 +1,75 @@
+﻿@model Package2Go5.Items
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Items</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.title)
+            @Html.ValidationMessageFor(model => model.title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.delivery_address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.delivery_address)
+            @Html.ValidationMessageFor(model => model.delivery_address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.size)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.size)
+            @Html.ValidationMessageFor(model => model.size)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.delivery_price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.delivery_price)
+            @Html.ValidationMessageFor(model => model.delivery_price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.note)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.note)
+            @Html.ValidationMessageFor(model => model.note)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script type="text/javascript">
+        new google.maps.places.Autocomplete(document.getElementById('delivery_address'));
+    </script>
+}

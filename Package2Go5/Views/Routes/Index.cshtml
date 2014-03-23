@@ -1,0 +1,184 @@
+﻿@model IEnumerable<Package2Go5.vw_routes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.DropDownList("Items", (System.Web.Mvc.SelectList)ViewBag.Items)
+<input type="hidden" name="offers" value="@ViewBag.Offers "/>
+
+<table id="Routes">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.id)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.from)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.waypoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.departure_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                Action
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var route in Model) {
+            <tr>
+                <td>
+                    @Html.HiddenFor(modelItem => route.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.from)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.waypoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.departure_time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.delivery_time)
+                </td>
+                <td>
+                    @Html.ActionLink(route.Username, "Profile", "UserProfile", new { username = route.Username }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.status)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (route.user_id == ViewBag.User_id){
+                            @Html.ActionLink("Edit", "Edit", new { id=route.id })
+                            @Html.ActionLink("Delete", "Delete", new { id=route.id })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Offer", "", "Offers", null, new { @class="Offer" }) 
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>
+                @*<input type="text" placeholder="@Html.DisplayNameFor(model => model.id)" />*@
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.from)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.waypoints)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.departure_time)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_time)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.Username)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.rate)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.status)"/>
+            </th>
+        </tr>
+    </tfoot>
+
+</table>
+
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/DataTables")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //filter
+            var oTable = $('#Routes').dataTable({
+                "aaSorting": [[4, "desc"]],
+                "sDom": '<"top"l>rt<"bottom"ip>',
+                "aoColumns": [null, null, null, null, { "sClass": "user" }, null, null, null, { "bSortable": false }]
+            });
+
+            $("tfoot input").keyup(function () {
+                oTable.fnFilter(this.value, $("tfoot input").index(this)+1);
+            });
+
+            //link to route details
+            $("#Routes").on("dblclick", "tr", function () {
+                var iPos = oTable.fnGetPosition(this);
+                var aData = oTable.fnGetData(iPos);
+                window.location.href = 'Routes/Details/' + aData[0];
+            });
+
+            //Offers
+            var offersArray = [];
+
+            $.each($('input[name=offers]').val().trim().split(";"), function (index, value) {
+                offersArray[value.toString().split(":")[0]] = value.toString().split(":")[1];
+            });
+
+            $('.Offer').each(function () {
+                var routeId = $(this).parent().parent().find('#route_id').val();
+
+                if (offersArray[routeId] != null && offersArray[routeId].replace('-0', '').replace('-1','').split(",").indexOf($('#Items').val()) > -1) {
+                    $(this).text("Reject");
+                    $(this).attr("href", "/Offers/Delete?i=" + $('#Items').val() + "&r=" + $(this).parent().parent().find('#route_id').val());
+                } else {
+                    $(this).text("Offer");
+                    $(this).attr("href", "/Offers/Create?i=" + $('#Items').val() + "&r=" + $(this).parent().parent().find('#route_id').val());
+                }
+            });
+
+            $('#Items').change(function () {
+                $('.Offer').each(function () {
+                    var routeId = $(this).parent().parent().find('#route_id').val();
+                    if (offersArray[routeId] != null && offersArray[routeId].split(",").indexOf($('#Items').val()) > -1) {
+                        $(this).text("Reject");
+                        $(this).attr("href", "/Offers/Delete?i=" + $('#Items').val() + "&r=" + $(this).parent().parent().find('#route_id').val());
+                    } else {
+                        $(this).text("Offer");
+                        $(this).attr("href", "/Offers/Create?i=" + $('#Items').val() + "&r=" + $(this).parent().parent().find('#route_id').val());
+                    }
+                });
+            });
+
+        });
+
+    </script> 
+}

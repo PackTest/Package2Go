@@ -1,0 +1,97 @@
+﻿@model Package2Go5.Models.ViewModels.UserProfileView
+
+@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View1</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UserProfileView</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.password)
+            @Html.ValidationMessageFor(model => model.password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.lastname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.lastname)
+            @Html.ValidationMessageFor(model => model.lastname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gender)
+        </div>
+        <div class="editor-field">
+            @Html.Label(Package2Go5.Constants.CProfile.genderType.Man.ToString())
+            @Html.RadioButtonFor(model => model.gender, (int)Package2Go5.Constants.CProfile.genderType.Man)
+
+            @Html.Label(Package2Go5.Constants.CProfile.genderType.Women.ToString())
+            @Html.RadioButtonFor(model => model.gender, (int)Package2Go5.Constants.CProfile.genderType.Women)
+            @Html.ValidationMessageFor(model => model.gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.birthday)
+        </div>
+        <div class="editor-field">
+            @Html.JQueryUI().DatepickerFor(model => model.birthday)
+            @Html.ValidationMessageFor(model => model.birthday)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.currency_id)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.currency_id, (System.Web.Mvc.SelectList)ViewBag.currencies)
+            @Html.ValidationMessageFor(model => model.currency_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.phone_nr)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.phone_nr)
+            @Html.ValidationMessageFor(model => model.phone_nr)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
