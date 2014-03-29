@@ -25,24 +25,23 @@ namespace Package2Go5.Controllers
 
         public ActionResult Index()
         {
-            int userId = Int32.Parse(Request.Cookies["UserId"].Value);
+            int userId = 0;
+            if(Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
             ViewBag.User_id = userId;
             ViewBag.Items = itemManager.GetNotUsedUserItemsList(userId);
 
             ViewBag.Offers = offersManager.GetUserOfferedRoutesIds(userId);
 
-            return View(manager.GetAll());
+            var routes = Mapper.Map<List<vw_routes>, List<RoutesView>>(manager.GetAll());
+
+            return View(routes);
         }
 
         [Authorize]
         public ActionResult Details(int id)
         {
-            Mapper.CreateMap<Routes, RoutesView>();
-            RoutesView route = Mapper.Map<Routes, RoutesView>(manager.GetRoute(id));
-
-            route.fromCoord = manager.GetCoordinates(route.from);
-
-            return View(route);
+            return View(manager.Get_vw_Route(id));
         }
 
         //
@@ -98,7 +97,6 @@ namespace Package2Go5.Controllers
                 ViewBag.actionList = manager.GetActionList();
                 ViewBag.userCurrency = currency.code;
 
-                Mapper.CreateMap<Routes, RoutesView>();
                 var routes = Mapper.Map<Routes, RoutesView>(manager.GetRoute(id));
 
                 routes.Items = itemManager.GetAll(userId);
@@ -155,6 +153,11 @@ namespace Package2Go5.Controllers
         public ActionResult RouteView(int id) 
         {
             return PartialView(manager.GetRoute(id));
+        }
+
+        public void AcceptOrder(int r, int i)
+        {
+            manager.AcceptOrder(r, i);
         }
     }
 }

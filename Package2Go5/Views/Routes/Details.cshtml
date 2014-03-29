@@ -1,39 +1,27 @@
-﻿@model Package2Go5.Models.ViewModels.RoutesView
+﻿@model Package2Go5.vw_routes
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>Details</h2>
 
 <fieldset>
-    <legend>RoutesView</legend>
-
-    @Html.Hidden("fromCoord", Model.fromCoord.Latitude)
-    @Html.Hidden("fromCoord", Model.fromCoord.Longitude)
-
-    <div id="waypoints">
-        <div>Montreal, QBC</div>
-        <div>Toronto, ONT</div>
-        <div>Chicago</div>
-        <div>Winnipeg</div>
-        <div>Fargo</div>
-        <div>Calgary</div>
-        <div>Spokane</div>
-    </div>
+    <legend>vw_routes</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.from)
     </div>
-    <div class="display-field from">
+    <div class="display-field">
         @Html.DisplayFor(model => model.from)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.to)
+         @Html.DisplayNameFor(model => model.waypoints)
     </div>
-    <div class="display-field to">
-        @Html.DisplayFor(model => model.to)
+    <div class="display-field">
+        @Html.DisplayFor(model => model.waypoints)
     </div>
 
     <div class="display-label">
@@ -51,39 +39,56 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.status_id)
+         @Html.DisplayNameFor(model => model.status)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.status_id)
+        @Html.DisplayFor(model => model.status)
     </div>
 
-    <!-- This is the div that will contain the Google Map -->
-    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.rate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.user_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.user_id)
+    </div>
 </fieldset>
-
-<button type="button" onclick="addWayPoint()">Add Way Point</button>
-
-<style type="text/css">
-
-    * { font-family:Arial; }
-h2 { padding:0 0 5px 5px; }
-h2 a { color: #224f99; }
-a { color:#999; text-decoration: none; }
-a:hover { color:#802727; }
-p { padding:0 0 5px 0; }
-
-input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
-
-</style>
-
-
-
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryGMAPAPI")
-    @Styles.Render("~/Content/GMapApi")
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var geocoder, map;
+
+            var Lithuania = new google.maps.LatLng(55.00, 25.15);
+            var mapOptions = {
+                zoom: 8,
+                center: Lithuania,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        });
+    </script>
 }

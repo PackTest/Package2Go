@@ -572,8 +572,8 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserProfile" EntitySet="UserProfile" />
           </AssociationSet>
-          <EntitySet Name="vw_messages" EntityType="Package2GoModel.vw_messages" />
           <EntitySet Name="vw_routes" EntityType="Package2GoModel.vw_routes" />
+          <EntitySet Name="vw_messages" EntityType="Package2GoModel.vw_messages" />
         </EntityContainer>
         <EntityType Name="Currencies">
           <Key>
@@ -916,22 +916,6 @@
           <End Role="Roles" Type="Package2GoModel.Roles" Multiplicity="*" />
           <End Role="UserProfile" Type="Package2GoModel.UserProfile" Multiplicity="*" />
         </Association>
-        <EntityType Name="vw_messages">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="date" />
-            <PropertyRef Name="from" />
-            <PropertyRef Name="to" />
-            <PropertyRef Name="message" />
-            <PropertyRef Name="status" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" />
-          <Property Type="DateTime" Name="date" Nullable="false" Precision="3" />
-          <Property Type="String" Name="from" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="to" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vw_routes">
           <Key>
             <PropertyRef Name="id" />
@@ -952,6 +936,22 @@
           <Property Type="String" Name="Username" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="rate" />
           <Property Type="Int32" Name="user_id" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_messages">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="from" />
+            <PropertyRef Name="to" />
+            <PropertyRef Name="message" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" Precision="3" />
+          <Property Type="String" Name="from" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="to" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1121,18 +1121,6 @@
               <ScalarProperty Name="UserId" ColumnName="UserProfile_UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="vw_messages">
-            <EntityTypeMapping TypeName="Package2GoModel.vw_messages">
-              <MappingFragment StoreEntitySet="vw_messages">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="message" ColumnName="message" />
-                <ScalarProperty Name="to" ColumnName="to" />
-                <ScalarProperty Name="from" ColumnName="from" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_routes">
             <EntityTypeMapping TypeName="Package2GoModel.vw_routes">
               <MappingFragment StoreEntitySet="vw_routes">
@@ -1144,6 +1132,18 @@
                 <ScalarProperty Name="departure_time" ColumnName="departure_time" />
                 <ScalarProperty Name="waypoints" ColumnName="waypoints" />
                 <ScalarProperty Name="from" ColumnName="from" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_messages">
+            <EntityTypeMapping TypeName="Package2GoModel.vw_messages">
+              <MappingFragment StoreEntitySet="vw_messages">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="to" ColumnName="to" />
+                <ScalarProperty Name="from" ColumnName="from" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

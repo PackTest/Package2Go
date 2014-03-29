@@ -117,6 +117,11 @@ namespace Package2Go5.Models.ObjectManager
             return db.Routes.Where(r => r.id == id).First();
         }
 
+        public vw_routes Get_vw_Route(int id)
+        {
+            return db.vw_routes.Where(r => r.id == id).First();
+        }
+
         public List<KeyValuePair<string, int>> GetStatus() 
         {
             List<KeyValuePair<string, int>> status = new List<KeyValuePair<string, int>>();
@@ -213,6 +218,24 @@ namespace Package2Go5.Models.ObjectManager
             waypoints = waypoints.Remove(waypoints.Length - 2, 2);
 
             return waypoints;
+        }
+
+        public void AcceptOrder(int r, int i) 
+        {
+            ItemsRoutes itemRoute = new ItemsRoutes();
+
+            itemRoute.item_id = i;
+            itemRoute.route_id = r;
+
+            db.ItemsRoutes.Add(itemRoute);
+
+            db.Offers.Where(o => o.item_id == i && o.route_id == r).First().status_id = 3;
+
+            db.Routes.Where(route => route.id == r).First().waypoints += ";"+i+":"+db.Items.Where(item=>item.id == i).First().delivery_address;
+
+            db.Offers.RemoveRange(db.Offers.Where(o => o.item_id == i && o.route_id != r));
+
+            db.SaveChanges();
         }
 
     }

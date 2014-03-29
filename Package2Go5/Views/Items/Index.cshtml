@@ -1,107 +1,119 @@
-﻿@model IEnumerable<Package2Go5.Items>
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.ItemsView>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="over_map">
-    <h2>Items</h2>
-    <table id="Items">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.delivery_address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.size)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.delivery_price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.note)
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-        </thead>
+<h2>Items</h2>
+<table id="Items">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.note)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
 
-        <tbody>
-            @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.delivery_address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.size)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.delivery_price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.note)
-                    </td>
-                    <td>
-                        @if (User.Identity.IsAuthenticated && item.UsersItems.Where(ui=>ui.item_id == item.id).First().user_id == ViewBag.User_id)
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { id=item.id })
-                            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-                            @Html.ActionLink("Details", "Details", new { id=item.id })
-                        }
-                        @*else
-                        {
-                            <input type="button" name="@item.id" id="Add" value ="Add"/>
-                            <input type="button" name="" id="Remove" value ="Remove"/>
-                        }*@
-                    </td>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
+    <tbody>
+        @foreach (var item in Model) {
             <tr>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.id)" />
-                </th>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.title)" />
-                </th>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_address)" />
-                </th>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.size)"/>
-                </th>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_price)"/>
-                </th>
-                <th>
-                    <input type="text" placeholder="@Html.DisplayNameFor(model => model.note)"/>
-                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.delivery_address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.delivery_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.note)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && item.UsersItems.Where(ui=>ui.item_id == item.id).First().user_id == ViewBag.User_id)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id=item.id })
+                        @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                        @Html.ActionLink("Details", "Details", new { id=item.id })
+                    }
+                    @*else
+                    {
+                        <input type="button" name="@item.id" id="Add" value ="Add"/>
+                        <input type="button" name="" id="Remove" value ="Remove"/>
+                    }*@
+                </td>
             </tr>
-        </tfoot>
-    </table>
-</div>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.id)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.title)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_address)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.size)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_price)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.note)"/>
+            </th>
+        </tr>
+    </tfoot>
+</table>
 
 @section Scripts 
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
     @Scripts.Render("~/bundles/DataTables")
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var geocoder, map;
+
+            var Lithuania = new google.maps.LatLng(55.00, 25.15);
+            var mapOptions = {
+                zoom: 8,
+                center: Lithuania,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
             //filter
             var oTable = $('#Items').dataTable({

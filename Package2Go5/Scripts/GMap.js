@@ -98,8 +98,11 @@ function Datatable()
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
 
-    if (sURLVariables!="")   
+    if (sURLVariables != "") {
         oTable.fnFilter("^\\s*" + sURLVariables[0].split('=')[1] + "\\s*$", 0, true);
+        $('#over_map').show();
+        $('#showItems').text("Hide Items");
+    }
 
     $('#action').change(function () {
         oTable.fnFilter($(this).val());
@@ -307,7 +310,7 @@ function Initialize() {
     };
     
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-    
+
     $('#waypoints > li').each(function () {
         new google.maps.places.Autocomplete(
             document.getElementsByName(

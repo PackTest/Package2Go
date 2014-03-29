@@ -5,50 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="over_map">
-    <fieldset>
-        <legend>@Html.DisplayFor(model => model.title)</legend>
+<fieldset>
+    <legend>@Html.DisplayFor(model => model.title)</legend>
 
-        <div class="display-label">
-                @Html.DisplayNameFor(model => model.delivery_address):
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.delivery_address)
-        </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.delivery_address):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.delivery_address)
+    </div>
 
-        <div class="display-label">
-                @Html.DisplayNameFor(model => model.size)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.size)
-        </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.size)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.size)
+    </div>
 
-        <div class="display-label">
-                @Html.DisplayNameFor(model => model.delivery_price)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.delivery_price)
-        </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.delivery_price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.delivery_price)
+    </div>
 
-        <div class="display-label">
-                @Html.DisplayNameFor(model => model.note)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.note)
-        </div>
-    </fieldset>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.note)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     @Scripts.Render("~/bundles/jqueryGMAPAPI")
-    <script type="text/javascript">
+@*    <script type="text/javascript">
         $(document).ready(function () {
             $('#map_canvas').show();
         });
-    </script>
+    </script>*@
 }

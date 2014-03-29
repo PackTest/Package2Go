@@ -51,7 +51,6 @@ namespace Package2Go5.Controllers
             {
                 manager.Create(viewModel);
 
-                Mapper.CreateMap<UserProfileView, UserProfile>();
                 UserProfile user = Mapper.Map<UserProfileView, UserProfile>(viewModel);
 
                 LogIn(user);
@@ -70,10 +69,6 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Edit()
         {
-
-            Mapper.CreateMap<UserProfile, UserProfileEdit>()
-                .ForMember(dest => dest.gender, opt => opt.MapFrom(
-                    src => (CProfile.genderType)Enum.Parse(typeof(CProfile.genderType), src.gender)));
 
             UserProfile user = manager.Get(User.Identity.Name);
             UserProfileEdit model = Mapper.Map<UserProfile, UserProfileEdit>(user);

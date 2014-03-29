@@ -4104,11 +4104,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
 }
 
-.nav > li > a:hover,
+/*.nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
   background-color: #eeeeee;
-}
+}*/
 
 .nav > li.disabled > a {
   color: #999999;
@@ -4122,12 +4122,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 
-.nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
-  background-color: #eeeeee;
-  border-color: #428bca;
-}
+    /*.nav .open > a,
+    .nav .open > a:hover,
+    .nav .open > a:focus {
+      background-color: #eeeeee;
+      border-color: #428bca;
+    }*/
 
 .nav .nav-divider {
   height: 1px;

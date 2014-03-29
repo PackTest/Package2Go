@@ -12,21 +12,32 @@ namespace Package2Go5.Models.ViewModels
 
         public int id { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "from")]
         public string from { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "waypoints")]
         public string waypoints { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "departure_time")]
         public System.DateTime departure_time { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_time")]
         public System.DateTime delivery_time { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
         public int status_id { get; set; }
-
-        public Coordinate fromCoord { get; set; }
-
-        public Coordinate toCoord { get; set; }
 
         public List<Items> Items { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
+        public string status { get; set; }
+
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "Username")]
+        public string Username { get; set; }
+
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "rate")]
+        public Nullable<int> rate { get; set; }
+
+        public int user_id { get; set; }
     }
 }

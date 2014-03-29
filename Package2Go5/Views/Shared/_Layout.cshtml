@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html style="width:100%; height:100%;">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,19 +15,28 @@
 
 </head>
 <body>
-    <div id="wrapper" style="height: 100%; position:relative">
-        @Html.Action("Header", "Home")
+    <div id="wrapper">
 
-        @RenderBody()
+        <div id="map_canvas" style="overflow:scroll;"></div>
+
+        <div class="content">
+            @Html.Action("Header", "Home")
+            <div>
+                <div id="over_map">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
 
     </div>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('a[title=messages]').append(" " + $('#messages li').length)
+            $('a[title=messages]').append(" " + ($('#messages li').length-1))
 
             $('#messages li:gt(2)').hide();
+            $('#messages .ShowAll').show();
 
             $('a[title=messages]').click(function (e) {
                 e.preventDefault();
@@ -41,47 +50,73 @@
                     $('#message').show()
             });
 
-            $("input[name=to]").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "/Home/FindUser", type: "POST", dataType: "json",
-                        data: { to: request.to },
+            $("input[name=to]").change(function () {
+                console.log($(this).val());
+            });
 
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                return { label: item.username, value: item.username };
-                            }));
-                        },
-                    });
-                },
+            $.getJSON(
+            "/Home/FindUsers", {},
+            function (myData) {
+                $("#to").autocomplete({
+                    source: myData
+                });
             });
 
             $('a[title=replay]').click(function (e) {
                 e.preventDefault();
                 $("#messages").hide();
-                $('#message').show()
-                $('#message').find('input[name=to]').val($(this).prev().prev().prev().children().text());
+                $('#message').show();
+                $('#message').find('input[name=to]').val($(this).parent().prev().prev().prev().children().text());
             });
         });
 
         $('a[title=hide]').click(function (e) {
             e.preventDefault();
 
-            if ($(this).parent().hasClass("offer")) {
-                var url = "/Offers/Edit/" + $(this).prev().prev().prev().prev().prev().val();
+            if ($(this).parent().parent().hasClass("offer")) {
+                var url = "/Offers/Edit/" + $(this).parent().prev().prev().prev().prev().val();
                 $.get(url, null, function () { });
             }
             else {
-                var url = "/Messages/Edit/" + $(this).prev().prev().prev().prev().prev().prev().val();
+                var url = "/Messages/Edit/" + $(this).parent().prev().prev().prev().prev().val();
                 $.get(url, null, null);
             }
 
-            $(this).parent().hide();
+            $(this).parent().parent().remove();
             var messagesA = $('a[title=messages]');
             messagesA.text(messagesA.text().split(" ")[0] + " " + (messagesA.text().split(" ")[1] - 1));
 
+            $('#messages li:hidden:first').show();
+        });
+        
+        $('a[title=Accept]').click(function (e) {
+            e.preventDefault();
+
+            var itemId = $(this).parent().parent().find('.itemId').val();
+
+            var url = "/Routes/AcceptOrder?r=" + $(this).parent().parent().find('.routeId').val() + "&i=" + itemId;
+            $.get(url, null, function () { });
+            //$(this).parent().parent().remove();
+
+
+
+            var i = 0;
+            $('#messages li').each(function () {
+                if ($(this).hasClass("offer") && $(this).find('.itemId').val() == itemId)
+                {
+                    $(this).remove();
+                    i += 1;
+                    $('#messages li:hidden:first').show();
+                }
+            });
+
+            var messagesA = $('a[title=messages]');
+            messagesA.text(messagesA.text().split(" ")[0] + " " + (messagesA.text().split(" ")[1] - 1*i));
+
+            
         });
 
+        //Hide Messages and new message
         $(document).mouseup(function (e) {
             if (!$("#messages").is(e.target) && $("#messages").has(e.target).length === 0)
                 $("#messages").hide();

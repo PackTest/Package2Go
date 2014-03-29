@@ -36,7 +36,6 @@ namespace Package2Go5.Controllers
         {
             try
             {
-                // int itemId, int routeId, int userId
                 offersManager.Create(i, r, Int32.Parse(Request.Cookies["UserId"].Value));
                 return RedirectToAction("Index", "Routes");
             }

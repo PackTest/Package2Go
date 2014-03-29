@@ -31,9 +31,20 @@ body {
 }
 
 #wrapper {
-    width:90%;
-    margin:auto;
     position:relative;
+    height: 100%;
+}
+
+a {
+    cursor:pointer;
+}
+
+h2 {
+    margin:0 0 10px 0;
+}
+
+ul {
+    padding:0;
 }
 
 a:hover {
@@ -44,66 +55,93 @@ header, footer, nav, section {
     display: block;
 }
 
+.content {
+    position:absolute;
+    top:0px;
+    left:100px;
+    right:100px;
+    margin:auto;
+    pointer-events:none;
+}
+
+.content > div {
+    pointer-events:all;
+}
+
 /*Header*/
 #header {
-    /*background:#f2f2f2;*/
     margin-top:10px;
-    width:90%;
-    position:absolute;
-    left:5%; 
-    top:0px;
+    width:100%;
+}
+
+.HeaderLeft {
+    background:#363636;
+    float:left;
+    padding-right:10px;
 }
 
 #header nav {
-    width:70%;
     float:left;
+}
+
+#header nav a{
+    padding:13px;
 }
 
 #header .navbar {
     margin:0px;
 }
 
-#header .navbar-inner li {
+#header .navbar-inner li{
     float:left;
-    background:#f2f2f2;
+    background:#3c3c3c;
     margin-right:10px;
+    border-bottom:3px solid #156ae9;
+}
+
+#header img {
+    float:left;
+    padding:10px 20px 10px 20px;
 }
 
 .dropdown-menu {
-    background:#f2f2f2;
+    background:#363636;
+    border-radius:0px;
 }
 
 .dropdown-menu li {
     width:100%;
+    border-bottom:none !important;
 }
 
 #header .nav a, a[title=new_message], a[title=messages] {
-    color:#808080;
+    color:#fdfdfd;
     font-weight:bold;
 }
 
+#header .nav a:hover, a[title=new_message]:hover, a[title=messages]:hover {
+    background:#4d4d4d;
+}
+
 #header .HeaderRight {
-    position:absolute;
-    left:70%;
-    height:100%;
-    width:30%;
-    padding-top:10px;
+    float:right;
+    margin-right:50px;
 }
 
 #map_canvas {
-    display:none; 
     height: 100%; 
     width: 100%;
 }
 
 /**/
-#over_map {
-    position:absolute; 
-    left:5%;
-    right:5%;
-    top:65px;
-    background:#f2f2f2;
+#over_map, #over_map2 {
+    margin-top:10px;
+    background:#ffffff;
     padding:20px;
+    border:5px solid #f1f1f1;
+    box-shadow:0 0 20px;
+    float:left;
+    max-height:700px;
 }
 
 .display-label {
@@ -111,29 +149,109 @@ header, footer, nav, section {
     margin:5px 0;
 }
 
+/*Table*/
+#ItemsList {
+    float:right;
+}
+
+#Items_wrapper {
+    /*display:none;*/
+}
+
+#Routes, #Items {
+    box-shadow:0 0 10px;
+}
+
+.top {
+    margin:10px 0 5px 0;
+}
+
+#Routes a, #Items a {
+    color:#428bca;
+    margin-right:5px;
+}
+
+#Routes td, #Routes th, #Items td, th{
+    border:2px solid #f1f1f1;
+    min-width:60px;
+}
+
+tfoot th:first-child, tbody td:first-child, thead th:first-child {
+    display:none;
+}
+
+#Routes thead, #Items thead {
+    background:#3c3c3c;
+    color:#fff;
+}
+
+#Routes thead th, #Items thead th {
+    text-align:center;
+}
+
+#Routes tbody tr:nth-child(2n+1), #Items tbody tr:nth-child(2n+1) {
+    background:#fff;
+}
+
+#Routes tbody tr:nth-child(2n), #Items tbody tr:nth-child(2n) {
+    background:#dcdcdc;
+}
+
+tfoot input{
+    width:100%;
+}
+
+.bottom {
+    margin-top:5px;
+}
+
+.paging_two_button a {
+    margin-right:5px;
+    cursor:pointer;
+}
+
+
 /*Messages*/
 .messages {
-    margin-left:30px;
-    right:0px;
-    position:absolute;
+    float:right;
+    margin-right:20px;
+    border-bottom:3px solid #156ae9;
 }
 
 .messages a {
-    background:#ebebeb;
-    padding:12px;
-}
-
-.messages:first-child {
-    right:110px;
+    background:#3c3c3c;
+    display:block;
+    padding:13px;
 }
 
 #messages, #message {
     min-width:250px;
     margin-top:10px;
     padding:10px 10px;
-    background:#ebebeb;
+    background:#ffffff;
+    border:5px solid #f1f1f1;
+    box-shadow: 0 0 10px;
     position:absolute;
-    z-index:9999;
+    z-index:10;
+}
+
+#message textarea{
+    width:200px; 
+    height:100px;
+}
+
+#message #to {
+    width:200px;  
+    margin-bottom:5px;
+}
+
+/*#message*/ 
+input[type=submit] {
+    background:#3c3c3c;
+    padding: 5px 23px;
+    color:#fdfdfd;
+    font-weight:bold;
+    margin-top:5px;
 }
 
 #messages a {
@@ -141,10 +259,30 @@ header, footer, nav, section {
     padding:0px;
 }
 
-#messages hr{
-    background:#ddd;
+#messages li a {
+    float:left;
+    padding:5px;
+    margin-right:5px;
+    color:#fdfdfd;
 }
 
+#messages hr{
+    background:#ddd;
+    margin:5px 0 10px 0;
+}
+
+#messages .ShowAll a {
+    font-size:12px;
+}
+
+/*Waypoint*/
+#waypoints {
+    padding: 0;
+}
+
+.display-field {
+    max-width:300px;
+}
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
@@ -189,4 +327,12 @@ tfoot th:first-child, td:first-child, tr:first-child {
 tfoot #max, tfoot #min, tfoot #userPriceMin, tfoot #userPriceMax {
     width: 40px;
     margin:5px;
+}
+
+.ui-autocomplete{
+    z-index:11;
+}
+
+.ui-corner-all {
+    border-radius:0px !important;
 }

@@ -14,7 +14,7 @@
       <mvcSiteMapNode title="Create" controller="Items" action="Create"/>
     </mvcSiteMapNode>
     <mvcSiteMapNode title="Login" controller="UserProfile" action="Login" />
-    <mvcSiteMapNode title="Create" controller="UserProfile" action="Create" area="Admin"/>
+    <mvcSiteMapNode title="Create" controller="UserProfile" action="Create" />
     <mvcSiteMapNode title="LogOut" controller="UserProfile" action="LogOut" />
   </mvcSiteMapNode>
 

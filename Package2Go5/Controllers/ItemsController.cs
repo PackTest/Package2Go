@@ -1,4 +1,6 @@
-﻿using Package2Go5.Models.ObjectManager;
+﻿using AutoMapper;
+using Package2Go5.Models.ObjectManager;
+using Package2Go5.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +22,18 @@ namespace Package2Go5.Controllers
 
         public ActionResult Index()
         {
-            int userId = Int32.Parse(Request.Cookies["UserId"].Value);
+            int userId = 0;
+
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
+
             ViewBag.User_id = userId;
             ViewBag.Routes = routesManager.GetAll(userId);
             ViewBag.RoutesList = routesManager.GetRoutesList(userId);
 
-            var items = manager.GetAll(userId);
+            var items = Mapper.Map <List<Items>, List<ItemsView>>(manager.GetAll(userId));
 
-            return View(manager.GetAll(userId));
+            return View(items);
         }
 
         //
@@ -43,12 +49,14 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            Items items = new Items();
+            Items item = new Items();
             ViewBag.Currencies = currencyManager.GetCurrenciesList();
 
-            items.currency_id = currencyManager.GetCurrency(Int32.Parse(Request.Cookies["UserId"].Value)).id;
+            item.currency_id = currencyManager.GetCurrency(Int32.Parse(Request.Cookies["UserId"].Value)).id;
 
-            return View(items);
+            var itemView = Mapper.Map<Items, ItemsView>(item);
+
+            return View(itemView);
         }
 
         //
@@ -56,7 +64,7 @@ namespace Package2Go5.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(Items items)
+        public ActionResult Create(ItemsView items)
         {
             try
             {
@@ -75,7 +83,9 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            return View(manager.GetItem(id));
+            var itemView = Mapper.Map<Items, ItemsView>(manager.GetItem(id));
+
+            return View(itemView);
         }
 
         //
@@ -83,7 +93,7 @@ namespace Package2Go5.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(int id, Items item)
+        public ActionResult Edit(int id, ItemsView item)
         {
             try
             {

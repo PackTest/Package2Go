@@ -11,7 +11,7 @@ namespace Package2Go5.Models.ObjectManager
     {
         private Package2GoEntities db = new Package2GoEntities();
 
-        public void Create(Items itemView, int userId)
+        public void Create(ItemsView itemView, int userId)
         {
             Items item = new Items();
 
@@ -28,7 +28,7 @@ namespace Package2Go5.Models.ObjectManager
             db.SaveChanges();
         }
 
-        public void Update(int id, Items itemView)
+        public void Update(int id, ItemsView itemView)
         {
             Items item = db.Items.FirstOrDefault(u => u.id == id);
 

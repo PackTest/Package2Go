@@ -40,7 +40,7 @@ namespace Package2Go5
         public DbSet<UsersItems> UsersItems { get; set; }
         public DbSet<UsersMessages> UsersMessages { get; set; }
         public DbSet<UsersRoutes> UsersRoutes { get; set; }
-        public DbSet<vw_messages> vw_messages { get; set; }
         public DbSet<vw_routes> vw_routes { get; set; }
+        public DbSet<vw_messages> vw_messages { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Items</h2>
 
 <table id="Items">
     <thead>
@@ -97,12 +97,18 @@
     </tfoot>
 </table>
 
+</div>
+
+<div id="over_map2">
+
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Routes</legend>
+
+        <a href="#" id="showItems">Show Items</a>
 
         @Html.HiddenFor(model => model.id)
         @Html.HiddenFor(model => model.waypoints, new { id="" })
@@ -111,6 +117,7 @@
         <div class="editor-field">
             <ul id="waypoints">
                 <li>
+                    <img src="~/Images/arrow.png" alt=""/>
                     @Html.EditorFor(model => model.from)
                     @Html.ValidationMessageFor(model => model.from)
                 </li>
@@ -147,45 +154,93 @@
     </fieldset>
 }
 
-<div id="map_canvas" style="height: 600px; width: 600px; float:right;"></div>
-
 <div id="RouteSummary">
-    <a href="#" id="segments">Show Route Segments</a>
+    
+    <a href="#" id="tripInfo">Trip Info</a>
+    <div id="totalDirection_panel" hidden="hidden"></div>
+
+    <a href="#" id="segments" hidden="hidden">Show Route Segments</a>
     <div id="directions_panel" style="display:none"></div>
-    <div id="totalDirection_panel"></div>
     <ul id="paymentsByCurrencies"></ul>
 
-    <div id="paymentsforservice"></div>
-    <div id="totalCost"></div>
-    <div id="travelCost"></div>
+    <a href="#" id="calCost" hidden="hidden">Calculate Travel Costs</a>
+    <div id="calculateCosts" hidden="hidden">
+        <div id="paymentsforservice"></div>
+        <div id="totalCost"></div>
+        <div id="travelCost"></div>
 
-    <label>Oil Price</label><br/>
-    <input id="oilPrice" type="text" placeholder="oil price"/><br/>
-    <label>Oil Per KM</label><br/>
-    <input id="oilperKm" type="text" placeholder="oil l/km"/>
-
-</div>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <label>Oil Price</label><br/>
+        <input id="oilPrice" type="text" placeholder="oil price"/><br/>
+        <label>Oil Per KM</label><br/>
+        <input id="oilperKm" type="text" placeholder="oil l/km"/>
+    </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/DataTables")
+
     <script type="text/javascript">
 
         $(document).ready(function () {
 
+            $('#showItems').click(function (e) {
+                e.preventDefault();
+                if ($('#over_map').css("display") == "none") {
+                    $('#over_map').show();
+                    $(this).text("Hide Items");
+                }
+                else {
+                    $('#over_map').hide();
+                    $(this).text("Show Items");
+                }
+            });
+
+            $('#tripInfo').click(function (e) {
+                e.preventDefault();
+                if ($('#totalDirection_panel').css("display") == "none") {
+                    $('#totalDirection_panel').show();
+                    $('#segments').show();
+                    $('#calCost').show();
+                    $(this).text("Hide Trip Info");
+                }
+                else {
+                    $('#totalDirection_panel').hide();
+                    $('#segments').hide();
+                    $('#calCost').hide();
+                    $(this).text("Trip Info");
+                }
+            });
+
             $('#segments').click(function (e) {
                 e.preventDefault();
-                if ($('#directions_panel').css("display") == "none")
+                if ($('#directions_panel').css("display") == "none") {
                     $('#directions_panel').show();
-                else
+                    $(this).text("Hide Routes Segments");
+                }
+                else {
                     $('#directions_panel').hide();
+                    $(this).text("Show Routes Segments");
+                }
+            });
+
+            $('#calCost').click(function (e) {
+                e.preventDefault();
+                if ($('#calculateCosts').css("display") == "none") {
+                    $('#calculateCosts').show();
+                    $(this).text("Hide Calculated Costs");
+                }
+                else {
+                    $('#calculateCosts').hide();
+                    $(this).text("Show Calculated Costs");
+                }
             });
 
         });
+
+        $('#over_map').hide();
+        console.log(screen.height);
+        console.log($('html').css("height"));
 
     </script> 
 

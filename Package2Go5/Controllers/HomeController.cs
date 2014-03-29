@@ -24,18 +24,29 @@ namespace Package2Go5.Controllers
             return View();
         }
 
-        public ActionResult FindUser(string to)
+        //public ActionResult FindUsers(string to)
+        //{
+        //    var result = (from u in db.UserProfile
+        //                  where u.Username.ToLower().Contains(to.ToLower())
+        //                  select new { u.Username }).Distinct();
+
+        //    var a = Json(result, JsonRequestBehavior.AllowGet);
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+
+        public JsonResult FindUsers()
         {
-            var result = (from u in db.UserProfile
-                          where u.Username.ToLower().Contains(to.ToLower())
-                          select new { u.Username }).Distinct();
-            return Json(result, JsonRequestBehavior.AllowGet);
+            var userNames = db.UserProfile.Select(u => u.Username).ToList();
+
+            return Json(userNames, JsonRequestBehavior.AllowGet);
         }
 
         public PartialViewResult Header() 
         {
-            var offers = offersManager.GetUserNewOffers(0);
-            //var offers = offersManager.GetUserNewOffers(Int32.Parse(Request.Cookies["UserId"].Value));
+            List<Offers> offers = new List<Offers>();
+            if(Request.Cookies["UserId"] !=null)
+                offers = offersManager.GetUserNewOffers(Int32.Parse(Request.Cookies["UserId"].Value));
 
             var messages = messagesManager.GetNewUserMessages(User.Identity.Name);
             ViewBag.Messages = messages;

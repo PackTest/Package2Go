@@ -1,4 +1,4 @@
-﻿@model Package2Go5.Items
+﻿@model Package2Go5.Models.ViewModels.ItemsView
 
 @{
     ViewBag.Title = "Create";
@@ -77,5 +77,40 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script type="text/javascript">
         new google.maps.places.Autocomplete(document.getElementById('delivery_address'));
+
+        var marker;
+        var Lithuania = new google.maps.LatLng(55.00, 25.15);
+        var mapOptions = {
+            zoom: 8,
+            center: Lithuania,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        $('#delivery_address').focusout(function () {
+            $(this).attr("value", $(this).val());
+            
+            var address = $(this).val();
+            geocoder = new google.maps.Geocoder();
+
+            geocoder = new google.maps.Geocoder(); geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+
+                    map.setCenter(results[0].geometry.location);
+                    
+                    if (typeof marker != "undefined")
+                        marker.setMap(null);
+
+                    marker = new google.maps.Marker({
+
+                        map: map,
+
+                        position: results[0].geometry.location
+                    });
+                }
+            });
+        });
+
     </script>
 }

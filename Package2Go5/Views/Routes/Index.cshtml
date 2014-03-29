@@ -1,25 +1,24 @@
-﻿@model IEnumerable<Package2Go5.vw_routes>
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.RoutesView>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Routes</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@Html.DropDownList("Items", (System.Web.Mvc.SelectList)ViewBag.Items)
+@if(User.Identity.IsAuthenticated){
+    <div id="ItemsList">
+        <b>My Items:</b>
+        @Html.DropDownList("Items", (System.Web.Mvc.SelectList)ViewBag.Items)
+    </div>
+}
 <input type="hidden" name="offers" value="@ViewBag.Offers "/>
 
 <table id="Routes">
     <thead>
         <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.id)*@
-            </th>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.from)
             </th>
@@ -50,9 +49,7 @@
     <tbody>
         @foreach (var route in Model) {
             <tr>
-                <td>
-                    @Html.HiddenFor(modelItem => route.id)
-                </td>
+                <td>@Html.HiddenFor(modelItem => route.id)</td>
                 <td>
                     @Html.DisplayFor(modelItem => route.from)
                 </td>
@@ -92,9 +89,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <th>
-                @*<input type="text" placeholder="@Html.DisplayNameFor(model => model.id)" />*@
-            </th>
+            <th></th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.from)" />
             </th>
@@ -125,8 +120,21 @@
 {
     @Scripts.Render("~/bundles/DataTables")
 
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var geocoder, map;
+
+            var Lithuania = new google.maps.LatLng(55.50, 24.00);
+            var mapOptions = {
+                zoom: 8,
+                center: Lithuania,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
             //filter
             var oTable = $('#Routes').dataTable({
