@@ -19,11 +19,10 @@
         
 
         @{
-            //string path = System.Web.HttpContext.Current.Server.MapPath("~/App_Data/Profiles/" + Model.image);
 
             if (ViewBag.image != null)
             {
-                <img src="@ViewBag.image" alt="Profile photo" />
+            <img class="photo" src="@ViewBag.image" alt="Profile photo" />
             }
         }
 

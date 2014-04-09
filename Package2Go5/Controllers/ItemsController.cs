@@ -31,7 +31,14 @@ namespace Package2Go5.Controllers
             ViewBag.Routes = routesManager.GetAll(userId);
             ViewBag.RoutesList = routesManager.GetRoutesList(userId);
 
-            var items = Mapper.Map <List<Items>, List<ItemsView>>(manager.GetAll(userId));
+            List<ItemsView> items;
+
+            if(userManager.getRole(userId) != 1)
+            {
+                items = Mapper.Map<List<Items>, List<ItemsView>>(manager.GetAllUserItems(userId));
+            }else{
+                items = Mapper.Map<List<Items>, List<ItemsView>>(manager.GetAll(userId));
+            }
 
             return View(items);
         }

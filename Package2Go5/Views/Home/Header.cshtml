@@ -2,9 +2,52 @@
     <div id="header" class="clearfix">
         <div class="HeaderLeft">
             
-            <a href="~/Home/Index"><img src="~/Images/Logo.png" alt="logo"/></a>
+            <a href="~/"><img src="~/Images/Logo.png" alt="logo"/></a>
             <nav>
-                @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")
+                @*@Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")*@
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="/Routes">Routes <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Create", "create", "Routes")</li>
+                                    <li>@Html.ActionLink("FindRoute", "findroute", "Routes")</li>
+                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("MyRoutes", "Index", "Routes")</li>}
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="/Items">Items <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Create", "create", "Items")</li>
+                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("MyItems", "index", "Items")</li>}
+                                </ul>
+                            </li>
+
+                            @* Admin *@
+                            @if (User.Identity.IsAuthenticated && ViewBag.role == 1)
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administravimas <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("RoutesList", "Index", "Routes")</li>
+                                        <li>@Html.ActionLink("ItemsList", "Index", "Items")</li>
+                                    </ul>
+                                </li>
+                            }
+
+                            @if(User.Identity.IsAuthenticated){
+                                <li>@Html.ActionLink("Profile", "Edit", "UserProfile")</li>
+                                <li>@Html.ActionLink("Logout ("+User.Identity.Name+")", "logout", "UserProfile")</li>
+                            }else{
+                                <li>@Html.ActionLink("Login", "login", "UserProfile")</li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+
             </nav>
         </div>
         @if(User.Identity.IsAuthenticated){

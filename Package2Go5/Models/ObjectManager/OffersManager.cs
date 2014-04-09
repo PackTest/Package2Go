@@ -76,8 +76,8 @@ namespace Package2Go5.Models.ObjectManager
 
             foreach (Offers offer in offers)
             {
-                offer.Routes.from = routesManager.GetOnlyCities(offer.Routes.from);
-                offer.Routes.waypoints = offer.Routes.from + "->" + routesManager.GetOnlyCities(offer.Routes.waypoints);
+                offer.Routes.from = routesManager.GetOnlyCities(offer.Routes.from, "->");
+                offer.Routes.waypoints = offer.Routes.from + "->" + routesManager.GetOnlyCities(offer.Routes.waypoints, "->");
             }
 
             return offers.ToList();

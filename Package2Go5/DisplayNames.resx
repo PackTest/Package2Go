@@ -158,4 +158,7 @@
     <value>Way Points</value>
     <comment>Way points/Finish addresses</comment>
   </data>
+  <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
 </root>

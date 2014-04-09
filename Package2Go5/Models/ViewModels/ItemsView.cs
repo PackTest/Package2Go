@@ -18,6 +18,9 @@ namespace Package2Go5.Models.ViewModels
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_address")]
         public string delivery_address { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "address")]
+        public string address { get; set; }
+
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "size")]
         public string size { get; set; }
 

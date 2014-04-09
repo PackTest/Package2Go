@@ -28,6 +28,7 @@ namespace Package2Go5
         public int delivery_price { get; set; }
         public string note { get; set; }
         public int currency_id { get; set; }
+        public string address { get; set; }
     
         public virtual Currencies Currencies { get; set; }
         public virtual ICollection<ItemsRoutes> ItemsRoutes { get; set; }

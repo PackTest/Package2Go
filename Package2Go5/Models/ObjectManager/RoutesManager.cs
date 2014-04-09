@@ -105,8 +105,8 @@ namespace Package2Go5.Models.ObjectManager
 
             foreach (vw_routes route in routes)
             {
-                route.from = GetOnlyCities(route.from);
-                route.waypoints = GetOnlyCities(route.waypoints);
+                route.from = GetOnlyCities(route.from, "->");
+                route.waypoints = GetOnlyCities(route.waypoints, "->");
             }
 
             return routes;
@@ -119,7 +119,15 @@ namespace Package2Go5.Models.ObjectManager
 
         public vw_routes Get_vw_Route(int id)
         {
-            return db.vw_routes.Where(r => r.id == id).First();
+            var route = db.vw_routes.Where(r => r.id == id).First();
+
+            //route.from = route.from.Substring(route.from.IndexOf(':'), route.from.Length);
+
+            route.waypoints = route.waypoints.Split(';').Aggregate((i, j) => i.Split(':')[1] + "->" + j.Split(':')[1]);
+
+            //route.waypoints = GetOnlyCities(route.waypoints, "->");
+
+            return route;
         }
 
         public List<KeyValuePair<string, int>> GetStatus() 
@@ -192,7 +200,7 @@ namespace Package2Go5.Models.ObjectManager
             return null;
         }
 
-        public string GetOnlyCities(string addresses) 
+        public string GetOnlyCities(string addresses, string separator) 
         {
             string waypoints = "";
             foreach (string waypoint in addresses.Split(';'))
@@ -211,11 +219,11 @@ namespace Package2Go5.Models.ObjectManager
                     city = address[0].Split(' ');
 
                 if (city.Length > 1)
-                    waypoints += city[1] + "->";
+                    waypoints += city[1] + separator;
                 else
-                    waypoints += city[0] + "->";
+                    waypoints += city[0] + separator;
             }
-            waypoints = waypoints.Remove(waypoints.Length - 2, 2);
+            waypoints = waypoints.Remove(waypoints.Length - separator.Length, separator.Length);
 
             return waypoints;
         }

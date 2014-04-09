@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "FindRoute";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>FindRoute</h2>
+
+<input type="text" value="" placeholder="From" />
+<input type="text" value="" placeholder="To" />
+
+<input type="button" title="routesNear" value="Search" onclick="GetMarkers();" />
+
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+<script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+
+</script>

@@ -33,14 +33,22 @@ namespace Package2Go5.Controllers
 
             ViewBag.Offers = offersManager.GetUserOfferedRoutesIds(userId);
 
-            var routes = Mapper.Map<List<vw_routes>, List<RoutesView>>(manager.GetAll());
+            List<RoutesView> routes;
+
+            if(userManager.getRole(userId) != 1)
+            {
+                routes = Mapper.Map<List<vw_routes>, List<RoutesView>>(manager.GetAll(userId));
+            }else{
+                routes = Mapper.Map<List<vw_routes>, List<RoutesView>>(manager.GetAll());
+            }
 
             return View(routes);
         }
 
-        [Authorize]
         public ActionResult Details(int id)
         {
+            var routes = Mapper.Map<vw_routes, RoutesView>(manager.Get_vw_Route(id));
+
             return View(manager.Get_vw_Route(id));
         }
 
@@ -159,5 +167,24 @@ namespace Package2Go5.Controllers
         {
             manager.AcceptOrder(r, i);
         }
+
+        [Authorize]
+        public ActionResult FindRoute()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[Authorize]
+        //public ActionResult FindRoute()
+        //{
+        //    try {
+        //        return View();
+        //    }
+        //    catch 
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

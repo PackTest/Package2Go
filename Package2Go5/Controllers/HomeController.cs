@@ -24,16 +24,70 @@ namespace Package2Go5.Controllers
             return View();
         }
 
-        //public ActionResult FindUsers(string to)
-        //{
-        //    var result = (from u in db.UserProfile
-        //                  where u.Username.ToLower().Contains(to.ToLower())
-        //                  select new { u.Username }).Distinct();
+        public JsonResult FindTripsPoints(int show)
+        {
+            var points = "";
 
-        //    var a = Json(result, JsonRequestBehavior.AllowGet);
+            if (show == 0 || show == 1)
+            {
+                foreach (Routes route in db.Routes)
+                {
+                    points += route.id + ":" + routesManager.GetOnlyCities(route.from, ",") + ","
+                            + routesManager.GetOnlyCities(route.waypoints, ",") + ",";
+                }
+            }
 
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
+            if (show == 0 || show == 2)
+            {
+                points += "items,";
+                IEnumerable<Items> items;
+                int userId = 0;
+
+                if (Request.Cookies["UserId"] != null)
+                    userId = int.Parse(Request.Cookies["UserId"].Value);
+
+                if (show == 2)
+                {
+                    items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
+                }else{
+                    items = db.Items;  
+                }
+
+                foreach (Items item in items)
+                {
+                    points += item.id + ":" + routesManager.GetOnlyCities(item.delivery_address, ",") + ",";
+                }
+            }
+
+            points = points.Substring(0, points.Length - 1);
+
+            return Json(points, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FindItemsRoutes() 
+        {
+            int userId = 0;
+            var points = "";
+            IEnumerable<Items> items;
+
+            if (Request.Cookies["UserId"] != null)
+                userId = int.Parse(Request.Cookies["UserId"].Value);
+
+            items = db.Items.Where(i=>i.UsersItems.Any(ui=>ui.user_id != userId));
+
+            foreach (Items item in items)
+            {
+                points += item.id + ":" + item.address + "|" + item.delivery_address + ";";
+            }
+
+            return Json(points, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetMarkers() 
+        {
+            string markers = Request.Url.GetLeftPart(UriPartial.Authority) + "/Images/van.png" + "," + Request.Url.GetLeftPart(UriPartial.Authority) +"/Images/Item.png";
+            return Json(markers, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult FindUsers()
         {
@@ -45,11 +99,18 @@ namespace Package2Go5.Controllers
         public PartialViewResult Header() 
         {
             List<Offers> offers = new List<Offers>();
-            if(Request.Cookies["UserId"] !=null)
-                offers = offersManager.GetUserNewOffers(Int32.Parse(Request.Cookies["UserId"].Value));
+            var role = 0;
+            if (Request.Cookies["UserId"] != null)
+            {
+                int userId = Int32.Parse(Request.Cookies["UserId"].Value);
+                offers = offersManager.GetUserNewOffers(userId);
+                role = usersManager.getRole(userId);
+            }
 
             var messages = messagesManager.GetNewUserMessages(User.Identity.Name);
             ViewBag.Messages = messages;
+
+            ViewBag.role = role;
 
             return PartialView(offers);
         }

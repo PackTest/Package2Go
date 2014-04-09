@@ -18,6 +18,9 @@
                 @Html.DisplayName("title")
             </th>
             <th>
+                @Html.DisplayName("address")
+            </th>
+            <th>
                 @Html.DisplayName("delivery_address")
             </th>
             <th>
@@ -45,6 +48,7 @@
             <tr>
                 <td>@Html.Raw(item.id)</td>
                 <td>@Html.Raw(item.title)</td>
+                <td>@Html.Raw(item.address)</td>
                 <td>@Html.Raw(item.delivery_address)</td>
                 <td>@Html.Raw(item.size)</td>
                 <td>@Html.Raw(item.delivery_price)</td>
@@ -73,6 +77,9 @@
                 <input type="text" name="1" placeholder="title" />
             </th>
             <th>
+                <input type="text" name="2" placeholder="address" />
+            </th>
+            <th>
                 <input type="text" name="2" placeholder="delivery_address" />
             </th>
             <th>
@@ -98,7 +105,7 @@
 </table>
 
 </div>
-
+<div style="width:100px; height:1px;">
 <div id="over_map2">
 
 @using (Html.BeginForm()) {
@@ -180,6 +187,12 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/DataTables")
 
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
+    @Styles.Render("~/Content/GMapApi")
+
+    <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -235,18 +248,39 @@
                     $(this).text("Show Calculated Costs");
                 }
             });
-
         });
 
         $('#over_map').hide();
-        console.log(screen.height);
-        console.log($('html').css("height"));
+        
+        var input;
+        function AddItem(id)
+        {
+            $('tbody tr').each(function () {
+                var item = $(this).last().find('a');
+                if (item.attr("title") == id)
+                    AddItemToRoute(item);
+            });
 
+            input = $('.infoWindow').find('input');
+
+            input.val("Remove");
+            input.attr("onclick", "RemoveItem"+input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
+            
+        }
+
+        function RemoveItem(id) {
+            $('tbody tr').each(function () {
+                var item = $(this).last().find('a');
+                if (item.attr("title") == id)
+                    RemoveItemFromRoute(item);
+            });
+
+            input = $('.infoWindow').find('input');
+            input.val("Add");
+            input.attr("onclick", "AddItem" + input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
+        }
     </script> 
 
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-    @Scripts.Render("~/bundles/jqueryGMAPAPI")
-    @Styles.Render("~/Content/GMapApi")
 
 }

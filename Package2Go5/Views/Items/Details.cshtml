@@ -9,7 +9,14 @@
     <legend>@Html.DisplayFor(model => model.title)</legend>
 
     <div class="display-label">
-            @Html.DisplayNameFor(model => model.delivery_address):
+        @Html.DisplayNameFor(model => model.address):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.address)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.delivery_address):
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.delivery_address)

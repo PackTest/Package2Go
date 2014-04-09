@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.title)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.delivery_address)
             </th>
             <th>
@@ -41,6 +44,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.delivery_address)
@@ -77,6 +83,9 @@
             </th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.title)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.address)" />
             </th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_address)" />

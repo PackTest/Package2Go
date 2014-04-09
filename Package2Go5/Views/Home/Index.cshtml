@@ -3,4 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
+    <script type="text/javascript">
+        
+        $('#over_map').css("display", "none");
+
+    </script>
+}

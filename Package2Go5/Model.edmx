@@ -127,8 +127,9 @@
           <Property Name="delivery_address" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="size" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="delivery_price" Type="int" Nullable="false" />
-          <Property Name="note" Type="varchar(max)" />
+          <Property Name="note" Type="text" />
           <Property Name="currency_id" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" Nullable="false" MaxLength="255" />
         </EntityType>
         <EntityType Name="ItemsRoutes">
           <Key>
@@ -600,6 +601,7 @@
           <NavigationProperty Name="ItemsRoutes" Relationship="Package2GoModel.FK_ItemsRoutes_Items" FromRole="Items" ToRole="ItemsRoutes" />
           <NavigationProperty Name="Offers" Relationship="Package2GoModel.FK_Offers_Items" FromRole="Items" ToRole="Offers" />
           <NavigationProperty Name="UsersItems" Relationship="Package2GoModel.FK_UsersItems_Items" FromRole="Items" ToRole="UsersItems" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ItemsRoutes">
           <Key>
@@ -971,6 +973,7 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="Package2GoModel.Items">
               <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />

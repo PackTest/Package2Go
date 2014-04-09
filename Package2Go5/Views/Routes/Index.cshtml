@@ -81,6 +81,7 @@
                         else
                         {
                             @Html.ActionLink("Offer", "", "Offers", null, new { @class="Offer" }) 
+                            @Html.ActionLink("Details", "Details/"+route.id+"", "Routes") 
                         }
                     }
                 </td>
@@ -121,20 +122,9 @@
     @Scripts.Render("~/bundles/DataTables")
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-
+    <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
-            var geocoder, map;
-
-            var Lithuania = new google.maps.LatLng(55.50, 24.00);
-            var mapOptions = {
-                zoom: 8,
-                center: Lithuania,
-                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
-            };
-
-            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
             //filter
             var oTable = $('#Routes').dataTable({

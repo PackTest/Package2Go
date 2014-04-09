@@ -337,7 +337,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Images\arrow.png" />
+    <Content Include="Images\Item.png" />
     <Content Include="Images\Logo.png" />
+    <Content Include="Images\van.png" />
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -369,6 +371,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\GMap.js" />
     <Content Include="Scripts\GMapApi.js" />
+    <Content Include="Scripts\ItemsDirection.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -386,6 +389,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ShowMarkers.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -431,6 +435,7 @@
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Offers\Index.cshtml" />
     <Content Include="Views\Routes\Details.cshtml" />
+    <Content Include="Views\Routes\FindRoute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

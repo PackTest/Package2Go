@@ -90,6 +90,7 @@ namespace Package2Go5.Controllers
         {
             try
             {
+                ViewBag.currencies = currencyManager.GetCurrenciesList();
                 manager.Update(viewModel);
                 return RedirectToAction("Index");
             }

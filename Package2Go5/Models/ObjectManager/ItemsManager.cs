@@ -16,6 +16,7 @@ namespace Package2Go5.Models.ObjectManager
             Items item = new Items();
 
             item.title = HttpUtility.HtmlEncode(itemView.title);
+            item.address = HttpUtility.HtmlEncode(itemView.address);
             item.delivery_address = HttpUtility.HtmlEncode(itemView.delivery_address);
             item.size = itemView.size;
             item.delivery_price = itemView.delivery_price;
@@ -33,6 +34,7 @@ namespace Package2Go5.Models.ObjectManager
             Items item = db.Items.FirstOrDefault(u => u.id == id);
 
             item.title = HttpUtility.HtmlEncode(itemView.title);
+            item.address = HttpUtility.HtmlEncode(itemView.address);
             item.delivery_address = HttpUtility.HtmlEncode(itemView.delivery_address);
             item.size = itemView.size;
             item.delivery_price = itemView.delivery_price;

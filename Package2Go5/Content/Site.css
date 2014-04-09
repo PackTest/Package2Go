@@ -64,6 +64,12 @@ header, footer, nav, section {
     pointer-events:none;
 }
 
+/*UserProfile*/
+.photo {
+    max-width:300px;
+    max-height:300px;
+}
+
 .content > div {
     pointer-events:all;
 }
@@ -128,9 +134,27 @@ header, footer, nav, section {
     margin-right:50px;
 }
 
-#map_canvas {
-    height: 100%; 
-    width: 100%;
+#canvas_holder{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width:100%; 
+	height:100%;
+	z-index: 0;
+}
+ 
+#map_canvas{
+	width:100%;
+	height:100%; 
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	overflow: hidden;
+}
+
+#directions_panel span{
+    font-weight:bold;
+    color:#232323;
 }
 
 /**/
@@ -141,7 +165,7 @@ header, footer, nav, section {
     border:5px solid #f1f1f1;
     box-shadow:0 0 20px;
     float:left;
-    max-height:700px;
+    min-width:350px;
 }
 
 .display-label {
@@ -314,6 +338,11 @@ li {
 
 #waypoints li {
     padding:5px;
+}
+
+#waypoints input {
+    padding:5px;
+    width:220px;
 }
 
 tfoot th {
