@@ -131,7 +131,9 @@
             </ul>
         </div>
         <a href="#" id="addWaypoint">Add Another Input Box</a>
-
+        <p>
+            Optimal route? <input name="optimized" type="checkbox" />
+        </p>
         <div class="editor-label">
             @Html.LabelFor(model => model.departure_time)
         </div>
@@ -197,6 +199,10 @@
 
         $(document).ready(function () {
 
+            $('input[name=optimized]').change(function () {
+                calcRoute();
+            });
+
             $('#showItems').click(function (e) {
                 e.preventDefault();
                 if ($('#over_map').css("display") == "none") {
@@ -255,30 +261,31 @@
         var input;
         function AddItem(id)
         {
+            addedItems.push(id);
+            dirRenderer.forEach(function (data) {
+                data.setMap(null);
+            });
+            dirRenderer = [];
+
             $('tbody tr').each(function () {
                 var item = $(this).last().find('a');
                 if (item.attr("title") == id)
                     AddItemToRoute(item);
             });
-
-            input = $('.infoWindow').find('input');
-
-            input.val("Remove");
-            input.attr("onclick", "RemoveItem"+input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
-            
         }
 
         function RemoveItem(id) {
+
+            addedItems.splice($.inArray(id, addedItems), 1);
+
+
             $('tbody tr').each(function () {
                 var item = $(this).last().find('a');
                 if (item.attr("title") == id)
                     RemoveItemFromRoute(item);
             });
-
-            input = $('.infoWindow').find('input');
-            input.val("Add");
-            input.attr("onclick", "AddItem" + input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
         }
+
     </script> 
 
 

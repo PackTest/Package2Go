@@ -337,6 +337,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Images\arrow.png" />
+    <Content Include="Images\erase.png" />
     <Content Include="Images\Item.png" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\van.png" />

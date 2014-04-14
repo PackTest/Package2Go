@@ -1,10 +1,25 @@
 ﻿jQuery(document).ready(function ($) {
     Initialize();
 
-    //SortList
+    ////SortList
+    //$('#waypoints').sortable({
+    //    items: "li:not(:first)",
+    //    update: function (event, ui) { calcRoute(); }
+    //});
+
     $('#waypoints').sortable({
         items: "li:not(:first)",
-        update: function (event, ui) { calcRoute(); }
+        update: function (event, ui) {
+
+            var id = ui.item.find('input').attr("id");
+
+            if (id != 0
+                && !ui.item.find('input').hasClass("start")
+                && ui.item.index() > $("li").index(document.getElementById(id))) {
+                alert("Item start point should be first!");
+                event.preventDefault();
+            } else { calcRoute(); }
+        }
     });
 
     $('#waypoints').disableSelection();
@@ -19,6 +34,10 @@
         $(this).attr("value", $(this).val());
         calcRoute();
     });
+
+    //$(document).on('click', 'select', function (e) {
+    //    console.log(this);
+    //});
 
     WayPoints();
 
@@ -151,8 +170,8 @@ function Datatable()
 function AddItemToRoute(item)
 {
     if ($(item).attr("title") != "") {
-        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(3)').html());
-        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(4)').html());
+        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(3)').html(), true);
+        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(4)').html(), false);
 
         $(item).attr("id", "Remove");
         $(item).text("Remove");
@@ -256,7 +275,8 @@ function WayPoints() {
             if (typeof input != "undefined") {
                 input = $('.infoWindow').find('input');
                 input.val("Add");
-                input.attr("onclick", "AddItem" + input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
+                if (typeof input.attr("onclick") != "undefined")
+                    input.attr("onclick", "AddItem" + input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
             }
 
             var id = $(this).prev().attr("id");
@@ -270,7 +290,8 @@ function WayPoints() {
             }
 
             $(this).parents('li').remove();
-            $('#' + id).parent('li').remove();
+            if(id!=0)
+                $('#' + id).parent('li').remove();
 
             RedrawTable();
             calcRoute();
@@ -279,10 +300,15 @@ function WayPoints() {
 
 }
 
-function generateWaypoints(value)
+function generateWaypoints(value, start)
 {
     var last = $('#waypoints li').last();
     var newLast = $(last).clone();
+
+    if (newLast.find('input').hasClass("start")) {
+        newLast.find('input').removeClass("start");
+    }
+
     var name = "waypoint_" + (last.index() + 1);
     var array;
 
@@ -312,12 +338,15 @@ function generateWaypoints(value)
             $(newLast).find('input').attr("value", value);
             $(newLast).find('input').attr("id", array[0]);
         }
+        if(start == true)
+            $(newLast).find('input').addClass("start");
     }
     else
         $(newLast).find('input').val("");
 
     if (last.index() == 0)
-        newLast.append('<a id="remWaypoint">Remove</span></a>');
+        //newLast.append('<a id="remWaypoint">X</span></a>');
+        newLast.append('<a id="remWaypoint"><img src="/Images/erase.png" alt="erase"/></a>');
 
     $('#waypoints').append(newLast);
 
@@ -374,11 +403,18 @@ function calcRoute() {
         }
     }
 
+    var optimized = false;
+
+    if ($('input[name=optimized]').is(':checked'))
+    {
+        optimized = true;
+    }
+
     var request = {
         origin: start,
         destination: array[array.length - 1],
         waypoints: waypts,
-        optimizeWaypoints: false,
+        optimizeWaypoints: optimized,
         travelMode: google.maps.TravelMode.DRIVING
     };
     directionsService.route(request, function (response, status) {
@@ -416,8 +452,7 @@ function calcRoute() {
             }
 
             maxDistance = totalDistance/1000;
-            //GetMarkers(2);
-            GetMarkers2();
+            //GetItemsMarkers();
 
 
             $('#totalDirection_panel').html("");

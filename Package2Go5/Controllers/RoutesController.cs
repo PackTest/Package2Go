@@ -171,7 +171,11 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult FindRoute()
         {
-            return View();
+            int userId = 0;
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
+
+            return View(itemManager.GetNotUsedUserItemsList(userId));
         }
 
         //[HttpPost]

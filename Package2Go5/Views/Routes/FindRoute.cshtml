@@ -1,14 +1,23 @@
-﻿@{
+﻿@model SelectList
+
+@{
     ViewBag.Title = "FindRoute";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>FindRoute</h2>
 
-<input type="text" value="" placeholder="From" />
-<input type="text" value="" placeholder="To" />
+<input type="text" name="itemFrom" value="" placeholder="Routes near" />
+<input type="button" name="routesNear" value="Search" onclick="FindNear();" />
 
-<input type="button" title="routesNear" value="Search" onclick="GetMarkers();" />
+<div>
+    <input type="text" name="distance" value="50" /> km
+</div>
+
+@*<h4>Your Items </h4>*@
+<div class="ItemsDropDown">
+    @Html.DropDownList("action", Model)
+</div>
 
 @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
@@ -17,7 +26,8 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-
+        new google.maps.places.Autocomplete(document.getElementsByName("itemFrom")[0]);
+        //GetRoutesMarkers();
     });
 
 </script>

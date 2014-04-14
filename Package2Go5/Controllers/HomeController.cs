@@ -64,21 +64,71 @@ namespace Package2Go5.Controllers
             return Json(points, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult FindItemsRoutes() 
+                //    var test = '{"1":{"id":"1", "address":"Kupiškis, Panevėžys County, Lithuania", "delivery_address":"Šilainiai, Kaunas, Kaunas County, Lithuania", "title":"Kedė"},'
+                //+ '"2":{"id":"2", "address":"Kupiškis, Panevėžys County, Lithuania", "delivery_address":"Šilainiai, Kaunas, Kaunas County, Lithuania", "title":"Kedė"}}';
+
+        public JsonResult FindItems() 
         {
             int userId = 0;
-            var points = "";
+            var points = "{";
             IEnumerable<Items> items;
 
             if (Request.Cookies["UserId"] != null)
                 userId = int.Parse(Request.Cookies["UserId"].Value);
 
-            items = db.Items.Where(i=>i.UsersItems.Any(ui=>ui.user_id != userId));
+            items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
 
             foreach (Items item in items)
             {
-                points += item.id + ":" + item.address + "|" + item.delivery_address + ";";
+                points += "\"" + item.id + "\":{\"address\":\"" + item.address + "\", \"delivery_address\":\"" + item.delivery_address + "\", \"title\":\"" + item.title + "\"},";
             }
+
+            points = points.Substring(0, points.Length - 1)+"}";
+
+            return Json(points, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult FindItems2()
+        {
+            int userId = 0;
+            //var points = "{ \"Items\": [";
+            var points = "[";
+            IEnumerable<Items> items;
+
+            if (Request.Cookies["UserId"] != null)
+                userId = int.Parse(Request.Cookies["UserId"].Value);
+
+            items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
+
+            foreach (Items item in items)
+            {
+                points += "{ \"id\":\"" + item.id + "\", \"address\":\"" + item.address + "\", \"delivery_address\":\"" + item.delivery_address + "\", \"title\":\"" + item.title + "\"},";
+            }
+
+            //points = points.Substring(0, points.Length - 1) + "]}";
+            points = points.Substring(0, points.Length - 1)+"]";
+
+            return Json(points, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FindRoutes()
+        {
+            int userId = 0;
+            var points = "";
+            IEnumerable<Routes> routes;
+
+            if (Request.Cookies["UserId"] != null)
+                userId = int.Parse(Request.Cookies["UserId"].Value);
+
+            routes = db.Routes.Where(r => r.UsersRoutes.Any(ur => ur.user_id != userId));
+
+            foreach (Routes route in routes)
+            {
+                points += route.id + ">" + route.from + ";" + route.waypoints + "/";
+            }
+
+            points = points.Substring(0, points.Length - 1);
 
             return Json(points, JsonRequestBehavior.AllowGet);
         }
