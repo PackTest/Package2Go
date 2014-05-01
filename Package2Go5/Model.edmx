@@ -6,9 +6,11 @@
     <edmx:StorageModels>
     <Schema Namespace="Package2GoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="Package2GoModelStoreContainer">
+          <EntitySet Name="Comments" EntityType="Package2GoModel.Store.Comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Currencies" EntityType="Package2GoModel.Store.Currencies" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Items" EntityType="Package2GoModel.Store.Items" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ItemsRoutes" EntityType="Package2GoModel.Store.ItemsRoutes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ItemStatus" EntityType="Package2GoModel.Store.ItemStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Messages" EntityType="Package2GoModel.Store.Messages" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MessagesStatus" EntityType="Package2GoModel.Store.MessagesStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Offers" EntityType="Package2GoModel.Store.Offers" store:Type="Tables" Schema="dbo" />
@@ -42,11 +44,20 @@
       [vw_routes].[status] AS [status], 
       [vw_routes].[Username] AS [Username], 
       [vw_routes].[rate] AS [rate], 
-      [vw_routes].[user_id] AS [user_id]
+      [vw_routes].[user_id] AS [user_id], 
+      [vw_routes].[itemCount] AS [itemCount]
       FROM [dbo].[vw_routes] AS [vw_routes]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Comments_UserProfile" Association="Package2GoModel.Store.FK_Comments_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Items_Currencies" Association="Package2GoModel.Store.FK_Items_Currencies">
             <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Items_ItemStatus" Association="Package2GoModel.Store.FK_Items_ItemStatus">
+            <End Role="ItemStatus" EntitySet="ItemStatus" />
             <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsRoutes_Items" Association="Package2GoModel.Store.FK_ItemsRoutes_Items">
@@ -110,6 +121,16 @@
             <End Role="UsersRoutes" EntitySet="UsersRoutes" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="writer_id" Type="int" Nullable="false" />
+          <Property Name="comment" Type="text" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Currencies">
           <Key>
             <PropertyRef Name="id" />
@@ -130,6 +151,7 @@
           <Property Name="note" Type="text" />
           <Property Name="currency_id" Type="int" Nullable="false" />
           <Property Name="address" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="status_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ItemsRoutes">
           <Key>
@@ -138,6 +160,13 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="item_id" Type="int" Nullable="false" />
           <Property Name="route_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -221,7 +250,7 @@
           <Property Name="lastname" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="gender" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="birthday" Type="datetime" Nullable="false" />
-          <Property Name="phone_nr" Type="int" Nullable="false" />
+          <Property Name="phone_nr" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="rate" Type="int" />
           <Property Name="image_url" Type="nvarchar" MaxLength="255" />
           <Property Name="currency_id" Type="int" Nullable="false" />
@@ -300,7 +329,20 @@
           <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="56" />
           <Property Name="rate" Type="int" />
           <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="itemCount" Type="int" />
         </EntityType>
+        <Association Name="FK_Comments_UserProfile">
+          <End Role="UserProfile" Type="Package2GoModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="Comments" Type="Package2GoModel.Store.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Items_Currencies">
           <End Role="Currencies" Type="Package2GoModel.Store.Currencies" Multiplicity="1" />
           <End Role="Items" Type="Package2GoModel.Store.Items" Multiplicity="*" />
@@ -310,6 +352,18 @@
             </Principal>
             <Dependent Role="Items">
               <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Items_ItemStatus">
+          <End Role="ItemStatus" Type="Package2GoModel.Store.ItemStatus" Multiplicity="1" />
+          <End Role="Items" Type="Package2GoModel.Store.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="status_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -575,6 +629,16 @@
           </AssociationSet>
           <EntitySet Name="vw_routes" EntityType="Package2GoModel.vw_routes" />
           <EntitySet Name="vw_messages" EntityType="Package2GoModel.vw_messages" />
+          <EntitySet Name="Comments" EntityType="Package2GoModel.Comments" />
+          <AssociationSet Name="FK_Comments_UserProfile" Association="Package2GoModel.FK_Comments_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="ItemStatus" EntityType="Package2GoModel.ItemStatus" />
+          <AssociationSet Name="FK_Items_ItemStatus" Association="Package2GoModel.FK_Items_ItemStatus">
+            <End Role="ItemStatus" EntitySet="ItemStatus" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Currencies">
           <Key>
@@ -602,6 +666,8 @@
           <NavigationProperty Name="Offers" Relationship="Package2GoModel.FK_Offers_Items" FromRole="Items" ToRole="Offers" />
           <NavigationProperty Name="UsersItems" Relationship="Package2GoModel.FK_UsersItems_Items" FromRole="Items" ToRole="UsersItems" />
           <Property Type="String" Name="address" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="status_id" Nullable="false" />
+          <NavigationProperty Name="ItemStatus" Relationship="Package2GoModel.FK_Items_ItemStatus" FromRole="Items" ToRole="ItemStatus" />
         </EntityType>
         <EntityType Name="ItemsRoutes">
           <Key>
@@ -708,7 +774,7 @@
           <Property Name="lastname" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="gender" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="phone_nr" Type="Int32" Nullable="false" />
+          <Property Name="phone_nr" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="rate" Type="Int32" />
           <Property Name="image_url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="currency_id" Type="Int32" Nullable="false" />
@@ -716,6 +782,7 @@
           <NavigationProperty Name="UsersItems" Relationship="Package2GoModel.FK_UsersItems_UserProfile" FromRole="UserProfile" ToRole="UsersItems" />
           <NavigationProperty Name="UsersRoutes" Relationship="Package2GoModel.FK_UsersRoutes_UserProfile" FromRole="UserProfile" ToRole="UsersRoutes" />
           <NavigationProperty Name="Roles" Relationship="Package2GoModel.UsersInRoles" FromRole="UserProfile" ToRole="Roles" />
+          <NavigationProperty Name="Comments" Relationship="Package2GoModel.FK_Comments_UserProfile" FromRole="UserProfile" ToRole="Comments" />
         </EntityType>
         <EntityType Name="UsersItems">
           <Key>
@@ -938,6 +1005,7 @@
           <Property Type="String" Name="Username" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="rate" />
           <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="Int32" Name="itemCount" />
         </EntityType>
         <EntityType Name="vw_messages">
           <Key>
@@ -955,6 +1023,49 @@
           <Property Type="String" Name="message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="user_id" Nullable="false" />
+          <Property Type="Int32" Name="writer_id" Nullable="false" />
+          <Property Type="String" Name="comment" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="Package2GoModel.FK_Comments_UserProfile" FromRole="Comments" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Comments_UserProfile">
+          <End Type="Package2GoModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="Package2GoModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ItemStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="Package2GoModel.FK_Items_ItemStatus" FromRole="ItemStatus" ToRole="Items" />
+        </EntityType>
+        <Association Name="FK_Items_ItemStatus">
+          <End Type="Package2GoModel.ItemStatus" Role="ItemStatus" Multiplicity="1" />
+          <End Type="Package2GoModel.Items" Role="Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -973,6 +1084,7 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="Package2GoModel.Items">
               <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -1127,6 +1239,7 @@
           <EntitySetMapping Name="vw_routes">
             <EntityTypeMapping TypeName="Package2GoModel.vw_routes">
               <MappingFragment StoreEntitySet="vw_routes">
+                <ScalarProperty Name="itemCount" ColumnName="itemCount" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="rate" ColumnName="rate" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -1147,6 +1260,25 @@
                 <ScalarProperty Name="to" ColumnName="to" />
                 <ScalarProperty Name="from" ColumnName="from" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="Package2GoModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="writer_id" ColumnName="writer_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemStatus">
+            <EntityTypeMapping TypeName="Package2GoModel.ItemStatus">
+              <MappingFragment StoreEntitySet="ItemStatus">
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

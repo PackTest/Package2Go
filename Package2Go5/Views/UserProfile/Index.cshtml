@@ -1,14 +1,12 @@
-﻿@model Package2Go5.UserProfile
+﻿@model Package2Go5.Models.ViewModels.UserProfileView
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
 <fieldset>
-    <legend>UserProfile</legend>
+    <legend>Your Profile</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Username)
@@ -18,7 +16,10 @@
     </div>
 
     <div class="display-field">
-        <img class="photo" src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
+        @if (!String.IsNullOrEmpty(Model.image_url))
+        {
+            <img class="photo" src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
+        }
     </div>
 
     <div class="display-label">
@@ -39,7 +40,7 @@
          @Html.DisplayNameFor(model => model.gender)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.gender)
+        @((Package2Go5.Constants.CProfile.genderType)Model.gender)
     </div>
 
     <div class="display-label">
@@ -60,10 +61,48 @@
          @Html.DisplayNameFor(model => model.rate)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.rate)
+        @Html.DisplayFor(model => model.rate) (@Model.commentCount)
     </div>
+
+    <p>
+        <a href="#" title="showComments">Show Last Comments</a>
+    </p>
+    <ul id="comments">
+        @if (Model.comments.Count() == 0) 
+        { 
+            <li>No Comments</li>
+        }else{
+
+            foreach (Package2Go5.Models.ViewModels.CommentsView comment in Model.comments) 
+            {
+                <li>
+                    <p>@comment.comment</p>
+                    <p><b>Written by: </b><a href="/UserProfile/Profile?username=@comment.writer">@comment.writer</a></p>
+                    @comment.date
+                    <hr>
+                </li>
+            }
+        }
+    </ul>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        //if ($('.validation-summary-errors').text() != "") {
+            
+        //}
+
+        $('a[title=showComments]').click(function (e) {
+            e.preventDefault();
+            if ($('#comments').css("display")=="none") {
+                $('#comments').css("display", "block");
+                $(this).text('Hide Comments');
+            } else {
+                $('#comments').css("display", "none");
+                $(this).text('Show Last Comments');
+            }
+        });
+
+    </script>
+}

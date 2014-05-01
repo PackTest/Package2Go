@@ -26,5 +26,14 @@ namespace Package2Go5
 
             AutoMapperWebConfiguration.Configure();
         }
+
+        protected void Application_Error(object sender, EventArgs e) {
+            Exception ex = Server.GetLastError();
+            if (ex != null && ex.Message.Contains("Maximum request length exceeded"))
+            {
+                Server.ClearError();
+                Response.Redirect("/UserProfile/Edit?e=1");
+            }
+        }
     }
 }

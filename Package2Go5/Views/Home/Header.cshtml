@@ -4,26 +4,27 @@
             
             <a href="~/"><img src="~/Images/Logo.png" alt="logo"/></a>
             <nav>
-                @*@Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")*@
                 <div class="navbar">
                     <div class="navbar-inner">
                         <ul class="nav">
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="/Routes">Routes <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Create", "create", "Routes")</li>
+                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("Create", "create", "Routes")</li>}
                                     <li>@Html.ActionLink("FindRoute", "findroute", "Routes")</li>
                                     @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("MyRoutes", "Index", "Routes")</li>}
                                 </ul>
                             </li>
+                            @if (User.Identity.IsAuthenticated){
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="/Items">Items <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Create", "create", "Items")</li>
-                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("MyItems", "index", "Items")</li>}
+                                        <li>@Html.ActionLink("Create", "create", "Items")</li>
+                                        <li>@Html.ActionLink("MyItems", "index", "Items")</li>
+                                        <li>@Html.ActionLink("Items History", "History", "Items")</li>
                                 </ul>
                             </li>
-
+                            }
                             @* Admin *@
                             @if (User.Identity.IsAuthenticated && ViewBag.role == 1)
                             {
@@ -41,14 +42,13 @@
                                 <li>@Html.ActionLink("Logout ("+User.Identity.Name+")", "logout", "UserProfile")</li>
                             }else{
                                 <li>@Html.ActionLink("Login", "login", "UserProfile")</li>
+                                <li>@Html.ActionLink("Sign In", "create", "UserProfile")</li>
                             }
-
-
                         </ul>
                     </div>
                 </div>
-
             </nav>
+            <input type="text" name="findUser" placeholder="Find User"/>
         </div>
         @if(User.Identity.IsAuthenticated){
             <div class="HeaderRight clearfix">
@@ -59,12 +59,12 @@
                         {
                             <li>
                                 <input type="hidden" value="@message.id" />
-                                <p>From: <span>@message.from</span></p>  
+                                <p>From: <a title="messageFrom" href="/UserProfile/Profile?username=@message.from">@message.from</a></p>  
                                 <p>Date: <span>@message.date</span></p>  
-                                <p>Message:<span>@message.message</span></p>
+                                <p>Message: <span>@message.message</span></p>
                                 <div class="clearfix">
                                     <a href="#" title="replay">Replay</a>
-                                    <a href="/Messages/Details/@message.id">More</a>
+                                    <a href="/Messages/Details/@message.id" title="messageDetails">More</a>
                                     <a href="#" title="hide">Hide</a>
                                 </div>
                                 <hr>
@@ -78,6 +78,7 @@
                                 <input type="hidden" class="itemId" value="@offer.item_id" />
                                 <input type="hidden" value="@offer.id" />
                                 <p>Item: @offer.Items.title</p>
+                                <p>From: @offer.Items.address</p>
                                 <p>To: @offer.Items.delivery_address</p>
                                 <p>Price: @offer.Items.delivery_price @offer.Items.Currencies.code</p>
                                 <div class="clearfix">

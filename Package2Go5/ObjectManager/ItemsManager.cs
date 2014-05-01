@@ -1,4 +1,5 @@
-﻿using Package2Go5.Models.ViewModels;
+﻿using AutoMapper;
+using Package2Go5.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Package2Go5.Models.ObjectManager
             item.delivery_price = itemView.delivery_price;
             item.note = HttpUtility.HtmlEncode(itemView.note);
             item.currency_id = itemView.currency_id;
+            item.status_id = 1;
 
             item.UsersItems.Add(new UsersItems { item_id = item.id, user_id = userId });
 
@@ -39,6 +41,7 @@ namespace Package2Go5.Models.ObjectManager
             item.size = itemView.size;
             item.delivery_price = itemView.delivery_price;
             item.note = HttpUtility.HtmlEncode(itemView.note);
+            item.status_id = itemView.status_id;
 
             db.SaveChanges();
         }
@@ -49,13 +52,17 @@ namespace Package2Go5.Models.ObjectManager
             {
                 db.UsersItems.Remove(ui);
             }
-            db.Items.Remove(GetItem(id));
+            db.Items.Remove(db.Items.Where(i=>i.id==id).First());
             db.SaveChanges();
         }
 
-        public Items GetItem(int id)
+        public ItemsView GetItem(int id)
         {
-            return db.Items.Where(r => r.id == id).First();
+            var item = Mapper.Map<Items, ItemsView>(db.Items.Where(r => r.id == id).First());
+
+            item.owner = db.UserProfile.Where(up => up.UsersItems.Any(ui => ui.item_id == item.id)).First().Username;
+
+            return item;
         }
 
         public List<Items> GetAll( int userId = 0, int routeId = 0)
@@ -70,9 +77,28 @@ namespace Package2Go5.Models.ObjectManager
                 return db.Items.Where(i=>!i.ItemsRoutes.Any()).ToList();
         }
 
+        public List<ItemsView> GetAllHistory(int userId)
+        {
+            List<ItemsView> itemsView = Mapper.Map<List<Items>, List<ItemsView>>(db.Items.Where(i => i.status_id == 3 && i.UsersItems.Any(ui=>ui.user_id == userId)).ToList());
+
+            Routes route = null;
+
+            foreach (ItemsView item in itemsView)
+            {
+                route = db.Routes.Where(r => r.ItemsRoutes.Any(ir => ir.item_id == item.id)).FirstOrDefault();
+                if (route == null)
+                    continue;
+                item.date = route.departure_time;
+                item.route_id = route.id;
+            }
+
+
+            return itemsView;
+        }
+
         public List<Items> GetAllUserItems(int userId)
         {
-            return db.Items.Where(i => i.UsersItems.Any(ui=>ui.user_id == userId)).ToList();
+            return db.Items.Where(i => i.UsersItems.Any(ui=>ui.user_id == userId) && i.status_id != 3).ToList();
         }
 
         public SelectList GetNotUsedUserItemsList(int userId)
@@ -113,6 +139,27 @@ namespace Package2Go5.Models.ObjectManager
             }
 
             return pricesUserVal;
+        }
+
+        public SelectList getStatusList(int status_id) 
+        {
+            List<SelectListItem> status = new List<SelectListItem>();
+            bool selected = false;
+            
+            if(status_id == -1)
+                status.Add(new SelectListItem { Text = "Status", Value = "", Selected = selected });
+
+            foreach (ItemStatus stat in db.ItemStatus) 
+            {
+                if (stat.id == status_id)
+                    selected = true;
+                if (status_id != -1)
+                    status.Add(new SelectListItem { Text = stat.title, Value = stat.id.ToString(), Selected = selected });
+                else
+                    status.Add(new SelectListItem { Text = stat.title, Value = stat.title, Selected = selected });
+            }
+
+            return new SelectList(status, "Value", "Text");
         }
     }
 }

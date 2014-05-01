@@ -117,102 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="currency_id" xml:space="preserve">
-    <value>Currency</value>
-    <comment>user</comment>
+  <data name="upload" xml:space="preserve">
+    <value>Max file size should be 4MB.</value>
   </data>
-  <data name="delivery_address" xml:space="preserve">
-    <value>Delivery Address</value>
-    <comment>items</comment>
-  </data>
-  <data name="delivery_price" xml:space="preserve">
-    <value>Delivery Price</value>
-    <comment>items</comment>
-  </data>
-  <data name="delivery_time" xml:space="preserve">
-    <value>Delivery Time</value>
-    <comment>items</comment>
-  </data>
-  <data name="departure_time" xml:space="preserve">
-    <value>Departure Time</value>
-    <comment>items</comment>
-  </data>
-  <data name="from" xml:space="preserve">
-    <value>From</value>
-    <comment>routes</comment>
-  </data>
-  <data name="note" xml:space="preserve">
-    <value>Note</value>
-    <comment>items</comment>
-  </data>
-  <data name="rate" xml:space="preserve">
-    <value>User Rate</value>
-    <comment>user</comment>
-  </data>
-  <data name="size" xml:space="preserve">
-    <value>Size</value>
-    <comment>items</comment>
-  </data>
-  <data name="status_id" xml:space="preserve">
-    <value>Status</value>
-    <comment>All</comment>
-  </data>
-  <data name="title" xml:space="preserve">
-    <value>Title</value>
-    <comment>items</comment>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
-    <comment>user</comment>
-  </data>
-  <data name="waypoints" xml:space="preserve">
-    <value>Way Points</value>
-    <comment>routes</comment>
-  </data>
-  <data name="address" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="birthday" xml:space="preserve">
-    <value>Birthday</value>
-    <comment>user</comment>
-  </data>
-  <data name="gender" xml:space="preserve">
-    <value>Gender</value>
-    <comment>user</comment>
-  </data>
-  <data name="image" xml:space="preserve">
-    <value>Profile Photo</value>
-    <comment>user</comment>
-  </data>
-  <data name="lastname" xml:space="preserve">
-    <value>Last Name</value>
-    <comment>user</comment>
-  </data>
-  <data name="name" xml:space="preserve">
-    <value>Name</value>
-    <comment>user</comment>
-  </data>
-  <data name="password" xml:space="preserve">
-    <value>Password</value>
-    <comment>user</comment>
-  </data>
-  <data name="phone_nr" xml:space="preserve">
-    <value>Phone Number</value>
-    <comment>user</comment>
-  </data>
-  <data name="route_id" xml:space="preserve">
-    <value>Route</value>
-  </data>
-  <data name="owner" xml:space="preserve">
-    <value>Owner</value>
-  </data>
-  <data name="message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="date" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="item_id" xml:space="preserve">
-    <value>Item</value>
+  <data name="userForm" xml:space="preserve">
+    <value>Wrong password or filled fields.</value>
   </data>
 </root>

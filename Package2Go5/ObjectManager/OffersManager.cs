@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Package2Go5.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -70,22 +72,48 @@ namespace Package2Go5.Models.ObjectManager
             return offers;
         }
 
-        public List<Offers> GetUserOffersList(int userId)
+        public List<OffersView> GetUserOffersList(int userId)
         {
             IEnumerable<Offers> offers = db.Offers.Where(o => o.Routes.UsersRoutes.Any(ur => ur.user_id == userId));
 
-            foreach (Offers offer in offers)
+            //foreach (Offers offer in offers)
+            //{
+            //    offer.Routes.from = routesManager.GetOnlyCities(offer.Routes.from, "->");
+            //    offer.Routes.waypoints = offer.Routes.from + "->" + routesManager.GetOnlyCities(offer.Routes.waypoints, "->");
+            //}
+
+            //var offersView = AutoMapper.Mapper.Map<List<Offers>, List<OffersView>>(offers.ToList());
+            var offersView = new List<OffersView>();
+            OffersView offerView = null;
+
+            foreach (Offers offer in offers) 
             {
-                offer.Routes.from = routesManager.GetOnlyCities(offer.Routes.from, "->");
-                offer.Routes.waypoints = offer.Routes.from + "->" + routesManager.GetOnlyCities(offer.Routes.waypoints, "->");
+                offerView = Mapper.Map<Offers, OffersView>(offer);
+                offerView.item = offer.Items.title;
+                offerView.route = routesManager.GetOnlyCities(offer.Routes.from, "->") + "->" + routesManager.GetOnlyCities(offer.Routes.waypoints, "->");
+                offerView.status = db.OffersStatus.Where(os => os.id == offer.status_id).First().title;
+
+                offersView.Add(offerView); 
             }
 
-            return offers.ToList();
+            return offersView;
         }
 
         public List<Offers> GetUserNewOffers(int userId)
         {
             return db.Offers.Where(o => o.Routes.UsersRoutes.Any(ur => ur.user_id == userId) && o.status_id == 1).ToList();
+        }
+
+        public SelectList GetStatusList() 
+        {
+            List<SelectListItem> status = new List<SelectListItem>();
+
+            status.Add(new SelectListItem { Text="Status", Value="" });
+            foreach (OffersStatus stat in db.OffersStatus.ToList())
+            {
+                status.Add(new SelectListItem { Text = stat.title, Value = stat.title });
+            }
+            return new SelectList(status, "Value", "Text");
         }
 
     }

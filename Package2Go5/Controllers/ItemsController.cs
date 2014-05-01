@@ -30,6 +30,7 @@ namespace Package2Go5.Controllers
             ViewBag.User_id = userId;
             ViewBag.Routes = routesManager.GetAll(userId);
             ViewBag.RoutesList = routesManager.GetRoutesList(userId);
+            ViewBag.status = manager.getStatusList(-1);
 
             List<ItemsView> items;
 
@@ -38,6 +39,11 @@ namespace Package2Go5.Controllers
                 items = Mapper.Map<List<Items>, List<ItemsView>>(manager.GetAllUserItems(userId));
             }else{
                 items = Mapper.Map<List<Items>, List<ItemsView>>(manager.GetAll(userId));
+            }
+
+            foreach (ItemsView item in items) 
+            {
+                item.route_id = routesManager.GetItemRouteId(item.id);
             }
 
             return View(items);
@@ -90,9 +96,10 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            var itemView = Mapper.Map<Items, ItemsView>(manager.GetItem(id));
+            ItemsView item = manager.GetItem(id);
+            ViewBag.status = manager.getStatusList(item.status_id);
 
-            return View(itemView);
+            return View(item);
         }
 
         //
@@ -102,9 +109,9 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Edit(int id, ItemsView item)
         {
+            ViewBag.status = manager.getStatusList(item.status_id);
             try
             {
-                // TODO: Add update logic here
                 manager.Update(id, item);
                 return RedirectToAction("Index");
             }
@@ -121,6 +128,17 @@ namespace Package2Go5.Controllers
         {
             manager.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult History()
+        {
+            int userId = 0;
+
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
+
+            return View(manager.GetAllHistory(userId));
         }
     }
 }

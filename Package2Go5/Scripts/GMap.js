@@ -1,26 +1,7 @@
 ﻿jQuery(document).ready(function ($) {
     Initialize();
 
-    ////SortList
-    //$('#waypoints').sortable({
-    //    items: "li:not(:first)",
-    //    update: function (event, ui) { calcRoute(); }
-    //});
-
-    $('#waypoints').sortable({
-        items: "li:not(:first)",
-        update: function (event, ui) {
-
-            var id = ui.item.find('input').attr("id");
-
-            if (id != 0
-                && !ui.item.find('input').hasClass("start")
-                && ui.item.index() > $("li").index(document.getElementById(id))) {
-                alert("Item start point should be first!");
-                event.preventDefault();
-            } else { calcRoute(); }
-        }
-    });
+    sort();
 
     $('#waypoints').disableSelection();
 
@@ -35,11 +16,7 @@
         calcRoute();
     });
 
-    //$(document).on('click', 'select', function (e) {
-    //    console.log(this);
-    //});
-
-    WayPoints();
+    //WayPoints();
 
     if ($('#Items').length != 0)
         Datatable();
@@ -52,8 +29,9 @@
 
         $('#waypoints li').each(function () {
             var input = $(this).children('input');
-            if (typeof input.attr('id') != "undefined" && input.attr('id') != "from")
-                input.val(input.attr('id') + ":" + input.val());
+            if (typeof input.attr('id') != "undefined" && input.attr('id') != "from") {
+                input.val(input.attr('id').split('_')[0] + ":" + input.val());
+            }
             else
                 input.val(0 + ":" + input.val());
         });
@@ -77,6 +55,53 @@
     });
 
 });
+
+function sort() {
+
+    $.fn.isAfter = function (sel) {
+        return this.prevAll(sel).length !== 0;
+    }
+    $.fn.isBefore = function (sel) {
+        return this.nextAll(sel).length !== 0;
+    }
+
+    $('#waypoints').sortable({
+        items: "li:not(:first)",
+        update: function (event, ui) {
+            var id = ui.item.find('input').attr("id");
+            var start = 0;
+            var end = 0;
+
+            if (typeof id !== "undefined" && id != 0) {
+                if (id.split('_').length == 1) {
+                    end = $(document.getElementById(id).parentElement).index();
+                    id += "_1";
+                    start = $(document.getElementById(id).parentElement).index();
+                } else {
+                    start = $(document.getElementById(id).parentElement).index();
+                    end = $(document.getElementById(id.split('_')[0]).parentElement).index();
+                }
+
+                if (typeof id !== "undefined" && id != 0
+                    && start > end) {
+                    alert("Item start point should be first!");
+                    event.preventDefault();
+                } else {
+                    calcRoute();
+                }
+            } else {
+                calcRoute();
+            }
+        }
+    });
+}
+
+function reSort()
+{
+    $('#waypoints').sortable('destroy');
+    $('#waypoints').unbind();
+    sort();
+}
 
 function calculatePaymentsForService()
 {
@@ -110,7 +135,16 @@ function Datatable()
     var oTable = $('#Items').dataTable({
         "aaSorting": [[4, "desc"]],
         "sDom": '<"top"l>rt<"bottom"ip>',
-        "aoColumns": [null, null, null, null, null, null, null, null, null, null],
+        "iDisplayLength": 5,
+        "oLanguage": {
+            "sLengthMenu": 'Display <select>' +
+              '<option value="5">5</option>' +
+              '<option value="10">10</option>' +
+              '<option value="20">20</option>' +
+              '<option value="-1">All</option>' +
+              '</select> records'
+        },
+        "aoColumns": [null, null, null, null, null, null, null, null, null, null]
     });
 
     //Offer filter
@@ -133,17 +167,10 @@ function Datatable()
     });
 
     //User Price
-    MinMax('userPriceMin', 'userPriceMax', 6, oTable);
+    MinMax('userPriceMin', 'userPriceMax', 7, oTable);
 
     //Price
-    MinMax('min', 'max', 4, oTable);
-
-    //link to item details
-    $("#Items").on("dblclick", "tr", function () {
-        var iPos = oTable.fnGetPosition(this);
-        var aData = oTable.fnGetData(iPos);
-        window.location.href = 'Items/Details/' + aData[0];
-    });
+    MinMax('min', 'max', 5, oTable);
 
     //Add Remove Items Address
     $("tbody").on("click", "#Add", function (e) {
@@ -170,8 +197,9 @@ function Datatable()
 function AddItemToRoute(item)
 {
     if ($(item).attr("title") != "") {
-        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(3)').html(), true);
-        generateWaypoints($(item).attr("title") + ":" + $(item).parent().parent().children(':nth-child(4)').html(), false);
+        var id = $(item).attr("title");
+        generateWaypoints(id + ":" + $(item).parent().parent().children(':nth-child(3)').html(), true);
+        generateWaypoints(id + ":" + $(item).parent().parent().children(':nth-child(4)').html(), false);
 
         $(item).attr("id", "Remove");
         $(item).text("Remove");
@@ -182,14 +210,23 @@ function AddItemToRoute(item)
 
 function RemoveItemFromRoute(item)
 {
-    if ($('#waypoints li').size() > 2 && $(item).attr("title") != "") {
+    var id = $(item).attr("title");
+    if ($('#waypoints li').size() > 2 && id != "") {
 
         if ($(item).prev().attr("id") != 0) {
-            $('input[name=Items][value=' + $(item).attr("title") + ']').remove();
+            $('input[name=Items][value=' + id + ']').remove();
         }
 
-        $('#' + $(item).attr("title")).parent().remove();
-        $('#' + $(item).attr("title")).parent().remove();
+        $('#itemList').find('a[title=item' + id + ']').remove();
+
+        $('#' + id).parent().remove();
+
+        if (id.split('_').length > 1)
+            $('#' + id.split('_')[0]).parent().remove();
+        else
+            $('#' + id + '_1').parent().remove();
+
+        $('#' + id).parent().remove();
 
         if (typeof input != "undefined")
         {
@@ -235,10 +272,19 @@ function MinMax(class1, class2, index, oTable)
 function RedrawTable() {
     if ($('#Items').length != 0) {
         $('#Items').dataTable().fnDestroy();
-        otable = $('#Items').dataTable({
+        oTable = $('#Items').dataTable({
             "aaSorting": [[4, "desc"]],
             "sDom": '<"top"l>rt<"bottom"ip>',
-            "aoColumns": [null, null, null, null, null, null, null, null, null, null],
+            "iDisplayLength": 5,
+            "oLanguage": {
+                "sLengthMenu": 'Display <select>'+
+                  '<option value="5">5</option>'+
+                  '<option value="10">10</option>'+
+                  '<option value="20">20</option>'+
+                  '<option value="-1">All</option>'+
+                  '</select> records'
+            },
+            "aoColumns": [null, null, null, null, null, null, null, null, null, null]
         });
     }
 }
@@ -255,8 +301,19 @@ function WayPoints() {
             $('input[name=from]').attr("id", $('input[name=from]').val().split(':')[0]);
         $('input[name=from]').val($('input[name=from]').val().split(':')[1]);
 
+        var addedItems = new Array();
+
+        //var first = true;
         for (var i = 0; i < array.length; i++) {
-            generateWaypoints(array[i]);
+            var id = array[i].split(':')[0];
+
+            if (id != 0 && $.inArray(id, addedItems) == -1) {
+                generateWaypoints(array[i], true);
+                addedItems.push(id);
+                RedrawTable();
+            } else {
+                generateWaypoints(array[i], false);
+            }
         }
 
         calcRoute();
@@ -290,14 +347,17 @@ function WayPoints() {
             }
 
             $(this).parents('li').remove();
-            if(id!=0)
-                $('#' + id).parent('li').remove();
+            if (id != 0) {
+                if (id.split("_").length > 1)
+                    $('#' + id.split("_")[0]).parent('li').remove();
+                else
+                    $('#' + id+'_1').parent('li').remove();
+            }
 
             RedrawTable();
             calcRoute();
         }
     });
-
 }
 
 function generateWaypoints(value, start)
@@ -305,8 +365,13 @@ function generateWaypoints(value, start)
     var last = $('#waypoints li').last();
     var newLast = $(last).clone();
 
+    if(typeof value === "undefined")
+        newLast.find('input').attr("id", "0");
+    newLast.find('.dragImage').text("");
+
     if (newLast.find('input').hasClass("start")) {
         newLast.find('input').removeClass("start");
+        newLast.find('.dragImage').text("");
     }
 
     var name = "waypoint_" + (last.index() + 1);
@@ -323,7 +388,8 @@ function generateWaypoints(value, start)
         array = value.split(':');
         if (array[0] != 0) {
             $(newLast).find('input').attr("id", array[0]);
-            $('fieldset').append('<input type=hidden name=Items value="' + array[0] + '"/>');
+            $(newLast).find('.dragImage').html("<span>" + array[0] + "</span>")
+            $('fieldset').append('<input type=hidden name=Items value="'+ array[0] + '"/>');
 
             //Change buttons in ItemsList
             $('a[title=' + array[0] + ']').text("Remove");
@@ -338,20 +404,25 @@ function generateWaypoints(value, start)
             $(newLast).find('input').attr("value", value);
             $(newLast).find('input').attr("id", array[0]);
         }
-        if(start == true)
+        if (start == true) {
             $(newLast).find('input').addClass("start");
+            $(newLast).find('input').attr("id", array[0]+"_1");
+            addedItems.push(array[0]);
+
+            $('#itemList').append("<a title='item" + array[0] + "' href='/Items/Details/" + array[0] + "'> | " + Items[array[0]].title + "</a>");
+        }
     }
     else
         $(newLast).find('input').val("");
 
     if (last.index() == 0)
-        //newLast.append('<a id="remWaypoint">X</span></a>');
         newLast.append('<a id="remWaypoint"><img src="/Images/erase.png" alt="erase"/></a>');
 
     $('#waypoints').append(newLast);
 
     new google.maps.places.Autocomplete(document.getElementsByName(name)[0]);
     
+    reSort();
 }
 
 //Google Maps
@@ -386,12 +457,21 @@ function Initialize() {
 }
 
 function calcRoute() {
-    
+
     var start = $('#from').val();
 
     var waypts = [];
 
-    var array = $(".waypoint").map(function () { return $(this).val(); }).get();
+    //var array = $(".waypoint").map(function () {
+    //    return $(this).val();
+    //}).get();
+
+    var array = [];
+    $(".waypoint").each(function () {
+        array.push($(this).val());
+    });
+
+    console.log(array);
 
     if(array.length > 1)
     {
@@ -409,7 +489,6 @@ function calcRoute() {
     {
         optimized = true;
     }
-
     var request = {
         origin: start,
         destination: array[array.length - 1],
@@ -426,9 +505,10 @@ function calcRoute() {
             var totalDuraction = 0;
             var summaryPanel = document.getElementById('directions_panel');
             summaryPanel.innerHTML = '';
-            // For each route, display summary information.
 
+            // For each route, display summary information.
             var ind = 0
+
             $('#waypoints li').each(function () {
                 if (ind == 0) {
                     $(this).find('input').val(route.legs[ind].start_address);
@@ -441,19 +521,15 @@ function calcRoute() {
 
             for (var i = 0; i < route.legs.length; i++) {
 
-                var routeSegment = i + 1;
-                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
-                summaryPanel.innerHTML += route.legs[i].start_address + '<span> -> </span><br>';
-                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                summaryPanel.innerHTML += "<span>Distance: </span>" + route.legs[i].distance.text + '<br>';
-                summaryPanel.innerHTML += "<span>Duration: </span>" + route.legs[i].duration.text + '<br>';
+                var routeSegment = i + 1 + ", " + route.legs[i].distance.text + ", " + route.legs[i].duration.text;
+                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><p style="margin-left:20px;">'
+                + route.legs[i].start_address + '<br><img style="margin-left:20px;" src="/Images/arrow-down.png" alt=""/><br>'
+                + route.legs[i].end_address + '</p>';
                 totalDistance += route.legs[i].distance.value;
                 totalDuraction += route.legs[i].duration.value;
             }
 
             maxDistance = totalDistance/1000;
-            //GetItemsMarkers();
-
 
             $('#totalDirection_panel').html("");
             document.getElementById('totalDirection_panel').innerHTML += "<span>Total distance: </span><span id='distance'>" + Math.round(totalDistance / 1000) + '</span> KM<br><br>'

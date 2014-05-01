@@ -31,6 +31,12 @@
                 @Html.DisplayNameFor(model => model.note)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.route_id)
+            </th>
+            <th>
                 Action
             </th>
         </tr>
@@ -59,6 +65,14 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @if(item.route_id != 0){
+                        @Html.ActionLink("Show Route", "Details/" + item.route_id, "Routes")
+                    }
                 </td>
                 <td>
                     @if (User.Identity.IsAuthenticated && item.UsersItems.Where(ui=>ui.item_id == item.id).First().user_id == ViewBag.User_id)
@@ -99,6 +113,9 @@
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.note)"/>
             </th>
+            <th>
+                @Html.DropDownList("status", (SelectList)@ViewBag.status)
+            </th>
         </tr>
     </tfoot>
 </table>
@@ -106,8 +123,6 @@
 @section Scripts 
 {
     @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 
     @Scripts.Render("~/bundles/DataTables")
     <script type="text/javascript">
@@ -128,7 +143,20 @@
             var oTable = $('#Items').dataTable({
                 "aaSorting": [[4, "desc"]],
                 "sDom": '<"top"l>rt<"bottom"ip>',
-                "aoColumns": [{ "bVisible": false }, null, null, null, null, null, { "bSortable": false }]
+                "aoColumns": [{ "bVisible": false }, null, null, null, null, null, null, null, null, { "bSortable": false }],
+                "iDisplayLength": 5,
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>' +
+                      '<option value="5">5</option>' +
+                      '<option value="10">10</option>' +
+                      '<option value="20">20</option>' +
+                      '<option value="-1">All</option>' +
+                      '</select> records'
+                }
+            });
+
+            $('#status').change(function () {
+                oTable.fnFilter($(this).val());
             });
 
             $("tfoot input").keyup(function () {

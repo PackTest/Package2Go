@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Package2Go5.vw_messages>
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.MessagesView>
 
 @{
     ViewBag.Title = "Index";
@@ -6,21 +6,91 @@
 }
 
 <h2>Messages</h2>
+    
+    <a href="#" title="showFilter">Filter</a>   
 
-    <ul>
+    <div id="filter">
+        @Html.DropDownList("user", new List<SelectListItem>())
+        @Html.JQueryUI().Datepicker("dateFrom", null, new { @placeholder="Date From" })
+        @Html.JQueryUI().Datepicker("dateTill", null, new { @placeholder="Date Till" })
+
+        <div>
+            <input type="button" onclick="filter()" value="Filter" />
+            <input type="button" onclick="clearFilter()" value="Clear" />
+        </div>
+    </div>
+
+    <ul id="messagesList">
     @foreach (var item in Model) {
         <li>
             <p>
-                @Html.DisplayNameFor(model => model.from): <a href="/UserProfile/Profile/@item.from">@Html.DisplayFor(modelItem => item.from)</a>
+                <b>@Html.DisplayNameFor(model => model.from):</b> <a href="/UserProfile/Profile?username=@item.from">@Html.DisplayFor(modelItem => item.from)</a>
             </p>
             <p>
-                @Html.DisplayNameFor(model => model.date): <span>@Html.DisplayFor(modelItem => item.date)</span>
+                <b>@Html.DisplayNameFor(model => model.date):</b> <span>@Html.DisplayFor(modelItem => item.date)</span>
             </p>
             <p>
-                @Html.DisplayNameFor(model => model.message): <span>@Html.DisplayFor(modelItem => item.message)</span>
+                <b>@Html.DisplayNameFor(model => model.message):</b><br /><span>@Html.DisplayFor(modelItem => item.message)</span>
             </p>
-            <a href="#" title="replay">Replay</a>
+            <div><a href="#" title="replay">Replay</a></div>
             <hr>
         </li>
     }
     </ul>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function filter() {
+            var user = $('#user').val();
+            var dateFrom = Date.parse($('input[name=dateFrom]').val());
+            var dateTo = Date.parse($('input[name=dateTill]').val());
+
+            $("#messagesList li").each(function () {
+                var date = Date.parse($(this).find('p:nth-child(2) span').text().split(' ')[0]);
+                if (user != "" && $(this).find('a:first').text() != user
+                    || dateFrom != "" && date < dateFrom
+                    || dateTo != "" && date > dateTo)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        }
+
+        function clearFilter() {
+            $('#user').val("");
+            $('input[name=dateFrom]').val("");
+            $('input[name=dateTill]').val("");
+
+            filter();
+        }
+
+        var users = new Array();
+
+        $(document).ready(function () {
+            $("#dateFrom").datepicker();
+            $("#dateTill").datepicker();
+
+            $('#user').append('<option value="">From</option>');
+            $("#messagesList li").each(function () {
+                var user = $(this).find('a:first').text();
+
+                if ($.inArray(user, users) < 0) {
+                    users.push(user);
+                    $('#user').append('<option value="' + user + '">' + user + '</option>');
+                }
+            });
+
+            $('a[title=showFilter]').click(function (e) {
+                e.preventDefault();
+
+                if ($('#filter').css("display") == "none")
+                    $('#filter').css("display", "block");
+                else
+                    $('#filter').css("display", "none");
+            });
+        });
+    </script>
+}

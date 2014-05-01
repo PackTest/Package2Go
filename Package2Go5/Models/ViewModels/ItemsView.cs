@@ -30,12 +30,30 @@ namespace Package2Go5.Models.ViewModels
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "note")]
         public string note { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
+        public int status_id { get; set; }
+
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
+        public string status { get; set; }
+
         public List<Routes> routes { get; set; }
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "currency_id")]
         public int currency_id { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "currency_id")]
+        public string currency { get; set; }
+
         public virtual ICollection<UsersItems> UsersItems { get; set; }
+
+        //History
+        public DateTime date { get; set; }
+
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "route_id")]
+        public int route_id { get; set; }
+
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "owner")]
+        public string owner { get; set; }
 
     }
 }

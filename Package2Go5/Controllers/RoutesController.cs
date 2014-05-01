@@ -22,6 +22,7 @@ namespace Package2Go5.Controllers
         private ItemsManager itemManager = new ItemsManager();
         private CurrencyManager currencyManager = new CurrencyManager();
         private OffersManager offersManager = new OffersManager();
+        private CommentsManager commentsManager = new CommentsManager();
 
         public ActionResult Index()
         {
@@ -49,7 +50,9 @@ namespace Package2Go5.Controllers
         {
             var routes = Mapper.Map<vw_routes, RoutesView>(manager.Get_vw_Route(id));
 
-            return View(manager.Get_vw_Route(id));
+            ViewBag.commentCount = commentsManager.GetCommentsCount(routes.user_id);
+
+            return View(routes);
         }
 
         //
@@ -168,7 +171,7 @@ namespace Package2Go5.Controllers
             manager.AcceptOrder(r, i);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult FindRoute()
         {
             int userId = 0;
@@ -177,18 +180,5 @@ namespace Package2Go5.Controllers
 
             return View(itemManager.GetNotUsedUserItemsList(userId));
         }
-
-        //[HttpPost]
-        //[Authorize]
-        //public ActionResult FindRoute()
-        //{
-        //    try {
-        //        return View();
-        //    }
-        //    catch 
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

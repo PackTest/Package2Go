@@ -37,6 +37,10 @@
         <AssociationConnector Association="Package2GoModel.UsersInRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Package2GoModel.vw_routes" Width="1.5" PointX="6.75" PointY="13.5" />
         <EntityTypeShape EntityType="Package2GoModel.vw_messages" Width="1.5" PointX="7.1979852519920025" PointY="6.2998709558974353" />
+        <EntityTypeShape EntityType="Package2GoModel.Comments" Width="1.5" PointX="9.375" PointY="8.125" />
+        <AssociationConnector Association="Package2GoModel.FK_Comments_UserProfile" />
+        <EntityTypeShape EntityType="Package2GoModel.ItemStatus" Width="1.5" PointX="7.4245428477528241" PointY="21.077255005518559" />
+        <AssociationConnector Association="Package2GoModel.FK_Items_ItemStatus" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

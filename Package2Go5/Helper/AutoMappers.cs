@@ -16,25 +16,46 @@ namespace Package2Go5.Helper
             ConfigureItemsMapping();
             ConfigureRoutesMapping();
             ConfigureUserProfileMapping();
+            ConfigureCommentsMapping();
+            ConfigureMessagesMapping();
+            ConfigureOffersMapping();
         }
 
         private static void ConfigureItemsMapping()
         {
-            Mapper.CreateMap<Items, ItemsView>();
+            Mapper.CreateMap<Items, ItemsView>().ForMember(d => d.currency, o=>o.MapFrom(s=>s.Currencies.code)).ForMember(d => d.status, o => o.MapFrom(s => s.ItemStatus.title));
         }
 
         private static void ConfigureRoutesMapping()
         {
             Mapper.CreateMap<Routes, RoutesView>();
-            Mapper.CreateMap<vw_routes, RoutesView>();
+            Mapper.CreateMap<vw_routes, RoutesView>().ForMember(d => d.waypointsList, o => o.MapFrom(ss => ss.waypoints.Split(new string[] { "->" }, StringSplitOptions.None)));
+        }
+
+        private static void ConfigureCommentsMapping()
+        {
+            Mapper.CreateMap<Comments, CommentsView>();
+        }
+
+        private static void ConfigureMessagesMapping()
+        {
+            Mapper.CreateMap<vw_messages, MessagesView>();
         }
 
         private static void ConfigureUserProfileMapping()
         {
             Mapper.CreateMap<UserProfileView, UserProfile>();
+
+            Mapper.CreateMap<UserProfile, UserProfileView>().ForMember(dest => dest.gender, opt => opt.MapFrom(
+                    src => (CProfile.genderType)Enum.Parse(typeof(CProfile.genderType), src.gender)));
             Mapper.CreateMap<UserProfile, UserProfileEdit>()
                 .ForMember(dest => dest.gender, opt => opt.MapFrom(
                     src => (CProfile.genderType)Enum.Parse(typeof(CProfile.genderType), src.gender)));
-                    }
+        }
+
+        private static void ConfigureOffersMapping()
+        {
+            Mapper.CreateMap<Offers, OffersView>();
+        }
     }
 }

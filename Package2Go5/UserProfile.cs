@@ -19,6 +19,7 @@ namespace Package2Go5
             this.UsersItems = new HashSet<UsersItems>();
             this.UsersRoutes = new HashSet<UsersRoutes>();
             this.Roles = new HashSet<Roles>();
+            this.Comments = new HashSet<Comments>();
         }
     
         public int UserId { get; set; }
@@ -28,7 +29,7 @@ namespace Package2Go5
         public string lastname { get; set; }
         public string gender { get; set; }
         public System.DateTime birthday { get; set; }
-        public int phone_nr { get; set; }
+        public string phone_nr { get; set; }
         public Nullable<int> rate { get; set; }
         public string image_url { get; set; }
         public int currency_id { get; set; }
@@ -37,5 +38,6 @@ namespace Package2Go5
         public virtual ICollection<UsersItems> UsersItems { get; set; }
         public virtual ICollection<UsersRoutes> UsersRoutes { get; set; }
         public virtual ICollection<Roles> Roles { get; set; }
+        public virtual ICollection<Comments> Comments { get; set; }
     }
 }

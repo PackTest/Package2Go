@@ -29,10 +29,12 @@ namespace Package2Go5
         public string note { get; set; }
         public int currency_id { get; set; }
         public string address { get; set; }
+        public int status_id { get; set; }
     
         public virtual Currencies Currencies { get; set; }
         public virtual ICollection<ItemsRoutes> ItemsRoutes { get; set; }
         public virtual ICollection<Offers> Offers { get; set; }
         public virtual ICollection<UsersItems> UsersItems { get; set; }
+        public virtual ItemStatus ItemStatus { get; set; }
     }
 }

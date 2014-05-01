@@ -23,7 +23,6 @@ namespace Package2Go5.Models.ObjectManager
     public class RoutesManager
     {
         private Package2GoEntities db = new Package2GoEntities();
-        //private OffersManager offersManager = new OffersManager();
         private ItemsManager itemsManager = new ItemsManager();
 
         public void Create(RoutesView routeView, int userId)
@@ -56,15 +55,12 @@ namespace Package2Go5.Models.ObjectManager
 
             db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir=>ir.route_id == id));
 
-            
-
             if(routeView.Items != null)
                 foreach (Items ir in routeView.Items)
                 {
                     offers = db.Offers.Where(o => o.item_id == ir.id && o.Routes.UsersRoutes.Any(ur=>ur.user_id == UserId)).ToList();
                     if (offers.Count != 0) 
                     {
-                        //db.Offers.RemoveRange(offers);
                         foreach (Offers offer in offers) 
                         {
                             offer.status_id = 3;
@@ -121,11 +117,16 @@ namespace Package2Go5.Models.ObjectManager
         {
             var route = db.vw_routes.Where(r => r.id == id).First();
 
-            //route.from = route.from.Substring(route.from.IndexOf(':'), route.from.Length);
+            route.from = route.from.Split(':')[1];
 
-            route.waypoints = route.waypoints.Split(';').Aggregate((i, j) => i.Split(':')[1] + "->" + j.Split(':')[1]);
+            var waypoints = "";
 
-            //route.waypoints = GetOnlyCities(route.waypoints, "->");
+            foreach (string r in route.waypoints.Split(';')) 
+            {
+                waypoints += r.Split(':')[1] + "->";
+            }
+
+            route.waypoints = waypoints.Substring(0, waypoints.Length - 2);
 
             return route;
         }
@@ -174,31 +175,31 @@ namespace Package2Go5.Models.ObjectManager
             return routesList;
         }
 
-        public Coordinate GetCoordinates(string region)
-        {
-            WebRequest request = WebRequest
-               .Create("http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address="
-                  + HttpUtility.UrlEncode(region));
+        //public Coordinate GetCoordinates(string region)
+        //{
+        //    WebRequest request = WebRequest
+        //       .Create("http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address="
+        //          + HttpUtility.UrlEncode(region));
 
-            using (WebResponse response = request.GetResponse())
-            {
-                using (Stream stream = response.GetResponseStream())
-                {
-                    XDocument document = XDocument.Load(new StreamReader(stream));
+        //    using (WebResponse response = request.GetResponse())
+        //    {
+        //        using (Stream stream = response.GetResponseStream())
+        //        {
+        //            XDocument document = XDocument.Load(new StreamReader(stream));
 
-                    XElement longitudeElement = document.Descendants("lng").FirstOrDefault();
-                    XElement latitudeElement = document.Descendants("lat").FirstOrDefault();
+        //            XElement longitudeElement = document.Descendants("lng").FirstOrDefault();
+        //            XElement latitudeElement = document.Descendants("lat").FirstOrDefault();
 
-                    if (longitudeElement != null && latitudeElement != null)
-                    {
-                        return new Coordinate(Double.Parse(longitudeElement.Value, CultureInfo.InvariantCulture),
-                            Double.Parse(latitudeElement.Value, CultureInfo.InvariantCulture));
-                    }
-                }
-            }
+        //            if (longitudeElement != null && latitudeElement != null)
+        //            {
+        //                return new Coordinate(Double.Parse(longitudeElement.Value, CultureInfo.InvariantCulture),
+        //                    Double.Parse(latitudeElement.Value, CultureInfo.InvariantCulture));
+        //            }
+        //        }
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         public string GetOnlyCities(string addresses, string separator) 
         {
@@ -208,7 +209,7 @@ namespace Package2Go5.Models.ObjectManager
                 string[] address;
                 string[] city;
 
-                if(waypoint.Contains("County"))
+                if (waypoint.Contains("County") && waypoint.Split(',').Length > 2)
                     address = waypoint.Split(',').Reverse().Skip(2).First().Split(':');
                 else
                     address = waypoint.Split(',').Reverse().Skip(1).First().Split(':');
@@ -239,12 +240,22 @@ namespace Package2Go5.Models.ObjectManager
 
             db.Offers.Where(o => o.item_id == i && o.route_id == r).First().status_id = 3;
 
-            db.Routes.Where(route => route.id == r).First().waypoints += ";"+i+":"+db.Items.Where(item=>item.id == i).First().delivery_address;
+            var orderItem = db.Items.Where(item => item.id == i).First();
+            db.Routes.Where(route => route.id == r).First().waypoints += ";" + i + ":" + orderItem.address + ";" + i + ":" + orderItem.delivery_address;
 
             db.Offers.RemoveRange(db.Offers.Where(o => o.item_id == i && o.route_id != r));
 
             db.SaveChanges();
         }
 
+
+        public int GetItemRouteId(int itemId) 
+        {
+            var route = db.ItemsRoutes.Where(ir => ir.item_id == itemId).FirstOrDefault();
+            if (route != null)
+                return route.route_id;
+            else
+                return 0;
+        }
     }
 }

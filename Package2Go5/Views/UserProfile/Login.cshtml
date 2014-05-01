@@ -5,14 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Login</h2>
-
 @using (Html.BeginForm()) {    
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>UserProfileView</legend>
+        <legend>Login</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Username)
@@ -23,7 +21,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.password)
+            @Html.Label("Password")
         </div>
         <div class="editor-field">
             @Html.PasswordFor(model => model.password)

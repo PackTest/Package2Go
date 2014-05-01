@@ -1,18 +1,17 @@
 ﻿@model Package2Go5.Models.ViewModels.RoutesView
 
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "Create Route";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View1</h2>
 @using (Html.BeginForm("Create", "Routes", System.Web.Mvc.FormMethod.Post, new { @class="clearfix" }))
 {
 @Html.AntiForgeryToken()
 @Html.ValidationSummary(true)
 
 <fieldset style="float:left;">
-    <legend></legend>      
+    <legend>Create Route</legend>      
         
     <div class="editor-field">
         <ul id="waypoints">
@@ -21,6 +20,7 @@
                 @Html.ValidationMessageFor(model => model.from)
             </li>
             <li>
+                <img src="~/Images/arrow.png" alt=""/>
                 <input class="waypoint" name="waypoint_1" type="text" value="" placeholder="Way Point">
                 <a href="#" id="remWaypoint">Remove</a>
             </li>
@@ -58,14 +58,49 @@
 
 </fieldset>
 }
-<div id="summary" style="background:#fff;">
-<div id="directions_panel" style="display:none"></div>
-<div id="totalDirection_panel"></div>
+<div id="RouteSummary">
+    
+    <a href="#" id="tripInfo">Trip Info</a>
+    <div id="totalDirection_panel" hidden="hidden"></div>
+
+    <a href="#" id="segments" hidden="hidden">Show Route Segments</a>
+    <div id="directions_panel" style="display:none"></div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     @Scripts.Render("~/bundles/jqueryGMAPAPI")
-    @Styles.Render("~/Content/GMapApi")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            WayPoints();
+
+            $('#tripInfo').click(function (e) {
+                e.preventDefault();
+                if ($('#totalDirection_panel').css("display") == "none") {
+                    $('#totalDirection_panel').show();
+                    $('#segments').show();
+                    $('#calCost').show();
+                    $(this).text("Hide Trip Info");
+                }
+                else {
+                    $('#totalDirection_panel').hide();
+                    $('#segments').hide();
+                    $('#calCost').hide();
+                    $(this).text("Trip Info");
+                }
+            });
+
+            $('#segments').click(function (e) {
+                e.preventDefault();
+                if ($('#directions_panel').css("display") == "none") {
+                    $('#directions_panel').show();
+                    $(this).text("Hide Routes Segments");
+                }
+                else {
+                    $('#directions_panel').hide();
+                    $(this).text("Show Routes Segments");
+                }
+            });
+        });
+    </script>
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Package2Go5.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -40,14 +41,14 @@ namespace Package2Go5.Models.ObjectManager
             return db.vw_messages.Where(m => m.to == userId && m.status == "New").OrderByDescending(m=>m.date).ToList();
         }
 
-        public List<vw_messages> GetAllUserMessages(string userId)
+        public List<MessagesView> GetAllUserMessages(string userId)
         {
-            return db.vw_messages.Where(m => m.to == userId).OrderByDescending(m=>m.date).ToList();
+            return AutoMapper.Mapper.Map<List<vw_messages>, List<MessagesView>>(db.vw_messages.Where(m => m.to == userId).OrderByDescending(m => m.date).Take(100).ToList());
         }
 
-        public vw_messages GetUserMessagesById(int id)
+        public MessagesView GetUserMessagesById(int id)
         {
-            return db.vw_messages.Where(m => m.id == id).First();
+            return AutoMapper.Mapper.Map<vw_messages, MessagesView>(db.vw_messages.Where(m => m.id == id).First());
         }
 
     }

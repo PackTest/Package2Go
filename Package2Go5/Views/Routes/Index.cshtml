@@ -7,12 +7,6 @@
 
 <h2>Routes</h2>
 
-@if(User.Identity.IsAuthenticated){
-    <div id="ItemsList">
-        <b>My Items:</b>
-        @Html.DropDownList("Items", (System.Web.Mvc.SelectList)ViewBag.Items)
-    </div>
-}
 <input type="hidden" name="offers" value="@ViewBag.Offers "/>
 
 <table id="Routes">
@@ -41,6 +35,9 @@
                 @Html.DisplayNameFor(model => model.status)
             </th>
             <th>
+                @Html.DisplayName("Items count")
+            </th>
+            <th>
                 Action
             </th>
 
@@ -57,10 +54,10 @@
                     @Html.DisplayFor(modelItem => route.waypoints)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => route.departure_time)
+                    @route.departure_time.ToString("yyyy-MM-dd")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => route.delivery_time)
+                    @route.delivery_time.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     @Html.ActionLink(route.Username, "Profile", "UserProfile", new { username = route.Username }, null)
@@ -70,6 +67,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => route.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => route.itemCount)
                 </td>
                 <td>
                     @if (User.Identity.IsAuthenticated)
@@ -112,6 +112,9 @@
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.status)"/>
             </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.itemCount)"/>
+            </th>
         </tr>
     </tfoot>
 
@@ -121,7 +124,6 @@
 {
     @Scripts.Render("~/bundles/DataTables")
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -130,7 +132,16 @@
             var oTable = $('#Routes').dataTable({
                 "aaSorting": [[4, "desc"]],
                 "sDom": '<"top"l>rt<"bottom"ip>',
-                "aoColumns": [null, null, null, null, { "sClass": "user" }, null, null, null, { "bSortable": false }]
+                "iDisplayLength": 5,
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>'+
+                      '<option value="5">5</option>'+
+                      '<option value="10">10</option>'+
+                      '<option value="20">20</option>'+
+                      '<option value="-1">All</option>'+
+                      '</select> records'
+                },
+                "aoColumns": [null, null, null, null, { "sClass": "user" }, null, null, null, null, { "bSortable": false }]
             });
 
             $("tfoot input").keyup(function () {

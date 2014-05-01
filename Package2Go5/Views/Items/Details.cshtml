@@ -1,4 +1,4 @@
-﻿@model Package2Go5.Items
+﻿@model Package2Go5.Models.ViewModels.ItemsView
 
 @{
     ViewBag.Title = "Details";
@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.delivery_price)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.delivery_price)
+        @Html.DisplayFor(model => model.delivery_price) @Model.currency
     </div>
 
     <div class="display-label">
@@ -42,10 +42,13 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.note)
     </div>
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.owner)
+    </div>
+    <div class="display-field">
+        @Html.ActionLink(Model.owner, "Profile", "UserProfile", new { username=Model.owner }, null)
+    </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

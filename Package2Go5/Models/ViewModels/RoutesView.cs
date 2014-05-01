@@ -39,5 +39,9 @@ namespace Package2Go5.Models.ViewModels
         public Nullable<int> rate { get; set; }
 
         public int user_id { get; set; }
+
+        public int itemCount { get; set; }
+
+        public List<string> waypointsList { get; set; }
     }
 }

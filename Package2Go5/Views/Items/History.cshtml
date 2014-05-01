@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.ItemsView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Items</h2>
+<table id="Items">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_price), @Model.First().currency
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.delivery_address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.delivery_price)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                    @Html.ActionLink("Details", "Details", new { id=item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.id)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.title)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.address)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_address)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_price)"/>
+            </th>
+        </tr>
+    </tfoot>
+</table>
+
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/DataTables")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //filter
+            var oTable = $('#Items').dataTable({
+                "aaSorting": [[4, "desc"]],
+                "sDom": '<"top"l>rt<"bottom"ip>',
+                "iDisplayLength": 5,
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>'+
+                      '<option value="5">5</option>'+
+                      '<option value="10">10</option>'+
+                      '<option value="20">20</option>'+
+                      '<option value="-1">All</option>'+
+                      '</select> records'
+                },
+                "aoColumns": [null, null, null, null, null, { "bSortable": false }]
+            });
+
+            $("tfoot input").keyup(function () {
+                oTable.fnFilter(this.value, $("tfoot input").index(this));
+            });
+
+        });
+    </script> 
+}

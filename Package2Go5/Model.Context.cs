@@ -42,5 +42,7 @@ namespace Package2Go5
         public DbSet<UsersRoutes> UsersRoutes { get; set; }
         public DbSet<vw_routes> vw_routes { get; set; }
         public DbSet<vw_messages> vw_messages { get; set; }
+        public DbSet<Comments> Comments { get; set; }
+        public DbSet<ItemStatus> ItemStatus { get; set; }
     }
 }

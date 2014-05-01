@@ -1,29 +1,113 @@
-﻿@model IEnumerable<Package2Go5.Offers>
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.OffersView>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Offers</h2>
 
-    <ul>
-    @foreach (var item in Model) {
+    <a href="#" title="showFilter">Filter</a>   
+
+    <div id="filter">
+        @Html.DropDownList("item", new List<SelectListItem>())
+        @Html.JQueryUI().Datepicker("dateFrom", null, new { @placeholder="Date From" })
+        @Html.JQueryUI().Datepicker("dateTill", null, new { @placeholder="Date Till" })
+        @*@Html.DropDownList("status", new List<SelectListItem>())*@
+        @Html.DropDownList("status", (System.Web.Mvc.SelectList)@ViewBag.status)
+
+        
+
+        <div>
+            <input type="button" onclick="filter()" value="Filter" />
+            <input type="button" onclick="clearFilter()" value="Clear" />
+        </div>
+    </div>
+
+    <ul id="offersList">
+    @foreach (var offer in Model) {
         <li>
             <p>
-                @Html.DisplayNameFor(model => model.route_id): 
-                <a href="/Routes/Edit/@item.route_id">@Html.DisplayFor(modelItem => item.Routes.waypoints)</a>
+                @Html.DisplayNameFor(model => model.route): 
+                <a href="/Routes/Edit/@offer.route_id">@Html.DisplayFor(modelItem => offer.route)</a>
             </p>
             <p>
-                @Html.DisplayNameFor(model => model.item_id): 
-                <a href="/Items/Details/@item.id">@Html.DisplayFor(modelItem => item.Items.title)</a>
+                @Html.DisplayNameFor(model => model.item): 
+                <a href="/Items/Details/@offer.item_id">@Html.DisplayFor(modelItem => offer.item)</a>
             </p>
             <p>
-                @Html.DisplayNameFor(model => model.status_id): 
-                <span>@Html.DisplayFor(modelItem => item.OffersStatus.title)</span>
+                @Html.DisplayNameFor(model => model.date): 
+                <span>@Html.DisplayFor(modelItem => offer.date)</span>
             </p>
-            <a href="#" title="accept">Accept</a>
+            <p>
+                @Html.DisplayNameFor(model => model.status): 
+                <span>@Html.DisplayFor(modelItem => offer.status)</span>
+            </p>
+            @if(offer.status_id == 1){
+                <a href="#" title="accept">Accept</a>
+            }
             <hr>
         </li>
     }
     </ul>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function filter() {
+            var item = $('#item').val();
+            var status = $('#status').val();
+            var dateFrom = Date.parse($('input[name=dateFrom]').val());
+            var dateTo = Date.parse($('input[name=dateTill]').val());
+
+            $("#offersList li").each(function () {
+                var date = Date.parse($(this).find('p:nth-child(3) span').text().split(' ')[0]);
+                console.log($(this).find('p:nth-child(4) span').text());
+                if (item != "" && $(this).find('p:nth-child(2) a').text() != item
+                    || status != "" && $(this).find('p:nth-child(4) span').text() != status
+                    || dateFrom != "" && date < dateFrom
+                    || dateTo != "" && date > dateTo)
+                    $(this).hide();
+                else
+                    $(this).show();
+            });
+        }
+
+        function clearFilter() {
+            $('#item').val("");
+            $('#status').val("");
+            $('input[name=dateFrom]').val("");
+            $('input[name=dateTill]').val("");
+
+            filter();
+        }
+
+        var itemsArray = new Array();
+        var statusArray = new Array();
+
+        $(document).ready(function () {
+            $("#dateFrom").datepicker();
+            $("#dateTill").datepicker();
+
+            $('#item').append('<option value="">Item</option>');
+            $("#offersList li").each(function () {
+                var item = $(this).find('p:nth-child(2) a').text();
+                if ($.inArray(item, itemsArray) < 0) {
+                    itemsArray.push(item);
+                    $('#item').append('<option value="' + item + '">' + item + '</option>');
+                }
+            });
+
+            $('a[title=showFilter]').click(function (e) {
+                e.preventDefault();
+
+                if ($('#filter').css("display") == "none")
+                    $('#filter').css("display", "block");
+                else
+                    $('#filter').css("display", "none");
+            });
+        });
+    </script>
+}

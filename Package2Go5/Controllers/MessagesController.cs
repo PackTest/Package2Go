@@ -14,7 +14,7 @@ namespace Package2Go5.Controllers
 
         //
         // GET: /Messages/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View(messagesManager.GetAllUserMessages(User.Identity.Name));

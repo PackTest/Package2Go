@@ -1,4 +1,4 @@
-﻿@model Package2Go5.vw_routes
+﻿@model Package2Go5.Models.ViewModels.RoutesView
 
 @{
     ViewBag.Title = "Details";
@@ -6,20 +6,17 @@
 }
 
 <fieldset>
-    <legend>Details</legend>
+    <legend>Route</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.from)
+         @Html.DisplayName("Path")
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.from)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.waypoints)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.waypoints)
+    <div class="route">
+        <div class="display-field">@Html.DisplayFor(model => model.from)</div>
+        @foreach (string waypoint in Model.waypointsList) {
+            <img src="~/Images/arrow-down.png" alt="to" />
+            <div class="display-field">@waypoint</div>
+        }
     </div>
 
     <div class="display-label">
@@ -47,46 +44,23 @@
          @Html.DisplayNameFor(model => model.Username)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Username)
+        @Html.ActionLink(Model.Username, "Profile", "UserProfile", new { username=Model.Username }, null)
     </div>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.rate)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.rate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.user_id)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.user_id)
+        @Html.DisplayFor(model => model.rate) (@ViewBag.commentCount)
     </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
-@section Scripts 
+@section Scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
-            var geocoder, map;
-
-            var Lithuania = new google.maps.LatLng(55.00, 25.15);
-            var mapOptions = {
-                zoom: 8,
-                center: Lithuania,
-                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
-            };
-
-            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
         });
     </script>
 }

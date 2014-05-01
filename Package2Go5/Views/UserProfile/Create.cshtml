@@ -1,18 +1,16 @@
 ﻿@model Package2Go5.Models.ViewModels.UserProfileView
 
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "Create User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>View1</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>UserProfileView</legend>
+        <legend>Create Profile</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Username)
@@ -81,10 +79,6 @@
             @Html.TextBoxFor(model => model.phone_nr)
             @Html.ValidationMessageFor(model => model.phone_nr)
         </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
 }
 

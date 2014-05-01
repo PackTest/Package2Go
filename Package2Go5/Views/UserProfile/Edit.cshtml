@@ -1,6 +1,6 @@
 ﻿@model Package2Go5.Models.EditModels.UserProfileEdit
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "Edit Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,13 +16,14 @@
             @Html.ValidationMessageFor(model => model.Username)
         </div>
 
-        
-
         @{
 
             if (ViewBag.image != null)
             {
             <img class="photo" src="@ViewBag.image" alt="Profile photo" />
+            }else
+            {
+            <img class="photo" src="~/Images/DefaultProfile.jpg" alt="Profile photo" />            
             }
         }
 
@@ -110,15 +111,15 @@
             @Html.ValidationMessageFor(model => model.image)
         </div>
 
+        <div class="validation-summary-errors">
+            @ViewBag.error
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

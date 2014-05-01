@@ -12,17 +12,16 @@ namespace Package2Go5
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_routes
+    public partial class ItemStatus
     {
+        public ItemStatus()
+        {
+            this.Items = new HashSet<Items>();
+        }
+    
         public int id { get; set; }
-        public string from { get; set; }
-        public string waypoints { get; set; }
-        public System.DateTime departure_time { get; set; }
-        public System.DateTime delivery_time { get; set; }
-        public string status { get; set; }
-        public string Username { get; set; }
-        public Nullable<int> rate { get; set; }
-        public int user_id { get; set; }
-        public Nullable<int> itemCount { get; set; }
+        public string title { get; set; }
+    
+        public virtual ICollection<Items> Items { get; set; }
     }
 }

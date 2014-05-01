@@ -35,8 +35,25 @@ namespace Package2Go5.Models.ObjectManager
             userProfile.UsersRoutes = new Collection<UsersRoutes>();
             userProfile.currency_id = user.currency_id;
 
+            userProfile.Roles = new List<Roles>();
+            userProfile.Roles.Add(db.Roles.Where(r => r.RoleId == 2).First());
+
             db.UserProfile.Add(userProfile);
+            //db.use.Add(userProfile);
             db.SaveChanges();
+        }
+
+        public bool doesUserNameExist(string UserName)
+        {
+            try
+            {
+                db.UserProfile.Where(up => up.Username == UserName).First();
+                return false;
+            }
+            catch 
+            {
+                return true;
+            }
         }
 
         public void Update(UserProfileEdit user) 
@@ -61,7 +78,7 @@ namespace Package2Go5.Models.ObjectManager
                     using (var img = Image.FromStream(user.image.InputStream))
                     {
 
-                        if (img.RawFormat.Equals(ImageFormat.Png) || img.RawFormat.Equals(ImageFormat.Jpeg) || img.RawFormat.Equals(ImageFormat.Gif)) 
+                        if (img.RawFormat.Equals(ImageFormat.Png) || img.RawFormat.Equals(ImageFormat.Jpeg) || img.RawFormat.Equals(ImageFormat.Gif))
                         {
                             string path = System.Web.HttpContext.Current.Server.MapPath("~/Images/Profiles");
                             string fileName = user.Username + Path.GetExtension(user.image.FileName);
@@ -72,9 +89,12 @@ namespace Package2Go5.Models.ObjectManager
                         }
                     }
                 }
-
-                db.SaveChanges();
             }
+            else
+            {
+                userProfile.name = null;
+            }
+            db.SaveChanges();
         }
 
         public Bitmap ProportionallyResizeBitmap(Bitmap src, int maxWidth, int maxHeight)

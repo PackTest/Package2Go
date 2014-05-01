@@ -5,14 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Items</legend>
+        <legend>Edit Item</legend>
 
         @Html.HiddenFor(model => model.id)
 
@@ -63,6 +61,15 @@
             @Html.TextAreaFor(model => model.note)
             @Html.ValidationMessageFor(model => model.note)
         </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status_id)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.status_id, (System.Web.Mvc.SelectList)ViewBag.status)
+            @Html.ValidationMessageFor(model => model.status_id)
+        </div>
+
 
         <p>
             <input type="submit" value="Save" />
