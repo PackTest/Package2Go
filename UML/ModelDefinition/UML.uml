@@ -1,0 +1,1560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="d53373ca-f83a-469b-8193-67fcc14f467b"
+  name="UML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="95d987d5-c773-40b9-904e-2eb342cc2526">
+      <profileInstance
+        Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="c1d0ca68-1375-4059-971e-cfcb741954ac"
+        name="Svečias"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="51b391c8-9ec0-48a5-9cab-26f4135ff21c"
+            isDerived="false"
+            sourceEndRoleName="Svečias"
+            targetEndRoleName="Maršrutų, paketų žymeklių atvaizdavimas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="7bd664a3-644c-44b5-9b34-a4b8d9bff3c4"
+              LastKnownName="Atvaizduoti maršrutų, paketų žymeklius"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="793bf22e-1e8e-417c-82d9-8bb58d13b7a3"
+                  name="Svečias"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="81a288d3-34f3-4c69-9eb0-10017634de25"
+                  name="Maršrutų, paketų žymeklių atvaizdavimas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="85930e19-6e65-4c07-906a-c12b712e7cad"
+            isDerived="false"
+            sourceEndRoleName="Svečias"
+            targetEndRoleName="Vartotojo registravimasis"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="27172a61-e7bb-4c61-babb-a4e6118c819b"
+              LastKnownName="Registruoti naują vartotoją"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="72cf4630-7cc6-4025-82b4-a0798b7e6859"
+                  name="Svečias"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a40ae4bb-0460-4f60-93f2-fc6550832c52"
+                  name="Vartotojo registravimasis"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="69368517-ef9f-443e-9581-84c814a8ee90"
+            isDerived="false"
+            sourceEndRoleName="Svečias"
+            targetEndRoleName="Prisijungimas prie sistemos"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="540304d4-a429-4fbd-9a42-07aff2c85243"
+              LastKnownName="Prisijungti prie sistemos"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="13758784-4038-4d41-912c-f4fe4b881e8e"
+                  name="Svečias"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4edf4b68-9770-43d1-b361-7ecc0667274e"
+                  name="Prisijungimas prie sistemos"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="7da74cb0-5d44-4bf0-b41a-4637d5f6406f"
+        name="Vartotojas"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="c7cce0ba-e526-43ce-88ae-356017ae9429"
+            isSubstitutable="false">
+            <actorMoniker
+              Id="c1d0ca68-1375-4059-971e-cfcb741954ac"
+              LastKnownName="Svečias"
+              LastKnownLocation="UML.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="7b2d2c5a-43b3-404f-988f-819509f03c6a"
+            isDerived="false"
+            sourceEndRoleName="Vartotojas"
+            targetEndRoleName="Komentaro, įvertinimo kūrimas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="665813f8-1e06-487d-b1ee-b9e186d2abab"
+              LastKnownName="Kurti komentarus, įvertinimus"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3e00a733-235c-4d57-a9f6-99d31682ee1b"
+                  name="Vartotojas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e9e5664e-57a8-40b4-9d14-66da6708648e"
+                  name="Komentaro, įvertinimo kūrimas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="9c0d4f29-3736-4758-9ec3-4ad059544a65"
+            isDerived="false"
+            sourceEndRoleName="Vartotojas"
+            targetEndRoleName="Paketo valdymas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3a29709f-bf5f-40d5-b5d5-285b12327d64"
+              LastKnownName="Valdyti paketus"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f49018d6-52cd-4e33-ad7c-87866cf643f2"
+                  name="Vartotojas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="530633ba-cf67-4b26-b093-19277d9cf27b"
+                  name="Paketo valdymas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d4fe7e26-f10c-436f-bdb0-21907f06e00c"
+            isDerived="false"
+            sourceEndRoleName="Vartotojas"
+            targetEndRoleName="Maršrutų valdymas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c639dd05-5d4c-4475-9337-cfe9f147bb09"
+              LastKnownName="Valdyti maršrutus"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ffe203b1-b20a-4941-a074-79f8ff0c4595"
+                  name="Vartotojas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="da27d81d-ecc6-4bb3-9aee-b6f44221ddc6"
+                  name="Maršrutų valdymas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="fb55717a-81ee-4c79-be9f-52bcc31c6969"
+            isDerived="false"
+            sourceEndRoleName="Vartotojas"
+            targetEndRoleName="Vartotojo paskyros valdymas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="88b75bc6-dfd7-44cb-a616-f63ce5a8ba26"
+              LastKnownName="Valdyti vartotojo paskyrą"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d542b87c-f19e-4073-a3fc-74f491d94034"
+                  name="Vartotojas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5076eda6-f831-463a-b475-4463ba9391bd"
+                  name="Vartotojo paskyros valdymas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c8ad1c95-3b8e-427d-94e9-493f4be35da1"
+            isDerived="false"
+            sourceEndRoleName="Vartotojas"
+            targetEndRoleName="Žinutės"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="829592cb-e9ef-4116-a5f9-cb71fc6a9710"
+              LastKnownName="Valdyti žinutes"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f7d194df-ddc9-4c14-b901-f172ed7244ef"
+                  name="Vartotojas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1a6a5df0-c3de-4a0b-9cc2-43ff105b4195"
+                  name="Žinutės"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="865437c6-e0f4-4fc5-9414-7fb9ed4e95fb"
+        name="Administratorius"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="09a178ed-477e-4914-bcb9-513ef9f2f86d"
+            isDerived="false"
+            sourceEndRoleName="Administratorius"
+            targetEndRoleName="Maršrutų, paketų žymeklių atvaizdavimas"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="7bd664a3-644c-44b5-9b34-a4b8d9bff3c4"
+              LastKnownName="Atvaizduoti maršrutų, paketų žymeklius"
+              LastKnownLocation="UML.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="34872f60-6c4b-426a-8409-a2f3203108c0"
+                  name="Administratorius"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1d2a94a4-f959-41d7-9438-59f56769f10a"
+                  name="Maršrutų, paketų žymeklių atvaizdavimas"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="66f58536-c07b-4640-9dfa-36aea4a7ccab"
+        name="Komentarų Kūrimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c51d41a9-ff37-4ac5-8a33-7c6a5bd409e5"
+        name="Kūrimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="7bd664a3-644c-44b5-9b34-a4b8d9bff3c4"
+        name="Atvaizduoti maršrutų, paketų žymeklius"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c639dd05-5d4c-4475-9337-cfe9f147bb09"
+        name="Valdyti maršrutus"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="b0fc03b4-ed6e-49a7-a622-ceccad47f0d1">
+            <useCaseMoniker
+              Id="9e3808fb-1c12-480f-b408-1081a62def0e"
+              LastKnownName="Kurti naują maršrutą"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="cf6e4a80-0718-4f72-8adf-2a4a6fa82cd3">
+            <useCaseMoniker
+              Id="53588c28-bee3-4ecd-b595-e5b85f89bd60"
+              LastKnownName="Redaguoti maršrutą"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="36ec332b-6d30-452f-9499-f6b608cb7289">
+            <useCaseMoniker
+              Id="b46a3dae-3b1a-41bf-a46d-b87b7235eaa4"
+              LastKnownName="Atvaizdavimas žemėlapyje"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="27e7fffa-ec2f-429e-ba42-90744272a9a7">
+            <useCaseMoniker
+              Id="af36cdff-efd7-4a46-b9d7-fdd34ae94a8e"
+              LastKnownName="Šalinti"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0f1b2fea-34b0-414f-b73e-a478e21a6f35"
+        name="Paketai"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="829592cb-e9ef-4116-a5f9-cb71fc6a9710"
+        name="Valdyti žinutes"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="d5b285f9-1b5a-41e4-b942-afed484c3fb1">
+            <useCaseMoniker
+              Id="3dd3ffd1-cfaa-4ae8-9f43-8e5a18dd1e92"
+              LastKnownName="Siųsti žinutes"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="05de5540-1631-4bcf-9fc2-38a6bec6c5c8">
+            <useCaseMoniker
+              Id="0d0ccc60-177e-4551-adbb-efaa372d3e60"
+              LastKnownName="Peržiūrėti žinučių sąrašą"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="88b75bc6-dfd7-44cb-a616-f63ce5a8ba26"
+        name="Valdyti vartotojo paskyrą"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="383557aa-e1f8-4149-bd6c-b8e569a0c969">
+            <useCaseMoniker
+              Id="b2f31546-21f1-4138-8c65-44a7c171b109"
+              LastKnownName="Peržiūrėti paskyrą"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="ee95b93b-25a3-4eaa-aa1a-06375c7cc3cb">
+            <useCaseMoniker
+              Id="2a074531-f1e3-4dfe-83c4-3150001d73dd"
+              LastKnownName="Redaguoti"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="be19381a-7d24-4c6a-bdac-0c828f289187">
+            <useCaseMoniker
+              Id="4bd26410-1ae9-47f1-9ddf-f91cd1f61e63"
+              LastKnownName="Atsijungti nuo paskyros"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="665813f8-1e06-487d-b1ee-b9e186d2abab"
+        name="Kurti komentarus, įvertinimus"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9e3808fb-1c12-480f-b408-1081a62def0e"
+        name="Kurti naują maršrutą"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="53588c28-bee3-4ecd-b595-e5b85f89bd60"
+        name="Redaguoti maršrutą"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="2b40240f-fa91-4d38-999f-297b55929353">
+            <useCaseMoniker
+              Id="13c8a041-b87e-4cac-85e0-80dcd8678c70"
+              LastKnownName="Pridėti arba pašalinti paketus"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="96c20470-8948-4cb9-aebc-afb2bdd9e35c">
+            <useCaseMoniker
+              Id="21805016-4c67-4cc1-a1e5-a0c778f3f828"
+              LastKnownName="Peržiūrėti paketų  sąrašą"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b46a3dae-3b1a-41bf-a46d-b87b7235eaa4"
+        name="Atvaizdavimas žemėlapyje"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="af36cdff-efd7-4a46-b9d7-fdd34ae94a8e"
+        name="Šalinti"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="13c8a041-b87e-4cac-85e0-80dcd8678c70"
+        name="Pridėti arba pašalinti paketus"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="21805016-4c67-4cc1-a1e5-a0c778f3f828"
+        name="Peržiūrėti paketų  sąrašą"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3a29709f-bf5f-40d5-b5d5-285b12327d64"
+        name="Valdyti paketus"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="01313e45-c3b5-498a-87c5-09accb2f46ca">
+            <useCaseMoniker
+              Id="95303942-843a-4d0b-a0e5-7e37131c58a6"
+              LastKnownName="Kurti"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="14c311a2-a2f4-458a-a5ea-e2945eb03f63">
+            <useCaseMoniker
+              Id="a855cafa-be80-4c98-ad46-3071065d1fe4"
+              LastKnownName="Šalinti"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="2a3b9869-9373-4142-8308-0f79e1c99bd2">
+            <useCaseMoniker
+              Id="83e26596-e3b7-4a31-84c3-7348bd3a60c0"
+              LastKnownName="Redaguoti"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="32c9a659-e362-478c-ad96-b58d5e23c313">
+            <useCaseMoniker
+              Id="787ccc88-c5a0-48a4-a528-8c413bb0d98c"
+              LastKnownName="Peržiūrėti savo paketų sąrašą"
+              LastKnownLocation="UML.uml" />
+          </include>
+          <include
+            Id="cd0c8362-b337-459c-8504-18e9fdf14c72">
+            <useCaseMoniker
+              Id="2a9ea8d2-58ad-4000-bc3f-dab44c78793c"
+              LastKnownName="Surasti arti peketo esančius maršrutus"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="95303942-843a-4d0b-a0e5-7e37131c58a6"
+        name="Kurti"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a855cafa-be80-4c98-ad46-3071065d1fe4"
+        name="Šalinti"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="787ccc88-c5a0-48a4-a528-8c413bb0d98c"
+        name="Peržiūrėti savo paketų sąrašą"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="4316c2ce-f3ea-4eb1-b789-2cc2c2a1519c">
+            <useCaseMoniker
+              Id="dbc1cbb1-094f-4e1d-9bc2-03dd794249cc"
+              LastKnownName="Paketų filtravimas"
+              LastKnownLocation="UML.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="83e26596-e3b7-4a31-84c3-7348bd3a60c0"
+        name="Redaguoti"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="dbc1cbb1-094f-4e1d-9bc2-03dd794249cc"
+        name="Paketų filtravimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9f1fd0d5-0ae2-43d9-83cf-c4d244cc7780"
+        name="Kūrimas1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4a5d1a3f-5eff-4e57-b94f-bddadefd23f5"
+        name="Šalinimas1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a2b220aa-14b0-4c54-8623-e7a2112a0e6e"
+        name="Kūrimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="fa45d3a2-d353-4cad-8a7c-f5798e42a820"
+        name="Šalinimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="10402d23-179b-4287-bf1e-e9ce91f2fb97"
+        name="Kūrimas2"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="27172a61-e7bb-4c61-babb-a4e6118c819b"
+        name="Registruoti naują vartotoją"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="540304d4-a429-4fbd-9a42-07aff2c85243"
+        name="Prisijungti prie sistemos"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b2f31546-21f1-4138-8c65-44a7c171b109"
+        name="Peržiūrėti paskyrą"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2a074531-f1e3-4dfe-83c4-3150001d73dd"
+        name="Redaguoti"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3dd3ffd1-cfaa-4ae8-9f43-8e5a18dd1e92"
+        name="Siųsti žinutes"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0d0ccc60-177e-4551-adbb-efaa372d3e60"
+        name="Peržiūrėti žinučių sąrašą"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="71b0d21f-ce8e-4c3a-a3d0-d1e5143c1af3"
+        name="Sąrašo filtravimas"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="08910a96-0819-43e2-8a6e-1c791c238598"
+        name="Pranešimų apie paketus gavimas"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="aed741a4-468a-4d7b-8d75-aaffade4c3c0">
+            <useCaseMoniker
+              Id="829592cb-e9ef-4116-a5f9-cb71fc6a9710"
+              LastKnownName="Valdyti žinutes"
+              LastKnownLocation="UML.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4bd26410-1ae9-47f1-9ddf-f91cd1f61e63"
+        name="Atsijungti nuo paskyros"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2a9ea8d2-58ad-4000-bc3f-dab44c78793c"
+        name="Surasti arti peketo esančius maršrutus"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+            LastKnownName="&quot;Package2Go&quot;"
+            LastKnownLocation="UML.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="d6892250-9309-4227-be0e-2f32bc37d73e"
+        name="&quot;Package2Go&quot; sistema"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="0fff925d-3183-4457-a5f5-68c4d9c401b8"
+        name="&quot;Package2Go&quot;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="231ccc55-53e5-47e9-9f39-d96007efd186"
+        LastKnownName="Package2Go5"
+        LastKnownLocation="Package_2342.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4951c7ed-e111-4fb7-baa9-2471bf787799"
+        LastKnownName="System"
+        LastKnownLocation="Package1_2342.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c0c5ecad-b997-467d-a35c-0cf0ac07b742"
+        LastKnownName="Resources"
+        LastKnownLocation="Package_0011.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e13eb5ec-04b4-4a58-ad2a-35c6b5eef1a1"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="7e8445b9-20e3-44f2-ac8c-89260eee311c"
+        name="Activity"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="0030988e-8cbd-4fb3-b1f0-5427c2b702ff"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d1fb19d5-6229-485b-afdd-fa3afdc66d16"
+                guard="Maršrutų sąraše ant pasirinkto įrašo paspaudžiama &quot;Edit&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+            name="Maršruto atvaizdavimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a127cb7b-418f-4cca-8a33-b947fb4ed07e"
+                guard="Sekos pakeitimas"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="2568d0b1-54b4-410f-a1ce-4f11b467c1d8"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="643adbda-2bc9-422e-bf3f-522617a6b653"
+                guard="Paspaudžiamas &quot;New Waypoint&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0d6fbeee-30ba-4c8f-b0b9-c673dd8f2c37"
+                  LastKnownName="Tarpinio maršruto taško pridėjimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="f8720e02-e07c-4c6e-910f-6492feb600b1"
+                guard="Pridėti paketą"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7a5258f2-d4b9-4f54-b78d-97f4540465d3"
+                  LastKnownName="Paketo maršruto pridėjimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="0dac1b70-6a63-4874-a4c5-fcaa0a867609"
+                guard="Paspaudžiamas &quot;Remove&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="bd878148-6101-460b-887c-c72a6e09e484"
+                  LastKnownName="Tarpinio maršruto taško šalinimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="a45de1df-0711-405a-9680-78a2909602cd"
+                guard="Ant paketo paspaudžiama &quot;Remove&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="78c55c61-df88-4397-bb68-55269a774038"
+                  LastKnownName="Paketo maršruto šalinimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="2efa2800-b41f-4daa-948a-25108395fbc3"
+                guard="Paspaudžiama &quot;Save&quot;"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="57bddcfd-b267-4a42-af25-b78fc32e9350"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="b67be38c-9083-4ebd-b673-71ce60313ae3"
+                guard="Pasupaudžiama ant paketo žymeklio"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b4076d81-50b6-4756-bcf7-bf091cd79dda"
+                  LastKnownName="Paketo maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="89b5206a-44c7-4a66-b84c-43565c29cb6e"
+            name="Maršruto perpiešimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="1ca8411e-c532-4393-9371-1f9f0f36f4ea"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="2568d0b1-54b4-410f-a1ce-4f11b467c1d8"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="aeecb89e-9ba6-4422-b2b6-7fade96a9c75"
+                guard="Seka taisyklinga"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="89b5206a-44c7-4a66-b84c-43565c29cb6e"
+                  LastKnownName="Maršruto perpiešimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="33592247-5852-4006-bbf4-2d80bf445cd6"
+                guard="Seka netaisyklinga"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="0d6fbeee-30ba-4c8f-b0b9-c673dd8f2c37"
+            name="Tarpinio maršruto taško pridėjimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="fc50440a-c983-4973-8baf-3d3a58d0412e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="7a5258f2-d4b9-4f54-b78d-97f4540465d3"
+            name="Paketo maršruto pridėjimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="9c686241-2226-4c3e-882d-a046426636f6"
+                guard="Maršruto taškų pridėjimas"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0d6fbeee-30ba-4c8f-b0b9-c673dd8f2c37"
+                  LastKnownName="Tarpinio maršruto taško pridėjimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="bd878148-6101-460b-887c-c72a6e09e484"
+            name="Tarpinio maršruto taško šalinimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="1f71e660-7c4b-4388-82c5-fd23930823a8"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="78c55c61-df88-4397-bb68-55269a774038"
+            name="Paketo maršruto šalinimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="11f472f4-614a-4e3f-b9fd-64ef61eb0167"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="bd878148-6101-460b-887c-c72a6e09e484"
+                  LastKnownName="Tarpinio maršruto taško šalinimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="80510a6e-889f-4806-9124-e0e7cd24711a"
+            name="Maršruto pakeitimų išsaugojimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="fedced55-fa07-4d19-ba25-c0e72e558744"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="d8e05c38-e3bc-44f2-836e-3c75b7cb6630"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="57bddcfd-b267-4a42-af25-b78fc32e9350"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ccd2f7eb-8ace-4451-aaca-37662a2f489e"
+                guard="Taisyklingi duomenys"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="80510a6e-889f-4806-9124-e0e7cd24711a"
+                  LastKnownName="Maršruto pakeitimų išsaugojimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="c49c14bc-343f-419d-b9be-c8331f5dd89e"
+                guard="Klaidingi duomenys"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <activityFinalNode
+            Id="d8e05c38-e3bc-44f2-836e-3c75b7cb6630"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <opaqueAction
+            Id="b4076d81-50b6-4756-bcf7-bf091cd79dda"
+            name="Paketo maršruto atvaizdavimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="897f59e6-7092-4ec5-ba43-9e9298aeedf8"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="638addd7-7a6c-4a3d-aedd-69de1822c67f"
+                  LastKnownName="Maršruto atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="5aadc105-dc4e-41d5-96c4-b75125a6327b"
+        name="Activity1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="e357f6ac-dd2f-4878-83fd-f88ec399feac"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="f99ef6f8-2595-4098-aa74-07dbcb39a3c2"
+                guard="Paspaudžiama &quot;Search Route&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+                  LastKnownName="Maršrutų paieškos lango atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+            name="Maršrutų paieškos lango atvaizdavimas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="1a706535-e37f-4a76-b1eb-574e8ea858e5"
+                guard="Uždedama varnelė ant &quot;Item Adrress&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="93694027-2388-4c89-8f8e-3defcccaba64"
+                  LastKnownName="Užpildomi adresų laukeliai"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="2fb7d909-f41d-4cc7-b5cc-70b90bfe572c"
+                guard="Pasirenkamas kitas paketas"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a8e7eadf-0a47-436f-b90e-25cd52ba2a8a"
+                  LastKnownName="Perbraižomas paketo maršrutas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="ac0474cf-0ed6-475a-b65e-3a98c7fdc84f"
+                guard="Paspaudžiama &quot;Search&quot;"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="36afe52f-2bcc-4b11-b8e2-0782f0b01dcb"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="3ddc2907-f902-49a7-894b-3bdac802ccb3"
+                guard="Paspaudžiama ant maršruto žymeklio"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="634b70cb-2105-4073-98b2-3167d1a57da1"
+                  LastKnownName="Nubraižomas maršrutas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="7c42d5af-7b73-4070-a7ae-6231957129fa"
+                guard="Paspaudžiama ant &quot;Offer&quot;"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="17e2b405-34b4-41af-8bdd-2fcf6f053db5"
+                  LastKnownName="Išsiunčiamas pasiūlimas maršruto savininkui"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="93694027-2388-4c89-8f8e-3defcccaba64"
+            name="Užpildomi adresų laukeliai"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a0528949-bff8-4eda-8bcb-25ae76199e45"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+                  LastKnownName="Maršrutų paieškos lango atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="a8e7eadf-0a47-436f-b90e-25cd52ba2a8a"
+            name="Perbraižomas paketo maršrutas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d2ba2584-38fe-4148-a515-4436d37d0bdf"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+                  LastKnownName="Maršrutų paieškos lango atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="ef03983f-ac95-406a-a8dd-89d8b198fc6f"
+            name="Atvaizduojami maršrutų žymeliai"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="df6dae22-5228-4e5b-85e5-6917847997b0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+                  LastKnownName="Maršrutų paieškos lango atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="36afe52f-2bcc-4b11-b8e2-0782f0b01dcb"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="007b74ed-32ca-4cda-a976-9beff359b728"
+                guard="Nedidesnis atstumas nuo maršruto nei nurodytas"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ef03983f-ac95-406a-a8dd-89d8b198fc6f"
+                  LastKnownName="Atvaizduojami maršrutų žymeliai"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="634b70cb-2105-4073-98b2-3167d1a57da1"
+            name="Nubraižomas maršrutas"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8aedf703-5ad9-4d06-94f2-691acc361632"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b"
+                  LastKnownName="Maršrutų paieškos lango atvaizdavimas"
+                  LastKnownLocation="UML.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="17e2b405-34b4-41af-8bdd-2fcf6f053db5"
+            name="Išsiunčiamas pasiūlimas maršruto savininkui"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="8adea4d8-9142-4278-bc87-d3fb11a99bea"
+        name="Component1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="0e0ac77a-02b4-4a77-8ff9-8d48180dd50d"
+        name="Controllers"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="e2ffd12f-b870-4dfc-955e-478af2fb39b2">
+            <componentMoniker
+              Id="cc57d053-82c5-47d4-8fc7-fb98bf2775f0"
+              LastKnownName="ObjectsManagers"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="d093cb91-d17a-48c4-a5fd-ff0b44ed8235"
+        name="Models"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="133dabbf-d29e-4095-97a7-39d54af57d77"
+        name="ViewModels"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="e5db198f-0bf1-411f-8120-d657c5f60e68">
+            <componentMoniker
+              Id="d093cb91-d17a-48c4-a5fd-ff0b44ed8235"
+              LastKnownName="Models"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="cc57d053-82c5-47d4-8fc7-fb98bf2775f0"
+        name="ObjectsManagers"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="a6286c92-98dd-4c80-89e0-27865082f79f">
+            <componentMoniker
+              Id="133dabbf-d29e-4095-97a7-39d54af57d77"
+              LastKnownName="ViewModels"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+          <dependency
+            Id="a2ca6139-f9b8-4d72-a1f4-0f68876e4bca">
+            <componentMoniker
+              Id="bed69f8d-3dd1-4b11-a569-27f043648796"
+              LastKnownName="vw_models"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+          <dependency
+            Id="56157d6b-6940-46d6-9114-1d08fe8df4f3">
+            <componentMoniker
+              Id="d093cb91-d17a-48c4-a5fd-ff0b44ed8235"
+              LastKnownName="Models"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="2eeb4813-54ec-41c3-8600-4bed43948012"
+        name="Views"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="85aa96be-5759-4928-bd18-1ec7a24c05aa">
+            <componentMoniker
+              Id="0e0ac77a-02b4-4a77-8ff9-8d48180dd50d"
+              LastKnownName="Controllers"
+              LastKnownLocation="UML.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="bed69f8d-3dd1-4b11-a569-27f043648796"
+        name="vw_models"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

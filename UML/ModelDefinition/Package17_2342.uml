@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="993e5014-81da-42d9-8ad4-40bc7bcfb904"
+  name="EditModels"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="79e3d202-f0db-4598-b398-0194f795110b"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DPackage2Go5.Models.EditModels"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="6d4e9a72-8143-4aac-a81d-1d04b8d5c740"
+        name="UserProfileEdit"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="768884eb-92e6-471c-ab6e-e400204e66c9"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Models.EditModels Type%3DUserProfileEdit"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="39f2ba65-52f9-4075-bcfd-635a9cf454db"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c3b9d884-783c-4abf-aa2c-398dc66bc4dc">
+                <propertyInstance
+                  Id="356e7649-c735-4cfb-8571-21619bd6d7dc"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2ecb958f-29d1-4840-a8c5-ab90ef790c4b">
+                <propertyInstance
+                  Id="f6c0c04d-c0b4-4004-a78e-cbe589b61d81"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="31780c1a-34b2-4715-8059-76eb820990a1">
+                <propertyInstance
+                  Id="45e19338-3451-43f3-b479-3779e74ccda2"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2acc3b6d-b67c-41d3-9093-d1f696c75f5e">
+                <propertyInstance
+                  Id="455c3a90-a4ca-4420-99b3-237634e8b7f6"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8101ccf5-17fd-4c47-9828-f13b8259ef7a">
+                <propertyInstance
+                  Id="61b26324-c0c6-45f0-bac8-c20615eed020"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="e1a32ba6-2f2f-483f-8dce-eb187ee24f32"
+            isSubstitutable="false">
+            <classMoniker
+              Id="9dadedc8-dd04-4943-851c-17cc3feacbf4"
+              LastKnownName="UserProfileView"
+              LastKnownLocation="Package15_2342.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="f5cfe66a-0dbc-4afe-8da2-9b53560b550e"
+            name="newPassword"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="5363b015-d0bc-4ad6-b4fe-915c0e4d8443"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Models.EditModels Type%3DUserProfileEdit Member%3DnewPassword"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="46c434a9-89dc-4488-a670-e7a5ee81b25b"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="efce3d5a-f502-4c3e-819e-e0a56f11f4e5">
+                    <propertyInstance
+                      Id="ea49e843-8dde-4487-9438-e181a07f67ba"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="01639203-900a-4049-9ea6-72116d49d233">
+                    <propertyInstance
+                      Id="4a4b28d5-88bd-4458-bd47-00717f42ad74"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bfc60b9a-a99c-4b4a-b701-35b4824574de">
+                    <propertyInstance
+                      Id="16bdaa12-2c3d-4075-9c2c-1d27254b923d"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e7b6a3c6-f3b8-4e2e-99af-264942ef8303">
+                    <propertyInstance
+                      Id="d4263df9-e139-441e-81ce-b081654852ad"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e497c955-235f-409c-8713-b9ce857bd026">
+                    <propertyInstance
+                      Id="a9a51a13-19aa-4022-8d4d-a674f422f800"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="af2091f4-7eae-46c4-b3fd-be5a324131a2">
+                    <propertyInstance
+                      Id="21eced2e-4bd9-4e88-9061-c0bd412b8534"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f0836fb4-3645-4a21-b648-345dae19840f">
+                    <propertyInstance
+                      Id="cbd24ee7-5197-4298-b3e4-61b65ba88d93"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="c1f6834d-7634-403d-85cd-e2037d4e5c23"
+            name="confirmPassword"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="ee14b082-b636-46df-9d8f-3930da5757a3"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Models.EditModels Type%3DUserProfileEdit Member%3DconfirmPassword"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="473bdc6a-d87b-4e08-80e4-2b3977ba394c"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e2b82311-228e-4abf-a148-6a9983eb9bcb">
+                    <propertyInstance
+                      Id="a4161f89-415f-42bd-8251-166e80094497"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f5637f13-ec0c-4f00-8659-e634abdacc51">
+                    <propertyInstance
+                      Id="d7e47f0a-c582-4d28-874c-510ae355960c"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f142d474-3bc3-4452-a26d-8726dc9be97f">
+                    <propertyInstance
+                      Id="5d597375-a9f2-4d87-8ac7-9b5f95b19368"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="830e1c27-3a79-4a7b-bb69-1813c6f34101">
+                    <propertyInstance
+                      Id="80ee5ad9-dad2-4684-8dbf-42b5c786cc55"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="46782f67-ec8a-4dc5-8662-fddd37295a7c">
+                    <propertyInstance
+                      Id="62a504c2-a648-4b9f-99e3-bba23a44fd36"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d98644e3-90ed-4e83-b42a-7f00f4994a35">
+                    <propertyInstance
+                      Id="97caf919-650b-4810-8e9e-b7588cfb06c9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9f8bc69d-3753-4249-bff4-5388036e2b4d">
+                    <propertyInstance
+                      Id="ab8723ba-94c0-4df2-9058-42e86cfc9369"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="UML.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="d19e21ee-204f-4ac1-9ddb-544dd8d47454"
+            name="UserProfileEdit"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="8f3f5f23-c0fd-4754-8bd4-f838892e3924"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Models.EditModels Type%3DUserProfileEdit Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="054b86a3-9b30-4b1f-97cf-d6749d7df0e7"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="54468dbb-16ce-461f-9ade-69a41f8fc882">
+                    <propertyInstance
+                      Id="e18abd71-4e94-4c9d-9856-7416be3eddee"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ca43a2f5-1025-4ffd-bb63-15baf1ace82f">
+                    <propertyInstance
+                      Id="7395ce12-df0a-418a-b42b-7410f7ef6825"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3706835c-c3a4-4d05-a139-ebb0a020cd3d">
+                    <propertyInstance
+                      Id="39727499-112e-4184-b19b-0242fb34a207"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7e4d78e2-9848-4651-afce-dc3943b18d6a">
+                    <propertyInstance
+                      Id="df1620ea-cb4b-49e9-aaff-a567c0eb2c54"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1a78bdf5-e5d8-4735-a850-8c1e80bf5724">
+                    <propertyInstance
+                      Id="a5ae803c-892e-4c73-bad9-a4179377f2a3"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="142aca62-baac-41be-9cfc-156ee00c453f">
+                    <propertyInstance
+                      Id="340daa02-890c-4e6f-b1bf-ebae7ee4cdf8"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

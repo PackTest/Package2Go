@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="369edd85-2ea7-4a3d-9649-fd3d209d1db2" name="Activity1" linkedPackageId="368bbc6b-c336-432e-9821-6a0c3cfff52a" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="e75c0a09-64b8-4319-92cc-b8a4ef480d1c">
+      <profileInstance Id="09fbdbc6-f452-49f0-84ca-f2434d69686d" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f9a790a7-dc49-4c5a-bbf4-548e9eeefbb7">
+      <profileInstance Id="69624e2d-a4a3-44c3-8133-dae3a2263011" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b33ee525-ed28-48e9-96b2-1018cc690d78">
+      <profileInstance Id="bb1f5e98-5a16-4bae-b22c-5be7cce7d5ae" name="CSharpProfile">
+        <elementDefinition Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7" />
+      </profileInstance>
+      <elementDefinition Id="95d987d5-c773-40b9-904e-2eb342cc2526" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="d1aaeb4f-262b-412e-b7a8-322f54f7e219" name="Activity1" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="5aadc105-dc4e-41d5-96c4-b75125a6327b" />
+        <nodes>
+          <initialNode Id="9e48d295-1c60-47c7-971a-e9604784c9f8" name="Initial1" isLeaf="false">
+            <elementDefinition Id="e357f6ac-dd2f-4878-83fd-f88ec399feac" />
+            <flowNodeTargets>
+              <controlFlow Id="587d5964-a5f9-418b-974a-2a4fd61425a7" guard="Paspaudžiama &quot;Search Route&quot;" isLeaf="false">
+                <opaqueActionMoniker Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" LastKnownName="Maršrutų paieškos lango atvaizdavimas" />
+                <elementDefinition Id="f99ef6f8-2595-4098-aa74-07dbcb39a3c2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" name="Maršrutų paieškos lango atvaizdavimas" isLeaf="false">
+            <elementDefinition Id="2febcb74-ea24-488f-b0b3-424f4ea4f66b" />
+            <flowNodeTargets>
+              <controlFlow Id="bbab7019-f0ef-4f75-85ab-85c76b2363e3" guard="Uždedama varnelė ant &quot;Item Adrress&quot;" isLeaf="false">
+                <opaqueActionMoniker Id="8b018883-7d8d-4c11-abfd-a6f5ee41f683" LastKnownName="Užpildomi adresų laukeliai" />
+                <elementDefinition Id="1a706535-e37f-4a76-b1eb-574e8ea858e5" />
+              </controlFlow>
+              <controlFlow Id="3482e910-3586-452a-b8b5-ead47f5571da" guard="Pasirenkamas kitas paketas" isLeaf="false">
+                <opaqueActionMoniker Id="188e442a-e350-4ae0-a9d7-bbc6c4b852be" LastKnownName="Perbraižomas paketo maršrutas" />
+                <elementDefinition Id="2fb7d909-f41d-4cc7-b5cc-70b90bfe572c" />
+              </controlFlow>
+              <controlFlow Id="1c087649-fe69-45c6-bbae-28d532f7e685" guard="Paspaudžiama &quot;Search&quot;" isLeaf="false">
+                <decisionNodeMoniker Id="1b712d3d-f844-4a6d-b3c2-b6681363d5fa" LastKnownName="Decision1" />
+                <elementDefinition Id="ac0474cf-0ed6-475a-b65e-3a98c7fdc84f" />
+              </controlFlow>
+              <controlFlow Id="09909449-d04c-414c-8587-f30605d9a98e" guard="Paspaudžiama ant maršruto žymeklio" isLeaf="false">
+                <opaqueActionMoniker Id="e329b310-0225-490b-9601-5cd027da7b16" LastKnownName="Nubraižomas maršrutas" />
+                <elementDefinition Id="3ddc2907-f902-49a7-894b-3bdac802ccb3" />
+              </controlFlow>
+              <controlFlow Id="b2c4b6d4-32bd-4e11-8aba-631f6a9d4141" guard="Paspaudžiama ant &quot;Offer&quot;" isLeaf="false">
+                <opaqueActionMoniker Id="d5627d0e-c9ce-4b7f-aaee-10f565dd4fe3" LastKnownName="Išsiunčiamas pasiūlimas maršruto savininkui" />
+                <elementDefinition Id="7c42d5af-7b73-4070-a7ae-6231957129fa" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="8b018883-7d8d-4c11-abfd-a6f5ee41f683" name="Užpildomi adresų laukeliai" isLeaf="false">
+            <elementDefinition Id="93694027-2388-4c89-8f8e-3defcccaba64" />
+            <flowNodeTargets>
+              <controlFlow Id="61097185-2eaf-4d1f-a9ca-68592769c763" isLeaf="false">
+                <opaqueActionMoniker Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" LastKnownName="Maršrutų paieškos lango atvaizdavimas" />
+                <elementDefinition Id="a0528949-bff8-4eda-8bcb-25ae76199e45" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="188e442a-e350-4ae0-a9d7-bbc6c4b852be" name="Perbraižomas paketo maršrutas" isLeaf="false">
+            <elementDefinition Id="a8e7eadf-0a47-436f-b90e-25cd52ba2a8a" />
+            <flowNodeTargets>
+              <controlFlow Id="7300c8cd-1488-454e-b4cb-553d436e18bf" isLeaf="false">
+                <opaqueActionMoniker Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" LastKnownName="Maršrutų paieškos lango atvaizdavimas" />
+                <elementDefinition Id="d2ba2584-38fe-4148-a515-4436d37d0bdf" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c8ee3a26-e31b-4dd2-b64f-ceb9a109d6f1" name="Atvaizduojami maršrutų žymeliai" isLeaf="false">
+            <elementDefinition Id="ef03983f-ac95-406a-a8dd-89d8b198fc6f" />
+            <flowNodeTargets>
+              <controlFlow Id="d622bd91-cfb9-44f5-a9e5-777d3caceab0" isLeaf="false">
+                <opaqueActionMoniker Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" LastKnownName="Maršrutų paieškos lango atvaizdavimas" />
+                <elementDefinition Id="df6dae22-5228-4e5b-85e5-6917847997b0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="1b712d3d-f844-4a6d-b3c2-b6681363d5fa" name="Decision1" isLeaf="false">
+            <elementDefinition Id="36afe52f-2bcc-4b11-b8e2-0782f0b01dcb" />
+            <flowNodeTargets>
+              <controlFlow Id="543e7c75-29f1-4dc6-8d8c-f5b99d18eaea" guard="Nedidesnis atstumas nuo maršruto nei nurodytas" isLeaf="false">
+                <opaqueActionMoniker Id="c8ee3a26-e31b-4dd2-b64f-ceb9a109d6f1" LastKnownName="Atvaizduojami maršrutų žymeliai" />
+                <elementDefinition Id="007b74ed-32ca-4cda-a976-9beff359b728" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="e329b310-0225-490b-9601-5cd027da7b16" name="Nubraižomas maršrutas" isLeaf="false">
+            <elementDefinition Id="634b70cb-2105-4073-98b2-3167d1a57da1" />
+            <flowNodeTargets>
+              <controlFlow Id="7c7a3720-c5dd-45aa-914c-2c1de086b441" isLeaf="false">
+                <opaqueActionMoniker Id="c2abc83b-36f3-4d04-9c9c-dc454b829eda" LastKnownName="Maršrutų paieškos lango atvaizdavimas" />
+                <elementDefinition Id="8aedf703-5ad9-4d06-94f2-691acc361632" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="d5627d0e-c9ce-4b7f-aaee-10f565dd4fe3" name="Išsiunčiamas pasiūlimas maršruto savininkui" isLeaf="false">
+            <elementDefinition Id="17e2b405-34b4-41af-8bdd-2fcf6f053db5" />
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="368bbc6b-c336-432e-9821-6a0c3cfff52a" name="UML">
+    <elementDefinition Id="d53373ca-f83a-469b-8193-67fcc14f467b" />
+  </package>
+</activityRootModel>

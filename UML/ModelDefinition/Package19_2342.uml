@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="a810bd79-4b67-4f11-9578-624a2de54a0d"
+  name="Constants"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="d537f72e-001b-427c-bf5e-3f82731af849"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DPackage2Go5.Constants"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <enumeration
+        Id="0a4ef906-04bd-436c-9ce8-6bc143b834a9"
+        name="genderType"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="d2ceb211-59ec-42e1-a2c4-5ee22bfe484d"
+            handle="viewcode://./CodeSchema_Enum?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Constants Type%3D(Name%3DgenderType ParentType%3DCProfile)"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="02f63a68-a6a0-4d00-9a77-47b773e0b319"
+            name="enum"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7ce50880-d768-4c0f-98a6-8fbaf5da1a8e">
+                <propertyInstance
+                  Id="2b8561b6-9719-4230-8654-6146d92e7121"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="64191774-b7fa-4327-b641-3b31a7a42c9f">
+                <propertyInstance
+                  Id="b30c8f71-2537-432e-ac32-c54669ed9418"
+                  name="BaseType"
+                  value="int" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="47309d41-45ac-4fc6-9de5-aac3cf898e1a">
+                <propertyInstance
+                  Id="27de5911-4df2-4985-966d-88f90a432356"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="610cf6f7-8a5b-4295-8638-b2f2e6a3b94f"
+            name="Man">
+            <referencesInternal>
+              <reference
+                Id="4af86407-346b-4747-9f1c-59e086c134ce"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Constants Type%3D(Name%3DgenderType ParentType%3DCProfile) Member%3DMan"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="7bd501e3-f408-46c2-8405-0e83ed1ebd00"
+            name="Women">
+            <referencesInternal>
+              <reference
+                Id="9e660feb-a7cd-439a-b681-2f6f461c11ec"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Constants Type%3D(Name%3DgenderType ParentType%3DCProfile) Member%3DWomen"
+                tag="ViewCode" />
+            </referencesInternal>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

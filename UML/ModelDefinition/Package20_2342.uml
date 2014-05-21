@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="fc8be148-924b-4c5c-bd14-3f8e991758ff"
+  name="Helper"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="52cec521-fd17-4cb3-9429-56ede851bfab"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DPackage2Go5.Helper"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="ec41c9e2-4d52-4ac0-91dc-0694c4a7eeb6"
+        name="AutoMapperWebConfiguration"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="79c67f7c-12f8-4ec4-aa1d-454309a2d942"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="3f6e4020-75d4-4959-baad-338f75e1847e"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b03865cb-7889-4a0d-9aa5-42c7a6d93d67">
+                <propertyInstance
+                  Id="075c5eb0-efa8-459b-91a5-6ca70ddec58c"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="81d8d888-0b4c-499e-9e4d-b6cdf450de90">
+                <propertyInstance
+                  Id="28cbcc36-6777-4466-91bf-da681a754dd1"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="06a886ce-448c-411f-a254-f040a3a6c199">
+                <propertyInstance
+                  Id="1cc3ed2b-84c1-4f25-9d9a-49698d2f4a59"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="38e9386b-e923-4da9-9da8-d6ac002448d8">
+                <propertyInstance
+                  Id="54565be7-ad71-4150-a213-4f30b0e4ed7d"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8012ad1f-d2c5-4666-afeb-dbb619458f0b">
+                <propertyInstance
+                  Id="75d59e76-5ba7-4023-a3a2-3e27b36e23e0"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ce29adcb-a076-4dea-b5e4-2a05d71f5b5f"
+            name="Configure"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="457a82b4-8630-4cc4-bc3a-709ca7b6303e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigure"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="1433b727-ed9d-4039-83e7-c866932c44a7"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e51d8319-9b97-4893-a0e6-ff467b3c9252">
+                    <propertyInstance
+                      Id="58830b9f-0329-47d4-a396-c3f3d9c8a960"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="21f891f8-c490-4e56-9623-d876acdb79de">
+                    <propertyInstance
+                      Id="d62bf23b-3b88-40e5-8a26-5ea1e6b147a0"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="15a6db09-d3f6-4805-b731-dffad15e600d">
+                    <propertyInstance
+                      Id="7330a243-bc26-498d-9c0d-8a3db3a1ca0f"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3f3551b8-e9b2-47ee-b277-690e3d6e4120">
+                    <propertyInstance
+                      Id="072256a9-3ee4-49ef-ac7a-5e29f3d2e109"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1de1e461-2cac-44a1-958e-9ad6d61b3fbc">
+                    <propertyInstance
+                      Id="58bedac7-8bbc-4f47-ba75-7f83b1605f92"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fbc03552-8010-43c1-8064-94d979dcca9b">
+                    <propertyInstance
+                      Id="9bb005c7-c46c-46ce-9941-460b5d66be6c"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="ae26f655-17f0-4b88-9bec-60cb9bae8d26"
+            name="ConfigureItemsMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="38e3f967-104e-4951-a831-bc098c764e3e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureItemsMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e1f242fd-7dc2-4640-b07b-c901934c5b68"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7a992357-749f-4d34-845a-b971605aadfd">
+                    <propertyInstance
+                      Id="0c637cdf-5a47-4a52-a5fb-1694dbc12d85"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6c2d7dd2-1e04-4c59-81b5-4fb0eb47c7b0">
+                    <propertyInstance
+                      Id="b8269df3-3d53-43c1-a23d-e370fdb1c6d2"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4d7684bd-c4e4-46b6-af09-cd00d10315a0">
+                    <propertyInstance
+                      Id="73145f0e-30a3-47dc-b8e5-4edd2cc877fe"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0829bc89-01dc-4198-a6ce-deab7999397a">
+                    <propertyInstance
+                      Id="00489ae1-87b8-47bc-9760-ede35eaebf00"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0bf4d1a6-b69d-40d5-bc8f-576d196f3dc6">
+                    <propertyInstance
+                      Id="92731858-bf15-4622-9ece-0f62a265e465"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f12c8b5e-9d41-46b5-b6ed-fb4ed0966f0c">
+                    <propertyInstance
+                      Id="15a42b4f-92c6-42d4-b214-103583df8c5b"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="fde09ae3-c661-44a8-b8b1-8d974a76579b"
+            name="ConfigureRoutesMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="2f0a27ab-bc95-405b-a9b0-b9e62d54d6ed"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureRoutesMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="d6369694-9c01-444c-a4cc-e1a2202ed5ef"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b1dec24e-b281-418a-8291-34c5f4518422">
+                    <propertyInstance
+                      Id="40b36c75-0151-4775-8faf-7b43a33d3dc7"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f0e88b27-c47e-42fd-92d2-0682ee83dadb">
+                    <propertyInstance
+                      Id="df1828aa-23e7-4d14-a174-6579cd0d14f6"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7ce35e5d-1fad-40a1-add7-ecfe0a3dffd4">
+                    <propertyInstance
+                      Id="889c4321-4434-44f3-8727-9cb6d633984d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a746eb1b-73e0-479f-b07a-8300132c57fe">
+                    <propertyInstance
+                      Id="8f7fd171-0d76-4ad7-afd6-6246d1251465"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4b925ceb-4e5a-46bd-8ce8-cfad56f4d9b9">
+                    <propertyInstance
+                      Id="091c6156-e513-47ca-b153-f3cee9c2d1fd"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2584c649-937f-4b10-99ae-b5fd7717c295">
+                    <propertyInstance
+                      Id="1205bcf9-be78-43f0-a1c9-17bf69dcefb5"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="f593b5de-c127-492c-9b5e-066deafb7040"
+            name="ConfigureCommentsMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="5a62fde7-3255-452d-9949-77c83842767f"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureCommentsMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="cefa2794-9659-4291-ab8e-ede7cff1ced6"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="171a07e6-0beb-452e-80f2-d988d64d82d3">
+                    <propertyInstance
+                      Id="b0dfbdb9-e704-4e6e-8d31-0a954c80ac0a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0a6a755b-a2a8-45e2-a59c-7aaa133c77b9">
+                    <propertyInstance
+                      Id="344baf9b-9986-4bff-a4bf-aaaff7ea7057"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="425fec01-1e52-4d58-b86a-e718bd1e2d54">
+                    <propertyInstance
+                      Id="328347ec-af76-41cd-856a-0fec6e605ece"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="117b7d56-f536-4b01-ba25-1f3d73819862">
+                    <propertyInstance
+                      Id="587416a4-f487-4a5b-a345-1d99943cdb69"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8dcb2463-d325-4a2d-a2fe-0d6aeef1d88d">
+                    <propertyInstance
+                      Id="e5923024-4009-405b-8a5f-521a82410206"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1cb2d1b0-32e9-4e81-8458-91df7a7cf778">
+                    <propertyInstance
+                      Id="e4477fc6-1055-40e2-b452-f138c8592ecf"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="40e4503a-4e5c-4030-afe1-6afc536306e4"
+            name="ConfigureMessagesMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="c8f5ee08-5ce7-4e3d-97c8-f962901abec6"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureMessagesMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f4308ad9-f7eb-4c4a-a109-5e5ce94de14c"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0c46ffba-3b45-421d-b343-2b70e0140b11">
+                    <propertyInstance
+                      Id="88579cfe-edeb-4d81-ae42-5bca00987f46"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b0b45731-814d-4318-9e37-4c27c8ece042">
+                    <propertyInstance
+                      Id="43c4afc5-f7fa-4291-b0a9-56f3bf611e9c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a053539e-6f01-413e-81a8-f1af12b3e50c">
+                    <propertyInstance
+                      Id="49ef88d0-389d-49fb-9877-00fe93f60355"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="003113ba-6daa-48bf-8601-967718d8cfaa">
+                    <propertyInstance
+                      Id="0f1fcb03-027b-4db7-afc5-99a20b7aa5c3"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="06b09008-b1f1-4f4b-9f4d-10673a8cb7cb">
+                    <propertyInstance
+                      Id="55caa355-0bc6-4960-bcf7-01efb1ed07c3"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dc82e972-4fa0-4721-b4b5-85da660759c4">
+                    <propertyInstance
+                      Id="57eb40de-58d6-4d38-bdec-a74ede8df4e6"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="66da304d-ba43-4757-9ae5-728fc6523e07"
+            name="ConfigureUserProfileMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="83f1c0fc-32b9-4159-b9c1-9ceeb19b22d5"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureUserProfileMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b61bd91d-4ff5-4d52-9a01-da1491f9c523"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e2794e66-9280-4625-8470-8455ead8f8e4">
+                    <propertyInstance
+                      Id="7845b784-9eae-40fb-b184-2de1a85814be"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4db8ce86-d8b1-4363-9883-0781b1d2db18">
+                    <propertyInstance
+                      Id="d6d6a502-ab70-4c79-a38e-1c8c37834cbf"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9f4d878-39b8-4468-968f-53fd2c27082c">
+                    <propertyInstance
+                      Id="c96f0d2c-1675-471c-b6c1-570440567359"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f6ab9fa8-b68f-4576-8fcd-00da558dd636">
+                    <propertyInstance
+                      Id="9b034321-b8df-4419-b7bd-33802da7be68"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dbf0a2e8-7a9e-4d43-8ef7-93640fcbd9f3">
+                    <propertyInstance
+                      Id="270140ab-2d07-42cd-a2e7-32ea9b5136fe"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d10b8e88-fc34-46b4-8ac0-30fab1b8bcb1">
+                    <propertyInstance
+                      Id="ff67fe50-28a6-4fbd-94bb-365b09982a21"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="0049d33b-f5fb-450d-8e30-5c6f197cb2bd"
+            name="ConfigureOffersMapping"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="6e5210ca-d769-417a-a2bb-3c8dac4e924c"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FE:%2FProjects%2FPackage2Go%2FPackage2Go5%2Fbin%2FPackage2Go5.dll Namespace%3DPackage2Go5.Helper Type%3DAutoMapperWebConfiguration Member%3DConfigureOffersMapping"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e59cb40b-d0d2-4d9b-9557-f19bdbf9f90a"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2613d3eb-7f9e-46fb-9d0a-ae11742a2bb4">
+                    <propertyInstance
+                      Id="03218da1-bd1b-4fbd-b856-3c670b189c28"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8095b82f-df11-434a-a9c6-b90efcdba891">
+                    <propertyInstance
+                      Id="b0bc99ec-a556-41cb-b8e9-19532c4c4416"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="562cc35c-67db-4a00-a4ab-58935fa4ba37">
+                    <propertyInstance
+                      Id="ae780f2c-8ce5-4a9a-a8e0-daef5c930b7c"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9889fc9e-c0c7-4f3d-b0d7-111b02f883e4">
+                    <propertyInstance
+                      Id="32c63cbc-4df2-42fd-b4f6-a8b4b3d3d0f7"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ba69120a-4f37-4c83-b7b7-89f03e487e37">
+                    <propertyInstance
+                      Id="b9924f70-4828-4111-923e-89b5ca894fc0"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5e352673-1185-4dd5-8b83-80176b4e895f">
+                    <propertyInstance
+                      Id="243addb5-1356-47fb-98c2-9c29a6293e54"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

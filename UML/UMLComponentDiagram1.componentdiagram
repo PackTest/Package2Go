@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="4697486f-a74f-4c0c-bf13-75f8864ff150" name="UMLComponentDiagram1" linkedPackageId="7e45dc54-1c04-48bd-8b48-6e7ce41d21b2" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="3dd0a9a9-5939-46bd-ab66-83b6d9caf065">
+      <profileInstance Id="f2c9b66f-9b3d-4132-ac56-647c746fe156" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="5f0bac4e-32ae-47ed-a045-c3be5bff848b">
+      <profileInstance Id="f11be077-e8fb-4eae-9f0c-229df799e99b" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="21067c05-fb26-485b-badf-06a482f40940">
+      <profileInstance Id="489d8fbc-32d9-42c5-b0b2-1d41c96ebd84" name="CSharpProfile">
+        <elementDefinition Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7" />
+      </profileInstance>
+      <elementDefinition Id="95d987d5-c773-40b9-904e-2eb342cc2526" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="8fed101e-a6c5-4216-a998-bd73cd9fb2d1" name="Controllers" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0e0ac77a-02b4-4a77-8ff9-8d48180dd50d" />
+        <suppliersInternal>
+          <dependency Id="a0fb5aae-8f58-431c-9cf5-fe4037e8af98">
+            <componentMoniker Id="e8d9d1a8-14d8-4872-8932-0538b3fb6e56" LastKnownName="ObjectsManagers" />
+            <elementDefinition Id="e2ffd12f-b870-4dfc-955e-478af2fb39b2" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="274e11b1-ae0f-4249-9e8f-842d4cb72a2e" name="Models" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d093cb91-d17a-48c4-a5fd-ff0b44ed8235" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="e1e7bfa6-447d-45eb-96c1-e3acd47f61e3" name="ViewModels" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="133dabbf-d29e-4095-97a7-39d54af57d77" />
+        <suppliersInternal>
+          <dependency Id="c697f0e0-1aab-4191-a173-23933c282ce9">
+            <componentMoniker Id="274e11b1-ae0f-4249-9e8f-842d4cb72a2e" LastKnownName="Models" />
+            <elementDefinition Id="e5db198f-0bf1-411f-8120-d657c5f60e68" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="e8d9d1a8-14d8-4872-8932-0538b3fb6e56" name="ObjectsManagers" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cc57d053-82c5-47d4-8fc7-fb98bf2775f0" />
+        <suppliersInternal>
+          <dependency Id="539d6c6d-1aa1-4d5c-bace-1175e2f6461d">
+            <componentMoniker Id="e1e7bfa6-447d-45eb-96c1-e3acd47f61e3" LastKnownName="ViewModels" />
+            <elementDefinition Id="a6286c92-98dd-4c80-89e0-27865082f79f" />
+          </dependency>
+          <dependency Id="3e8e86c9-d1b0-49c7-b030-e018b2253529">
+            <componentMoniker Id="2c0e9690-69d7-46e3-89ea-6059b199e087" LastKnownName="vw_models" />
+            <elementDefinition Id="a2ca6139-f9b8-4d72-a1f4-0f68876e4bca" />
+          </dependency>
+          <dependency Id="24238cf5-a673-4870-a4ef-ab964adb2735">
+            <componentMoniker Id="274e11b1-ae0f-4249-9e8f-842d4cb72a2e" LastKnownName="Models" />
+            <elementDefinition Id="56157d6b-6940-46d6-9114-1d08fe8df4f3" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="d76ab190-d4ee-4cc3-b927-5067005997b0" name="Views" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2eeb4813-54ec-41c3-8600-4bed43948012" />
+        <suppliersInternal>
+          <dependency Id="9cc2dcd2-c90b-48cf-8d1b-15b5bf755535">
+            <componentMoniker Id="8fed101e-a6c5-4216-a998-bd73cd9fb2d1" LastKnownName="Controllers" />
+            <elementDefinition Id="85aa96be-5759-4928-bd18-1ec7a24c05aa" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="2c0e9690-69d7-46e3-89ea-6059b199e087" name="vw_models" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bed69f8d-3dd1-4b11-a569-27f043648796" />
+      </component>
+    </componentModelHasComponents>
+  </packagedElements>
+  <package Id="7e45dc54-1c04-48bd-8b48-6e7ce41d21b2" name="UML">
+    <elementDefinition Id="d53373ca-f83a-469b-8193-67fcc14f467b" />
+  </package>
+</componentModel>
