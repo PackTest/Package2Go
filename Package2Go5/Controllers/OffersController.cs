@@ -11,19 +11,35 @@ namespace Package2Go5.Controllers
     public class OffersController : Controller
     {
 
-        OffersManager offersManager = new OffersManager();
-
+        private OffersManager offersManager = new OffersManager();
+        private UserProfileManager userManager = new UserProfileManager();
+        private int id = 0;
         //
         // GET: /Offers/
-
+        [Authorize]
         public ActionResult Index()
         {
-            return View(offersManager.GetUserOffersList(Int32.Parse(Request.Cookies["UserId"].Value)));
+            if(Request.Cookies["UserId"] != null)
+                id = Int32.Parse(Request.Cookies["UserId"].Value);
+
+            ViewBag.status =  offersManager.GetStatusList();
+            return View(offersManager.GetUserOffersList(id));
+        }
+
+        [Authorize]
+        public ActionResult Offers()
+        {
+            if (Request.Cookies["UserId"] != null)
+                id = Int32.Parse(Request.Cookies["UserId"].Value);
+            if (User.Identity.IsAuthenticated && userManager.getRole(id) == 1)
+                return View(offersManager.GetAll());
+            else
+                return View();
         }
 
         //
         // GET: /Offers/Details/5
-
+        [Authorize]
         public ActionResult Details(int id)
         {
             return View();
@@ -31,12 +47,15 @@ namespace Package2Go5.Controllers
 
         //
         // POST: /Offers/Create
-
+        [Authorize]
         public ActionResult Create(int i, int r)
         {
             try
             {
-                offersManager.Create(i, r, Int32.Parse(Request.Cookies["UserId"].Value));
+                if (Request.Cookies["UserId"] != null)
+                    id = Int32.Parse(Request.Cookies["UserId"].Value);
+
+                offersManager.Create(i, r, id);
                 return RedirectToAction("Index", "Routes");
             }
             catch
@@ -45,9 +64,17 @@ namespace Package2Go5.Controllers
             }
         }
 
+        [Authorize]
+        public void CreateOffer(int i, int r) 
+        {
+            if (Request.Cookies["UserId"] != null)
+                id = Int32.Parse(Request.Cookies["UserId"].Value);
+            offersManager.Create(i, r, id);            
+        }
+
         //
         // GET: /Offers/Edit/5
-
+        [Authorize]
         public void Edit(int id)
         {
             offersManager.Update(id, 2);
@@ -56,12 +83,14 @@ namespace Package2Go5.Controllers
         //
         // POST: /Offers/Delete/5
 
-        //[HttpPost]
+        [Authorize]
         public ActionResult Delete(int i, int r)
         {
             try
             {
-                offersManager.Delete(i, r, Int32.Parse(Request.Cookies["UserId"].Value));
+                if (Request.Cookies["UserId"] != null)
+                    id = Int32.Parse(Request.Cookies["UserId"].Value);
+                offersManager.Delete(i, r, id);
                 return RedirectToAction("Index", "Routes");
             }
             catch

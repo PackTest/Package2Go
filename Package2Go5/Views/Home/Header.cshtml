@@ -11,8 +11,8 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="/Routes">Routes <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("Create", "create", "Routes")</li>}
-                                    <li>@Html.ActionLink("FindRoute", "findroute", "Routes")</li>
-                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("MyRoutes", "Index", "Routes")</li>}
+                                    <li>@Html.ActionLink("Find Route", "findroute", "Routes")</li>
+                                    @if (User.Identity.IsAuthenticated){<li>@Html.ActionLink("My Routes", "Index", "Routes")</li>}
                                 </ul>
                             </li>
                             @if (User.Identity.IsAuthenticated){
@@ -20,8 +20,8 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="/Items">Items <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                         <li>@Html.ActionLink("Create", "create", "Items")</li>
-                                        <li>@Html.ActionLink("MyItems", "index", "Items")</li>
-                                        <li>@Html.ActionLink("Items History", "History", "Items")</li>
+                                        <li>@Html.ActionLink("My Items", "index", "Items")</li>
+                                        @*<li>@Html.ActionLink("Items History", "History", "Items")</li>*@
                                 </ul>
                             </li>
                             }
@@ -31,15 +31,19 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administravimas <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("RoutesList", "Index", "Routes")</li>
-                                        <li>@Html.ActionLink("ItemsList", "Index", "Items")</li>
+                                        <li>@Html.ActionLink("Routes List", "Index", "Routes")</li>
+                                        <li>@Html.ActionLink("Items List", "Index", "Items")</li>
+                                        <li>@Html.ActionLink("Users List", "Index", "UserProfile")</li>
+                                        <li>@Html.ActionLink("Messages List", "Messages", "Messages")</li>
+                                        <li>@Html.ActionLink("Offers List", "Offers", "Offers")</li>
+                                        <li>@Html.ActionLink("Comments List", "Index", "Comments")</li>
                                     </ul>
                                 </li>
                             }
 
                             @if(User.Identity.IsAuthenticated){
                                 <li>@Html.ActionLink("Profile", "Edit", "UserProfile")</li>
-                                <li>@Html.ActionLink("Logout ("+User.Identity.Name+")", "logout", "UserProfile")</li>
+                                <li>@Html.ActionLink("Logout (" + User.Identity.Name + ")", "logout", "UserProfile", null, new { @title="logout" })</li>
                             }else{
                                 <li>@Html.ActionLink("Login", "login", "UserProfile")</li>
                                 <li>@Html.ActionLink("Sign In", "create", "UserProfile")</li>
@@ -76,14 +80,14 @@
                                 <h4>Offer</h4>
                                 <input type="hidden" class="routeId" value="@offer.route_id" />
                                 <input type="hidden" class="itemId" value="@offer.item_id" />
-                                <input type="hidden" value="@offer.id" />
+                                <input type="hidden" class="offerId" value="@offer.id" />
                                 <p>Item: @offer.Items.title</p>
                                 <p>From: @offer.Items.address</p>
                                 <p>To: @offer.Items.delivery_address</p>
                                 <p>Price: @offer.Items.delivery_price @offer.Items.Currencies.code</p>
                                 <div class="clearfix">
                                     <a href="/Routes/Edit/@offer.route_id?item=@offer.item_id">Look</a>  
-                                    <a href="#" title="hide">Hide</a>
+                                    <a href="#" title="Decline">Decline</a>
                                     <a href="#" title="Accept">Accept</a>
                                 </div>
                                 <hr> 
@@ -96,7 +100,7 @@
                     </ul>
                 </div>
                 <div class="messages">
-                    <a href="#" title="new_message">New Messages</a>
+                    <a href="#" title="new_message">New Message</a>
                     <div id="message" style="display:none">
                         <form  method="post" action="/Messages/Create">
                             @Html.TextBox("to", null, new { @placeholder="Send To" })<br>

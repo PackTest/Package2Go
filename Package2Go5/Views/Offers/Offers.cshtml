@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.OffersView>
+
+@{
+    ViewBag.Title = "Offers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Offers</h2>
+
+<table id="Messages">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.route_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.route_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { i=item.item_id, r=item.route_id })
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.route_id)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.item_id)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.status_id)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.date)"/>
+            </th>
+            <th></th>
+        </tr>
+    </tfoot>
+
+</table>
+
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/DataTables")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //filter
+            var oTable = $('#Messages').dataTable({
+                "aaSorting": [[4, "desc"]],
+                "sDom": '<"top"l>rt<"bottom"ip>',
+                "iDisplayLength": 5,
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>' +
+                      '<option value="5">5</option>' +
+                      '<option value="10">10</option>' +
+                      '<option value="20">20</option>' +
+                      '<option value="-1">All</option>' +
+                      '</select> records'
+                },
+                "aoColumns": [null, null, null, null, null, { "bSortable": false }]
+            });
+
+            $("tfoot input").keyup(function () {
+                oTable.fnFilter(this.value, $("tfoot input").index(this)+1);
+            });
+
+        });
+    </script>
+}

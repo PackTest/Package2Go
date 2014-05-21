@@ -23,6 +23,7 @@ namespace Package2Go5.Models.ObjectManager
             item.delivery_price = itemView.delivery_price;
             item.note = HttpUtility.HtmlEncode(itemView.note);
             item.currency_id = itemView.currency_id;
+            item.delivery_date = itemView.delivery_date;
             item.status_id = 1;
 
             item.UsersItems.Add(new UsersItems { item_id = item.id, user_id = userId });
@@ -40,6 +41,7 @@ namespace Package2Go5.Models.ObjectManager
             item.delivery_address = HttpUtility.HtmlEncode(itemView.delivery_address);
             item.size = itemView.size;
             item.delivery_price = itemView.delivery_price;
+            item.delivery_date = itemView.delivery_date;
             item.note = HttpUtility.HtmlEncode(itemView.note);
             item.status_id = itemView.status_id;
 
@@ -52,6 +54,16 @@ namespace Package2Go5.Models.ObjectManager
             {
                 db.UsersItems.Remove(ui);
             }
+
+            foreach (ItemsRoutes ir in db.ItemsRoutes.Where(ir => ir.item_id == id)) 
+            {
+                db.ItemsRoutes.Remove(ir);                
+            }
+            foreach (Offers o in db.Offers.Where(o => o.item_id == id)) 
+            {
+                db.Offers.Remove(o);
+            }
+
             db.Items.Remove(db.Items.Where(i=>i.id==id).First());
             db.SaveChanges();
         }
@@ -67,14 +79,16 @@ namespace Package2Go5.Models.ObjectManager
 
         public List<Items> GetAll( int userId = 0, int routeId = 0)
         {
-            if (userId != 0)
+            if (userId != 0 && routeId != -1)
             {
                 return db.Items.Where(i => i.UsersItems.Any()).ToList();
             }
             if (routeId == 0)
                 return db.Items.ToList();
-            else
+            else if (routeId != -1)
                 return db.Items.Where(i=>!i.ItemsRoutes.Any()).ToList();
+            else
+                return db.Items.Where(i => i.UsersItems.Any(ui=>ui.user_id != userId) && (i.status_id==1 || (i.ItemsRoutes.Any(ir=>ir.Routes.UsersRoutes.Any(ur=>ur.user_id == userId)) && i.status_id == 2))).ToList();
         }
 
         public List<ItemsView> GetAllHistory(int userId)
@@ -153,6 +167,8 @@ namespace Package2Go5.Models.ObjectManager
             {
                 if (stat.id == status_id)
                     selected = true;
+                else
+                    selected = false;
                 if (status_id != -1)
                     status.Add(new SelectListItem { Text = stat.title, Value = stat.id.ToString(), Selected = selected });
                 else

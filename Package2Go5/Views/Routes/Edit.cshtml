@@ -12,31 +12,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("id")
+                @Resources.DisplayNames.item_id
             </th>
             <th>
-                @Html.DisplayName("title")
+                @Resources.DisplayNames.title
             </th>
             <th>
-                @Html.DisplayName("address")
+                @Resources.DisplayNames.address
             </th>
             <th>
-                @Html.DisplayName("delivery_address")
+                @Resources.DisplayNames.delivery_address
             </th>
             <th>
-                @Html.DisplayName("size")
+                @Resources.DisplayNames.size
             </th>
             <th>
-                @Html.DisplayName("delivery_price")
+                @Resources.DisplayNames.delivery_price
             </th>
             <th>
-                @Html.DisplayName("currency")
+                @Resources.DisplayNames.currency_id
             </th>
             <th>
-                @Html.DisplayName("price, ")@ViewBag.userCurrency
-            </th>
-            <th>
-                @Html.DisplayName("note")
+                @Html.DisplayName("Price, ")@ViewBag.userCurrency
             </th>
             <th>
                 Action
@@ -54,7 +51,6 @@
                 <td>@Html.Raw(item.delivery_price)</td>
                 <td>@Html.Raw(item.Currencies.code)</td>
                 <td>@ViewBag.ItemsPrices[item.id]</td>
-                <td>@Html.Raw(item.note)</td>
                 <td>
                     @if (User.Identity.IsAuthenticated && item.UsersItems.Where(ui=>ui.item_id == item.id).First().user_id == ViewBag.User_id)
                     {
@@ -80,22 +76,19 @@
                 <input type="text" name="2" placeholder="address" />
             </th>
             <th>
-                <input type="text" name="2" placeholder="delivery_address" />
+                <input type="text" name="3" placeholder="delivery_address" />
             </th>
             <th>
-                <input type="text" name="3" placeholder="size"/>
+                <input type="text" name="4" placeholder="size"/>
             </th>
             <th>
                 <input type="text" id="min" placeholder="min"/><input type="text" id="max" placeholder="max"/>
             </th>
             <th>
-                <input type="text" name="5" placeholder="currency"/>
+                <input type="text" name="6" placeholder="currency"/>
             </th>     
             <th>
                 <input type="text" id="userPriceMin" placeholder="min"/><input type="text" id="userPriceMax" placeholder="max"/>
-            </th>       
-            <th>
-                <input type="text" name="7" placeholder="note"/>
             </th>
             <th>
                 @Html.DropDownList("action", (System.Web.Mvc.SelectList)ViewBag.actionList)
@@ -106,7 +99,7 @@
 
 </div>
 <div style="width:100px; height:1px;">
-<div id="over_map2">
+<div id="over_map2" onload="GetItemsMarkers()">
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -124,16 +117,21 @@
         <div class="editor-field">
             <ul id="waypoints">
                 <li>
-                    <img src="~/Images/arrow.png" alt=""/>
+                    <div class="dragImage"></div>
                     @Html.EditorFor(model => model.from)
                     @Html.ValidationMessageFor(model => model.from)
                 </li>
             </ul>
         </div>
         <a href="#" id="addWaypoint">Add Another Input Box</a>
-        <p>
+@*        <p>
             Optimal route? <input name="optimized" type="checkbox" />
-        </p>
+        </p>*@
+
+        <div id="itemList">
+            <b>Items: </b>
+        </div>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.departure_time)
         </div>
@@ -154,7 +152,7 @@
             @Html.LabelFor(model => model.status_id)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.status_id, (System.Web.Mvc.SelectList)ViewBag.status)
+            @Html.DropDownListFor(model => model.status_id, (SelectList)@ViewBag.status)
             @Html.ValidationMessageFor(model => model.status_id)
         </div>
         <p>
@@ -170,8 +168,7 @@
 
     <a href="#" id="segments" hidden="hidden">Show Route Segments</a>
     <div id="directions_panel" style="display:none"></div>
-    <ul id="paymentsByCurrencies"></ul>
-
+    <div></div>
     <a href="#" id="calCost" hidden="hidden">Calculate Travel Costs</a>
     <div id="calculateCosts" hidden="hidden">
         <div id="paymentsforservice"></div>
@@ -188,16 +185,15 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/DataTables")
-
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     @Scripts.Render("~/bundles/jqueryGMAPAPI")
-    @Styles.Render("~/Content/GMapApi")
 
     <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            GetItemsMarkers();
 
             $('input[name=optimized]').change(function () {
                 calcRoute();
@@ -257,34 +253,6 @@
         });
 
         $('#over_map').hide();
-        
-        var input;
-        function AddItem(id)
-        {
-            addedItems.push(id);
-            dirRenderer.forEach(function (data) {
-                data.setMap(null);
-            });
-            dirRenderer = [];
-
-            $('tbody tr').each(function () {
-                var item = $(this).last().find('a');
-                if (item.attr("title") == id)
-                    AddItemToRoute(item);
-            });
-        }
-
-        function RemoveItem(id) {
-
-            addedItems.splice($.inArray(id, addedItems), 1);
-
-
-            $('tbody tr').each(function () {
-                var item = $(this).last().find('a');
-                if (item.attr("title") == id)
-                    RemoveItemFromRoute(item);
-            });
-        }
 
     </script> 
 

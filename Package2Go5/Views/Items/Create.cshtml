@@ -55,6 +55,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.delivery_date)
+        </div>
+        <div class="editor-field">
+            @Html.JQueryUI().DatepickerFor(model => model.delivery_date)
+            @Html.ValidationMessageFor(model => model.delivery_date)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.currency_id)
         </div>
         <div class="editor-field">
@@ -82,6 +90,10 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script type="text/javascript" src="~/Scripts/ItemsDirection.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#delivery_date').datepicker("setDate", new Date());
+        });
+    </script>
 }

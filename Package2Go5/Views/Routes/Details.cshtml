@@ -12,10 +12,10 @@
          @Html.DisplayName("Path")
     </div>
     <div class="route">
-        <div class="display-field">@Html.DisplayFor(model => model.from)</div>
+        <div class="path">@Html.DisplayFor(model => model.from)</div>
         @foreach (string waypoint in Model.waypointsList) {
             <img src="~/Images/arrow-down.png" alt="to" />
-            <div class="display-field">@waypoint</div>
+            <div class="path">@waypoint</div>
         }
     </div>
 
@@ -55,12 +55,69 @@
     </div>
 </fieldset>
 
+<p>
+    <input name="decline" type="button" value="Decline" onclick="Decline()"/>
+</p>
+
 @section Scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
+        var itemId = 0, routeId = 0;
+
+        function Decline() {
+            if (itemId != 0) {
+                var url = "/Routes/DeclineRoute?i=" + itemId;
+                
+                $.get(url, null, function (data)
+                {
+                    if (data) {
+                        window.location.replace(window.location.href.split('?')[0]);
+                    }
+                });
+            } 
+        }
+
         $(document).ready(function () {
+
+            var sPageURL = window.location.search.substring(1);
+            routeId = window.location.pathname.split('/').reverse()[0];
+
+            if (sPageURL.split('=').length > 1)
+                itemId = sPageURL.split('=')[1];
+
+            if (itemId != 0) {
+                $('input[name=decline]').show();
+            }
+
+            var directionsService = new google.maps.DirectionsService();
+
+            var waypoints = [];
+            var start = "", end = "";
+            $('.path').each(function () {
+                if (start == "")
+                    start = $(this).text();
+                else
+                    waypoints.push({
+                        location: $(this).text(),
+                        stopover: true
+                    });
+            });
+            end = waypoints[waypoints.length - 1].location;
+            waypoints.pop();
+
+            directionsService.route({
+                origin: start,
+                destination: end,
+                waypoints: waypoints,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            }, function (result) {
+                directionsRenderer = new google.maps.DirectionsRenderer();
+                directionsRenderer.setMap(map);
+                directionsRenderer.setDirections(result);
+            });
+
         });
     </script>
 }

@@ -30,11 +30,12 @@ namespace Package2Go5
         public int currency_id { get; set; }
         public string address { get; set; }
         public int status_id { get; set; }
+        public System.DateTime delivery_date { get; set; }
     
         public virtual Currencies Currencies { get; set; }
+        public virtual ItemStatus ItemStatus { get; set; }
         public virtual ICollection<ItemsRoutes> ItemsRoutes { get; set; }
         public virtual ICollection<Offers> Offers { get; set; }
         public virtual ICollection<UsersItems> UsersItems { get; set; }
-        public virtual ItemStatus ItemStatus { get; set; }
     }
 }

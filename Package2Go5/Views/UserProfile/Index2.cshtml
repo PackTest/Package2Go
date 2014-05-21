@@ -6,21 +6,19 @@
 }
 
 <fieldset>
-    <legend>Profile</legend>
+    <legend>Your Profile</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Username)
     </div>
-    <div class="display-field" id="username">
+    <div class="display-field">
         @Html.DisplayFor(model => model.Username)
     </div>
-    
+
     <div class="display-field">
-        @if (Model.image_url != null)
+        @if (!String.IsNullOrEmpty(Model.image_url))
         {
-        <img class="photo" src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
-        }else{
-        <img class="photo" src="~/Images/DefaultProfile.jpg" alt="Profile photo"/>            
+            <img class="photo" src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
         }
     </div>
 
@@ -65,41 +63,28 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.rate) (@Model.commentCount)
     </div>
-</fieldset>
-<p>
-    <a href="#" title="showComments">Show Last Comments</a>
-</p>
-<ul id="comments">
-    @if (Model.comments.Count() == 0) 
-    { 
-        <li>No Comments</li>
-    }else{
 
-        foreach (Package2Go5.Models.ViewModels.CommentsView comment in Model.comments) 
-        {
-            <li>
-                <p>@comment.comment</p>
-                <p><b>Written by: </b><a href="/UserProfile/Profile?username=@comment.writer">@comment.writer</a></p>
-                @comment.date
-                <hr>
-            </li>
+    <p>
+        <a href="#" title="showComments">Show Last Comments</a>
+    </p>
+    <ul id="comments">
+        @if (Model.comments.Count() == 0) 
+        { 
+            <li>No Comments</li>
+        }else{
+
+            foreach (Package2Go5.Models.ViewModels.CommentsView comment in Model.comments) 
+            {
+                <li>
+                    <p>@comment.comment</p>
+                    <p><b>Written by: </b><a href="/UserProfile/Profile?username=@comment.writer">@comment.writer</a></p>
+                    @comment.date
+                    <hr>
+                </li>
+            }
         }
-    }
-</ul>
-
-@if(User.Identity.IsAuthenticated){ 
-    using (Html.BeginForm("CreateComment", "UserProfile"))
-    {
-        <div class="commentDiv">
-            <label>Write Comment</label><br/>
-            @Html.HiddenFor(model => model.UserId)
-            <label>Rate </label> @Html.DropDownList("Rate", new SelectList(Enumerable.Range(1, 10).Reverse()))<br/>
-            @Html.TextArea("Comment", new { @class="Comment", @placeholder="Comment" })
-        </div>
-        <div class="validation-summary-errors">@ViewBag.error</div>    
-        <input type="submit" value="Send"/>
-    }
-}
+    </ul>
+</fieldset>
 
 @section Scripts {
     <script type="text/javascript">

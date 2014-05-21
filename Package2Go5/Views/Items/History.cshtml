@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Items</h2>
+<h2>Items History</h2>
 <table id="Items">
     <thead>
         <tr>
@@ -22,7 +22,10 @@
                 @Html.DisplayNameFor(model => model.delivery_address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.delivery_price), @Model.First().currency
+                @Html.DisplayNameFor(model => model.delivery_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery_price), @if(Model.Count() > 0) {@Model.First().currency}
             </th>
             <th>
                 Action
@@ -44,6 +47,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.delivery_address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.delivery_date)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.delivery_price)
@@ -68,6 +74,9 @@
             </th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_address)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_date)" />
             </th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_price)"/>
@@ -97,7 +106,7 @@
                       '<option value="-1">All</option>'+
                       '</select> records'
                 },
-                "aoColumns": [null, null, null, null, null, { "bSortable": false }]
+                "aoColumns": [null, null, null, null, null, null, { "bSortable": false }]
             });
 
             $("tfoot input").keyup(function () {

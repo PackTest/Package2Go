@@ -9,9 +9,6 @@ namespace Package2Go5.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         private OffersManager offersManager = new OffersManager();
         private MessagesManager messagesManager = new MessagesManager();
         private RoutesManager routesManager = new RoutesManager();
@@ -64,23 +61,25 @@ namespace Package2Go5.Controllers
             return Json(points, JsonRequestBehavior.AllowGet);
         }
 
-                //    var test = '{"1":{"id":"1", "address":"Kupiškis, Panevėžys County, Lithuania", "delivery_address":"Šilainiai, Kaunas, Kaunas County, Lithuania", "title":"Kedė"},'
-                //+ '"2":{"id":"2", "address":"Kupiškis, Panevėžys County, Lithuania", "delivery_address":"Šilainiai, Kaunas, Kaunas County, Lithuania", "title":"Kedė"}}';
-
-        public JsonResult FindItems() 
+        public JsonResult FindItems(int my = 0) 
         {
             int userId = 0;
             var points = "{";
-            IEnumerable<Items> items;
+            IEnumerable<Items> items = new List<Items>();
 
             if (Request.Cookies["UserId"] != null)
                 userId = int.Parse(Request.Cookies["UserId"].Value);
 
-            items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
+            if (my == 0)
+                items = db.Items.Where(i => (i.UsersItems.Any(ui => ui.user_id != userId) && i.status_id == 1) || (i.ItemsRoutes.Any(ir => ir.Routes.UsersRoutes.Any(ur=>ur.user_id == userId)) && i.status_id == 2));
+            else if (my == -1)
+                items = db.Items.Where(i => i.status_id == 1);
+            else if(User.Identity.IsAuthenticated)
+                items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id == userId) && i.status_id == 1);
 
             foreach (Items item in items)
             {
-                points += "\"" + item.id + "\":{\"address\":\"" + item.address + "\", \"delivery_address\":\"" + item.delivery_address + "\", \"title\":\"" + item.title + "\"},";
+                points += "\"" + item.id + "\":{\"address\":\"" + item.address + "\", \"delivery_address\":\"" + item.delivery_address + "\", \"title\":\"" + item.title + "\", \"price\":\"" + item.delivery_price + " " + item.Currencies.code + "\", \"date\":\"" + item.delivery_date + "\"},";
             }
 
             points = points.Substring(0, points.Length - 1)+"}";
@@ -88,47 +87,40 @@ namespace Package2Go5.Controllers
             return Json(points, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult FindItems2()
+        public JsonResult FindRoutes(int o = 0)
         {
             int userId = 0;
-            //var points = "{ \"Items\": [";
-            var points = "[";
-            IEnumerable<Items> items;
-
-            if (Request.Cookies["UserId"] != null)
-                userId = int.Parse(Request.Cookies["UserId"].Value);
-
-            items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
-
-            foreach (Items item in items)
-            {
-                points += "{ \"id\":\"" + item.id + "\", \"address\":\"" + item.address + "\", \"delivery_address\":\"" + item.delivery_address + "\", \"title\":\"" + item.title + "\"},";
-            }
-
-            //points = points.Substring(0, points.Length - 1) + "]}";
-            points = points.Substring(0, points.Length - 1)+"]";
-
-            return Json(points, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult FindRoutes()
-        {
-            int userId = 0;
-            var points = "";
+            var points = "{";
             IEnumerable<Routes> routes;
 
             if (Request.Cookies["UserId"] != null)
                 userId = int.Parse(Request.Cookies["UserId"].Value);
 
-            routes = db.Routes.Where(r => r.UsersRoutes.Any(ur => ur.user_id != userId));
+            routes = db.Routes.Where(i => i.UsersRoutes.Any(ur => ur.user_id != userId) && i.status_id == 1 && !i.Offers.Any(of=>of.item_id == o));
 
             foreach (Routes route in routes)
             {
-                points += route.id + ">" + route.from + ";" + route.waypoints + "/";
-            }
+                points += "\"" + route.id + "\":{\"from\":\"" + route.from.Split(':')[1] + "\", \"date_from\":\"" + route.departure_time + "\", \"date_till\":\"" + route.delivery_time + "\", \"waypoints\":{";
 
-            points = points.Substring(0, points.Length - 1);
+                foreach (String waypoint in route.waypoints.Split(';')) 
+                {
+                    var addr = waypoint.Split(':');
+                    points += "\"" + addr[0] + "\":\"" + addr[1] + "\",";
+                }
+                points = points.Substring(0, points.Length - 1) + "}, \"offers\":[";
+                foreach (Offers offer in route.Offers)
+                {
+                    points += "\"" + offer.item_id + "\",";
+                }
+                if (route.Offers.Count() != 0)
+                    points = points.Substring(0, points.Length - 1) + "]},";
+                else
+                    points += "]},";
+            }
+            if (points.Length != 1)
+                points = points.Substring(0, points.Length - 1) + "}";
+            else
+                points += "}";
 
             return Json(points, JsonRequestBehavior.AllowGet);
         }

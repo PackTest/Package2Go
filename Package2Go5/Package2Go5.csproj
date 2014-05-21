@@ -159,7 +159,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Comments.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Constants\CProfile.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
@@ -169,6 +173,11 @@
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Currencies.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayErrors.resx</DependentUpon>
     </Compile>
     <Compile Include="DisplayNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -183,6 +192,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ItemsRoutes.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemStatus.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Mapping\UserProfileMapper.cs" />
@@ -209,13 +221,16 @@
     </Compile>
     <Compile Include="Models\Coordinate.cs" />
     <Compile Include="Models\EditModels\UserProfileEdit.cs" />
-    <Compile Include="Models\ObjectManager\MessagesManager.cs" />
-    <Compile Include="Models\ObjectManager\MessageManager.cs" />
-    <Compile Include="Models\ObjectManager\OffersManager.cs" />
-    <Compile Include="Models\ObjectManager\CurrencyManager.cs" />
-    <Compile Include="Models\ObjectManager\ItemsManager.cs" />
-    <Compile Include="Models\ObjectManager\RoutesManager.cs" />
-    <Compile Include="Models\ObjectManager\UserProfileManager.cs" />
+    <Compile Include="Models\ViewModels\CommentsView.cs" />
+    <Compile Include="Models\ViewModels\OffersView.cs" />
+    <Compile Include="Models\ViewModels\MessagesView.cs" />
+    <Compile Include="ObjectManager\CommentsManager.cs" />
+    <Compile Include="ObjectManager\MessagesManager.cs" />
+    <Compile Include="ObjectManager\OffersManager.cs" />
+    <Compile Include="ObjectManager\CurrencyManager.cs" />
+    <Compile Include="ObjectManager\ItemsManager.cs" />
+    <Compile Include="ObjectManager\RoutesManager.cs" />
+    <Compile Include="ObjectManager\UserProfileManager.cs" />
     <Compile Include="Models\ViewModels\ItemsView.cs" />
     <Compile Include="Models\ViewModels\RoutesView.cs" />
     <Compile Include="Models\Waypoint.cs" />
@@ -234,9 +249,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="RouteStatus.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="UserProfile.cs">
@@ -260,7 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
-      <Link>AutoMapper.Net4.dll</Link>
+      <Link>Views\AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
@@ -336,7 +348,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Images\arrow-down.png" />
     <Content Include="Images\arrow.png" />
+    <Content Include="Images\DefaultProfile.jpg" />
+    <Content Include="Images\drag.png" />
     <Content Include="Images\erase.png" />
     <Content Include="Images\Item.png" />
     <Content Include="Images\Logo.png" />
@@ -420,11 +435,9 @@
     <Content Include="Views\UserProfile\Login.cshtml" />
     <Content Include="Views\Routes\Create.cshtml" />
     <Content Include="Views\Routes\Edit.cshtml" />
-    <Content Include="Views\Routes\Gmap.cshtml" />
     <Content Include="Views\Routes\Index.cshtml" />
-    <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\UserProfile\Index2.cshtml" />
     <Content Include="Views\UserProfile\Profile.cshtml" />
-    <Content Include="Views\Routes\Details2.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
@@ -437,6 +450,11 @@
     <Content Include="Views\Offers\Index.cshtml" />
     <Content Include="Views\Routes\Details.cshtml" />
     <Content Include="Views\Routes\FindRoute.cshtml" />
+    <Content Include="Views\Items\History.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\Messages\Messages.cshtml" />
+    <Content Include="Views\Offers\Offers.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -448,6 +466,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DisplayErrors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisplayErrors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="DisplayNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayNames.Designer.cs</LastGenOutput>

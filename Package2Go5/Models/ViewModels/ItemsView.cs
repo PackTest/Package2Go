@@ -27,6 +27,10 @@ namespace Package2Go5.Models.ViewModels
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_price")]
         public int delivery_price { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime delivery_date { get; set; }
+
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "note")]
         public string note { get; set; }
 

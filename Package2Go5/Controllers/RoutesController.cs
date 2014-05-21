@@ -32,6 +32,8 @@ namespace Package2Go5.Controllers
             ViewBag.User_id = userId;
             ViewBag.Items = itemManager.GetNotUsedUserItemsList(userId);
 
+            ViewBag.status = manager.GetStatus(-1);
+
             ViewBag.Offers = offersManager.GetUserOfferedRoutesIds(userId);
 
             List<RoutesView> routes;
@@ -61,7 +63,7 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.status = new SelectList(manager.GetStatus(), "Value", "Key");
+            ViewBag.status = manager.GetStatus(0);
             return View();
         }
 
@@ -72,7 +74,7 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Create(RoutesView rotesView)
         {
-            ViewBag.status = new SelectList(manager.GetStatus(), "Value", "Key");
+            ViewBag.status = manager.GetStatus(rotesView.status_id);
 
             foreach (string key in Request.Form.AllKeys)
             {
@@ -104,14 +106,12 @@ namespace Package2Go5.Controllers
             if (manager.IsUserInRoute(id, userId)) 
             {
                 var currency = currencyManager.GetCurrency(userId);
-                ViewBag.status = new SelectList(manager.GetStatus(), "Value", "Key");
+                var routes = Mapper.Map<Routes, RoutesView>(manager.GetRoute(id));
+                routes.Items = itemManager.GetAll(userId, -1);
+
                 ViewBag.actionList = manager.GetActionList();
                 ViewBag.userCurrency = currency.code;
-
-                var routes = Mapper.Map<Routes, RoutesView>(manager.GetRoute(id));
-
-                routes.Items = itemManager.GetAll(userId);
-
+                ViewBag.status = manager.GetStatus(routes.status_id);
                 ViewBag.ItemsPrices = itemManager.GetPriceUserVal(routes.Items, currency.id);
 
                 return View(routes);
@@ -127,7 +127,7 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Edit(int id, RoutesView routesView)
         {
-            ViewBag.status = new SelectList(manager.GetStatus(), "Value", "Key");
+            ViewBag.status = manager.GetStatus(routesView.status_id);
 
             foreach (string key in Request.Form.AllKeys)
             {
@@ -171,7 +171,6 @@ namespace Package2Go5.Controllers
             manager.AcceptOrder(r, i);
         }
 
-        //[Authorize]
         public ActionResult FindRoute()
         {
             int userId = 0;
@@ -179,6 +178,22 @@ namespace Package2Go5.Controllers
                 userId = Int32.Parse(Request.Cookies["UserId"].Value);
 
             return View(itemManager.GetNotUsedUserItemsList(userId));
+        }
+
+        public bool DeclineRoute(int i)
+        {
+            int userId = 0;
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
+            try
+            {
+                manager.Decline(i);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

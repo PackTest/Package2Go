@@ -43,6 +43,35 @@ namespace Package2Go5.Models.ObjectManager
             db.SaveChanges();
         }
 
+        public void Delete(int id) 
+        {
+            UserProfile user = db.UserProfile.Where(up => up.UserId == id).FirstOrDefault();
+            if (user != null) 
+            {
+                //var Items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id == id)).Select(i=>i.id).ToList();
+                //var Routes = db.Routes.Where(r => r.UsersRoutes.Any(ur => ur.user_id == id)).Select(i => i.id).ToList();
+                //var Messages = db.Messages.Where(m => m.UsersMessages.Any(um => um.userId == id)).Select(i => i.id).ToList();
+
+                //db.Offers.RemoveRange(db.Offers.Where(o => Items.Contains(o.item_id) && Routes.Contains(o.route_id)));
+                //db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir => Items.Contains(ir.item_id) || Routes.Contains(ir.route_id)));
+
+                //db.UsersItems.RemoveRange(db.UsersItems.Where(ui => ui.user_id == id));
+                //db.Items.RemoveRange(db.Items.Where(i => Items.Contains(i.id)));
+
+                //db.UsersMessages.RemoveRange(db.UsersMessages.Where(ui => ui.userId == id));
+                //db.Messages.RemoveRange(db.Messages.Where(m => Messages.Contains(m.id)));
+
+                //db.UsersRoutes.RemoveRange(db.UsersRoutes.Where(ui => ui.user_id == id));
+                //db.Routes.RemoveRange(db.Routes.Where(r => Routes.Contains(r.id)));
+
+                //db.Comments.RemoveRange(db.Comments.Where(c => c.writer_id == id || c.user_id == id));
+
+                db.UserProfile.Remove(user);                
+            }
+
+            db.SaveChanges();
+        }
+
         public bool doesUserNameExist(string UserName)
         {
             try
@@ -182,7 +211,16 @@ namespace Package2Go5.Models.ObjectManager
 
         public int getRole(int id) 
         {
-            return db.UserProfile.Where(u => u.UserId == id).First().Roles.First().RoleId;
+            var user = db.UserProfile.Where(u => u.UserId == id).FirstOrDefault();
+            if (user != null)
+                return user.Roles.First().RoleId;
+            else
+                return 1;
+        }
+
+        public List<UserProfileView> GetAllUsers() 
+        {
+            return AutoMapper.Mapper.Map<List<UserProfile>, List<UserProfileView>>(db.UserProfile.ToList());
         }
 
     }

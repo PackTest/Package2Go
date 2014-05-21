@@ -26,16 +26,10 @@
                 @Html.DisplayNameFor(model => model.delivery_time)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.rate)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.status)
             </th>
             <th>
-                @Html.DisplayName("Items count")
+                @Html.DisplayNameFor(model => model.itemCount)
             </th>
             <th>
                 Action
@@ -60,12 +54,6 @@
                     @route.delivery_time.ToString("yyyy-MM-dd")
                 </td>
                 <td>
-                    @Html.ActionLink(route.Username, "Profile", "UserProfile", new { username = route.Username }, null)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => route.rate)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => route.status)
                 </td>
                 <td>
@@ -80,7 +68,6 @@
                         }
                         else
                         {
-                            @Html.ActionLink("Offer", "", "Offers", null, new { @class="Offer" }) 
                             @Html.ActionLink("Details", "Details/"+route.id+"", "Routes") 
                         }
                     }
@@ -104,13 +91,7 @@
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_time)"/>
             </th>
             <th>
-                <input type="text" placeholder="@Html.DisplayNameFor(model => model.Username)"/>
-            </th>
-            <th>
-                <input type="text" placeholder="@Html.DisplayNameFor(model => model.rate)"/>
-            </th>
-            <th>
-                <input type="text" placeholder="@Html.DisplayNameFor(model => model.status)"/>
+                @Html.DropDownList("status", (SelectList)@ViewBag.status)<input type="hidden" />
             </th>
             <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.itemCount)"/>
@@ -141,7 +122,11 @@
                       '<option value="-1">All</option>'+
                       '</select> records'
                 },
-                "aoColumns": [null, null, null, null, { "sClass": "user" }, null, null, null, null, { "bSortable": false }]
+                "aoColumns": [null, null, null, null, null, null, null, { "bSortable": false }]
+            });
+
+            $('#status').change(function () {
+                oTable.fnFilter($(this).val());
             });
 
             $("tfoot input").keyup(function () {

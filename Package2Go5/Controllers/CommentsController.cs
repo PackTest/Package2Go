@@ -13,17 +13,11 @@ namespace Package2Go5.Controllers
     {
         //
         // GET: /Comments/
+        CommentsManager manager = new CommentsManager();
 
         public ActionResult Index()
         {
-            int userId = 0;
-
-            if (Request.Cookies["UserId"] != null)
-                userId = Int32.Parse(Request.Cookies["UserId"].Value);
-
-
-
-            return View();
+            return View(manager.GetAll());
         }
 
         //
@@ -104,7 +98,7 @@ namespace Package2Go5.Controllers
 
         public ActionResult Delete(int id)
         {
-            //manager.Delete(id);
+            manager.Delete(id);
             return RedirectToAction("Index");
         }
     }

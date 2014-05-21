@@ -11,39 +11,46 @@
     <div class="display-label">
         @Html.DisplayNameFor(model => model.address):
     </div>
-    <div class="display-field">
+    <div class="display-field address">
         @Html.DisplayFor(model => model.address)
     </div>
 
     <div class="display-label">
         @Html.DisplayNameFor(model => model.delivery_address):
     </div>
-    <div class="display-field">
+    <div class="display-field delivery_address">
         @Html.DisplayFor(model => model.delivery_address)
     </div>
 
     <div class="display-label">
-            @Html.DisplayNameFor(model => model.size)
+        @Html.DisplayNameFor(model => model.delivery_date):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.delivery_date)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.size)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.size)
     </div>
 
     <div class="display-label">
-            @Html.DisplayNameFor(model => model.delivery_price)
+        @Html.DisplayNameFor(model => model.delivery_price)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.delivery_price) @Model.currency
     </div>
 
     <div class="display-label">
-            @Html.DisplayNameFor(model => model.note)
+        @Html.DisplayNameFor(model => model.note)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.note)
     </div>
     <div class="display-label">
-            @Html.DisplayNameFor(model => model.owner)
+        @Html.DisplayNameFor(model => model.owner)
     </div>
     <div class="display-field">
         @Html.ActionLink(Model.owner, "Profile", "UserProfile", new { username=Model.owner }, null)
@@ -52,11 +59,21 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     @Scripts.Render("~/bundles/jqueryGMAPAPI")
-@*    <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
-            $('#map_canvas').show();
+
+            var directionsService = new google.maps.DirectionsService();
+
+            directionsService.route({
+                origin: $('.address').text().trim(),
+                destination: $('.delivery_address').text().trim(),
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            }, function (result) {
+                directionsRenderer = new google.maps.DirectionsRenderer();
+                directionsRenderer.setMap(map);
+                directionsRenderer.setDirections(result);
+            });
         });
-    </script>*@
+    </script>
 }

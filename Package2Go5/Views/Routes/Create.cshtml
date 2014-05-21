@@ -16,13 +16,14 @@
     <div class="editor-field">
         <ul id="waypoints">
             <li>
+                <div class="dragImage"></div>
                 @Html.EditorFor(model => model.from)
                 @Html.ValidationMessageFor(model => model.from)
             </li>
             <li>
-                <img src="~/Images/arrow.png" alt=""/>
-                <input class="waypoint" name="waypoint_1" type="text" value="" placeholder="Way Point">
-                <a href="#" id="remWaypoint">Remove</a>
+                <div class="dragImage"></div>
+                <input class="text-box single-line waypoint valid" id="0" name="waypoint_1" type="text" value="" placeholder="Enter a location" autocomplete="off">
+                <a class="remWaypoint"><img src="/Images/erase.png" alt="erase"></a>
             </li>
         </ul>
     </div>

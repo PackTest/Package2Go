@@ -19,9 +19,11 @@ namespace Package2Go5.Models.ViewModels
         public string waypoints { get; set; }
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "departure_time")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime departure_time { get; set; }
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_time")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime delivery_time { get; set; }
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
@@ -40,6 +42,7 @@ namespace Package2Go5.Models.ViewModels
 
         public int user_id { get; set; }
 
+        [Display(ResourceType = typeof(Resources.DisplayNames), Name = "itemCount")]
         public int itemCount { get; set; }
 
         public List<string> waypointsList { get; set; }

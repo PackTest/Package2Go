@@ -1,108 +1,163 @@
-﻿@model Package2Go5.Models.ViewModels.UserProfileView
+﻿@model IEnumerable<Package2Go5.Models.ViewModels.UserProfileView>
 
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<fieldset>
-    <legend>Your Profile</legend>
+<h2>Users List</h2>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Username)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Username)
-    </div>
+<table id="Users">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone_nr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image_url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.currency_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.commentCount)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone_nr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.image_url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.currency_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.commentCount)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Profile", new { username=item.Username })
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.UserId })*@
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.UserId)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.Username)" />
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.name)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.lastname)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.gender)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.birthday)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.phone_nr)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.rate)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.image_url)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.currency_id)"/>
+            </th>
+            <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.commentCount)"/>
+            </th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
 
-    <div class="display-field">
-        @if (!String.IsNullOrEmpty(Model.image_url))
-        {
-            <img class="photo" src="/Images/Profiles/@Model.image_url" alt="Profile photo"/>
-        }
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.lastname)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.lastname)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.gender)
-    </div>
-    <div class="display-field">
-        @((Package2Go5.Constants.CProfile.genderType)Model.gender)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.birthday)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.birthday)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.phone_nr)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.phone_nr)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.rate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.rate) (@Model.commentCount)
-    </div>
-
-    <p>
-        <a href="#" title="showComments">Show Last Comments</a>
-    </p>
-    <ul id="comments">
-        @if (Model.comments.Count() == 0) 
-        { 
-            <li>No Comments</li>
-        }else{
-
-            foreach (Package2Go5.Models.ViewModels.CommentsView comment in Model.comments) 
-            {
-                <li>
-                    <p>@comment.comment</p>
-                    <p><b>Written by: </b><a href="/UserProfile/Profile?username=@comment.writer">@comment.writer</a></p>
-                    @comment.date
-                    <hr>
-                </li>
-            }
-        }
-    </ul>
-</fieldset>
-
-@section Scripts {
+@section Scripts 
+{
+    @Scripts.Render("~/bundles/DataTables")
     <script type="text/javascript">
+        $(document).ready(function () {
 
-        //if ($('.validation-summary-errors').text() != "") {
-            
-        //}
+            //filter
+            var oTable = $('#Users').dataTable({
+                "aaSorting": [[4, "desc"]],
+                "sDom": '<"top"l>rt<"bottom"ip>',
+                "iDisplayLength": 5,
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>' +
+                      '<option value="5">5</option>' +
+                      '<option value="10">10</option>' +
+                      '<option value="20">20</option>' +
+                      '<option value="-1">All</option>' +
+                      '</select> records'
+                },
+                "aoColumns": [null, null, null, null, null, null, null, null, null, null, null, null, { "bSortable": false }]
+            });
 
-        $('a[title=showComments]').click(function (e) {
-            e.preventDefault();
-            if ($('#comments').css("display")=="none") {
-                $('#comments').css("display", "block");
-                $(this).text('Hide Comments');
-            } else {
-                $('#comments').css("display", "none");
-                $(this).text('Show Last Comments');
-            }
+            $("tfoot input").keyup(function () {
+                oTable.fnFilter(this.value, $("tfoot input").index(this));
+            });
+
         });
-
     </script>
 }

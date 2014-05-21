@@ -51,5 +51,18 @@ namespace Package2Go5.Models.ObjectManager
             return AutoMapper.Mapper.Map<vw_messages, MessagesView>(db.vw_messages.Where(m => m.id == id).First());
         }
 
+        public void Remove(int id) 
+        {
+            db.UsersMessages.RemoveRange(db.UsersMessages.Where(um => um.messageId == id));
+
+            db.Messages.Remove(db.Messages.Where(m => m.id == id).First());
+            db.SaveChanges();
+        }
+
+        public List<MessagesView> GetAllMessages() 
+        {
+            return AutoMapper.Mapper.Map<List<vw_messages>, List<MessagesView>>(db.vw_messages.ToList());
+        }
+
     }
 }

@@ -25,9 +25,11 @@ namespace Package2Go5
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Comments> Comments { get; set; }
         public DbSet<Currencies> Currencies { get; set; }
         public DbSet<Items> Items { get; set; }
         public DbSet<ItemsRoutes> ItemsRoutes { get; set; }
+        public DbSet<ItemStatus> ItemStatus { get; set; }
         public DbSet<Messages> Messages { get; set; }
         public DbSet<MessagesStatus> MessagesStatus { get; set; }
         public DbSet<Offers> Offers { get; set; }
@@ -35,14 +37,11 @@ namespace Package2Go5
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Routes> Routes { get; set; }
         public DbSet<RouteStatus> RouteStatus { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<UsersItems> UsersItems { get; set; }
-        public DbSet<UsersMessages> UsersMessages { get; set; }
         public DbSet<UsersRoutes> UsersRoutes { get; set; }
-        public DbSet<vw_routes> vw_routes { get; set; }
         public DbSet<vw_messages> vw_messages { get; set; }
-        public DbSet<Comments> Comments { get; set; }
-        public DbSet<ItemStatus> ItemStatus { get; set; }
+        public DbSet<vw_routes> vw_routes { get; set; }
+        public DbSet<UsersMessages> UsersMessages { get; set; }
     }
 }

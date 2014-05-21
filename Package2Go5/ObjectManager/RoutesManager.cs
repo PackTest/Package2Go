@@ -45,30 +45,130 @@ namespace Package2Go5.Models.ObjectManager
         public void Update(int id, RoutesView routeView, int UserId)
         {
             Routes route = db.Routes.FirstOrDefault(u => u.id == id);
+
             List<Offers> offers = new List<Offers>();
 
             route.from = HttpUtility.HtmlEncode(routeView.from);
-            route.waypoints = HttpUtility.HtmlEncode(routeView.waypoints);
             route.status_id = routeView.status_id;
             route.delivery_time = routeView.delivery_time;
             route.departure_time = routeView.departure_time;
 
-            db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir=>ir.route_id == id));
+            if (route.status_id == 1)
+            {
+                route.waypoints = HttpUtility.HtmlEncode(routeView.waypoints);
 
-            if(routeView.Items != null)
-                foreach (Items ir in routeView.Items)
+                List<int> itemsId = new List<int>();
+                foreach (ItemsRoutes ir in route.ItemsRoutes)
                 {
-                    offers = db.Offers.Where(o => o.item_id == ir.id && o.Routes.UsersRoutes.Any(ur=>ur.user_id == UserId)).ToList();
-                    if (offers.Count != 0) 
+                    if (!itemsId.Contains(ir.item_id))
+                        itemsId.Add(ir.item_id);
+                }
+
+                db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir => ir.route_id == id));
+                foreach (Items item in db.Items.Where(i => i.ItemsRoutes.Any(ir => ir.route_id == id)))
+                {
+                    item.status_id = 1;
+                }
+
+                List<int> messagesId = new List<int>();
+                List<int> ItemsRoutesIds = new List<int>();
+                if (routeView.Items != null)
+                    foreach (Items ir in routeView.Items)
                     {
-                        foreach (Offers offer in offers) 
+                        offers = db.Offers.Where(o => o.item_id == ir.id && o.Routes.UsersRoutes.Any(ur => ur.user_id == UserId)).ToList();
+                        if (offers.Count != 0)
                         {
-                            offer.status_id = 3;
+                            foreach (Offers offer in offers)
+                            {
+                                offer.status_id = 3;
+                            }
                         }
+
+                        //send Message about added item
+                        if (!itemsId.Contains(ir.id))
+                        {
+                            if (!messagesId.Contains(ir.id))
+                            {
+                                var message = new Messages
+                                {
+                                    from = UserId,
+                                    to = db.UsersItems.Where(ui => ui.item_id == ir.id).First().user_id,
+                                    date = DateTime.Now,
+                                    message = "Your item was added to route =" + route.id + "=" + ir.id + "=" + db.Items.Where(i => i.id == ir.id).First().title,
+                                    statusId = 1
+                                };
+                                messagesId.Add(ir.id);
+                                db.Messages.Add(message);
+                                db.UsersMessages.Add(new UsersMessages { userId = UserId, messageId = message.id });
+                                db.UsersMessages.Add(new UsersMessages { userId = db.UsersItems.Where(ui => ui.item_id == ir.id).First().user_id, messageId = message.id });
+                            }
+                        }
+                        else
+                        {
+                            itemsId.Remove(ir.id);
+                        }
+
+                        if (!ItemsRoutesIds.Contains(ir.id))
+                        {
+                            route.ItemsRoutes.Add(new ItemsRoutes { item_id = ir.id, route_id = id });
+                            ItemsRoutesIds.Add(ir.id);
+                            db.Items.Where(i => i.id == ir.id).First().status_id = 2;
+                        }
+
                     }
 
-                    route.ItemsRoutes.Add(new ItemsRoutes { item_id = ir.id, route_id = id });
+                List<Messages> messages = new List<Messages>();
+                List<UsersMessages> usersMessages = new List<UsersMessages>();
+                foreach (int itemId in itemsId)
+                {
+                    var message = new Messages
+                    {
+                        from = UserId,
+                        to = db.UsersItems.Where(ui => ui.item_id == itemId).First().user_id,
+                        date = DateTime.Now,
+                        message = "Your item was removed from route =" + route.id + "=" + itemId + "=" + db.Items.Where(i => i.id == itemId).First().title,
+                        statusId = 1
+                    };
+                    messages.Add(message);
+                    message.UsersMessages.Add(new UsersMessages { userId = UserId, messageId = message.id });
+                    message.UsersMessages.Add(new UsersMessages { userId = db.UsersItems.Where(ui => ui.item_id == itemId).First().user_id, messageId = message.id });
                 }
+                db.Messages.AddRange(messages);
+            }
+            else if (route.status_id == 2)
+            {
+                db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir => ir.route_id == id));
+                foreach (Items item in db.Items.Where(i => i.ItemsRoutes.Any(ir => ir.route_id == id)))
+                {
+                    item.status_id = 1;
+                }
+                var waypoints = "";
+                foreach (string waypoint in route.waypoints.Split(';'))
+                {
+                    if (waypoint.Split(':')[0] == "0")
+                        waypoints += waypoint + ";";
+                }
+                route.waypoints = HttpUtility.HtmlEncode(waypoints.Substring(0, waypoints.Length - 1));
+            }
+            else
+            {
+                var messages = new List<Messages>();
+                foreach (Items item in routeView.Items) 
+                {
+                    var message = new Messages
+                    {
+                        from = UserId,
+                        to = db.UsersItems.Where(ui => ui.item_id == item.id).First().user_id,
+                        date = DateTime.Now,
+                        message = "Did your item arrived =" + id + "=" + item.id + "=" + db.Items.Where(i => i.id == item.id).First().title,
+                        statusId = 1
+                    };
+                    messages.Add(message);
+                    message.UsersMessages.Add(new UsersMessages { userId = UserId, messageId = message.id });
+                    message.UsersMessages.Add(new UsersMessages { userId = db.UsersItems.Where(ui => ui.item_id == item.id).First().user_id, messageId = message.id });
+                }
+                db.Messages.AddRange(messages);
+            }
 
             db.SaveChanges();
         }
@@ -131,16 +231,27 @@ namespace Package2Go5.Models.ObjectManager
             return route;
         }
 
-        public List<KeyValuePair<string, int>> GetStatus() 
+        public SelectList GetStatus(int status_id)
         {
-            List<KeyValuePair<string, int>> status = new List<KeyValuePair<string, int>>();
+            List<SelectListItem> status = new List<SelectListItem>();
+            bool selected = false;
 
-            foreach (RouteStatus stat in db.RouteStatus.ToList()) 
+            if (status_id == -1)
+                status.Add(new SelectListItem { Text = "Status", Value = "", Selected = selected });
+
+            foreach (RouteStatus stat in db.RouteStatus)
             {
-                status.Add(new KeyValuePair<string,int>(stat.title, stat.id));
+                if (stat.id == status_id)
+                    selected = true;
+                else
+                    selected = false;
+                if (status_id != -1)
+                    status.Add(new SelectListItem { Text = stat.title, Value = stat.id.ToString(), Selected = selected });
+                else
+                    status.Add(new SelectListItem { Text = stat.title, Value = stat.title, Selected = selected });
             }
 
-            return status;
+            return new SelectList(status, "Value", "Text");
         }
 
         public SelectList GetActionList() 
@@ -174,32 +285,6 @@ namespace Package2Go5.Models.ObjectManager
 
             return routesList;
         }
-
-        //public Coordinate GetCoordinates(string region)
-        //{
-        //    WebRequest request = WebRequest
-        //       .Create("http://maps.googleapis.com/maps/api/geocode/xml?sensor=false&address="
-        //          + HttpUtility.UrlEncode(region));
-
-        //    using (WebResponse response = request.GetResponse())
-        //    {
-        //        using (Stream stream = response.GetResponseStream())
-        //        {
-        //            XDocument document = XDocument.Load(new StreamReader(stream));
-
-        //            XElement longitudeElement = document.Descendants("lng").FirstOrDefault();
-        //            XElement latitudeElement = document.Descendants("lat").FirstOrDefault();
-
-        //            if (longitudeElement != null && latitudeElement != null)
-        //            {
-        //                return new Coordinate(Double.Parse(longitudeElement.Value, CultureInfo.InvariantCulture),
-        //                    Double.Parse(latitudeElement.Value, CultureInfo.InvariantCulture));
-        //            }
-        //        }
-        //    }
-
-        //    return null;
-        //}
 
         public string GetOnlyCities(string addresses, string separator) 
         {
@@ -238,12 +323,30 @@ namespace Package2Go5.Models.ObjectManager
 
             db.ItemsRoutes.Add(itemRoute);
 
-            db.Offers.Where(o => o.item_id == i && o.route_id == r).First().status_id = 3;
+            db.Items.Where(item => item.id == i).First().status_id = 2;
+
+            var offer = db.Offers.Where(o => o.item_id == i && o.route_id == r).First();
+            offer.status_id = 3;
 
             var orderItem = db.Items.Where(item => item.id == i).First();
             db.Routes.Where(route => route.id == r).First().waypoints += ";" + i + ":" + orderItem.address + ";" + i + ":" + orderItem.delivery_address;
 
-            db.Offers.RemoveRange(db.Offers.Where(o => o.item_id == i && o.route_id != r));
+            db.Offers.RemoveRange(db.Offers.Where(o => o.item_id == i && o.route_id != r && o.id != offer.id));
+
+            //Message
+            var message = new Messages
+            {
+                from = offer.Routes.UsersRoutes.First().user_id,
+                to = offer.Items.UsersItems.First().user_id,
+                date = DateTime.Now,
+                message = "=" + i + "=" + db.Items.Where(item=>item.id == i).First().title + "= was added to route =" + r,
+                statusId = 1
+            };
+
+            db.Messages.Add(message);
+
+            db.UsersMessages.Add(new UsersMessages { userId = offer.Routes.UsersRoutes.First().user_id, messageId = message.id });
+            db.UsersMessages.Add(new UsersMessages { userId = offer.Items.UsersItems.First().user_id, messageId = message.id });
 
             db.SaveChanges();
         }
@@ -256,6 +359,46 @@ namespace Package2Go5.Models.ObjectManager
                 return route.route_id;
             else
                 return 0;
+        }
+
+        public void Decline(int item_id) 
+        {
+            var route = db.Routes.Where(r => r.ItemsRoutes.Any(ir => ir.item_id == item_id)).First();
+
+            var item = db.Items.Where(i => i.id == item_id).First();
+
+            var userFrom = db.UserProfile.Where(up=>up.UsersItems.Any(ui=>ui.item_id==item_id)).First().UserId;
+            var userTo = db.UserProfile.Where(up => up.UsersRoutes.Any(ur => ur.route_id == route.id)).First().UserId;
+
+            var message = new Messages
+            {
+                from = userFrom,
+                to = userTo,
+                date = DateTime.Now,
+                message = "=" + item.id + "=" + item.title + "= was removed from your route =" + route.id,
+                statusId = 1
+            };
+
+            db.Messages.Add(message);
+
+            db.UsersMessages.Add(new UsersMessages { userId = userFrom, messageId = message.id });
+            db.UsersMessages.Add(new UsersMessages { userId = userTo, messageId = message.id });
+
+            db.ItemsRoutes.RemoveRange(route.ItemsRoutes);
+            item.status_id = 1;
+
+            var newWaypoint = "";
+            foreach (string waypoint in route.waypoints.Split(';')) 
+            {
+                if (int.Parse(waypoint.Split(':')[0]) != item_id)
+                    newWaypoint += waypoint + ";";
+            }
+
+            route.waypoints = newWaypoint.Substring(0, newWaypoint.Length - 1);
+
+            db.Offers.RemoveRange(db.Offers.Where(o=>o.item_id == item_id));
+
+            db.SaveChanges();
         }
     }
 }

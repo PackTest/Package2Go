@@ -33,11 +33,26 @@ namespace Package2Go5.Models.ObjectManager
 
         public void Delete(int itemId, int routeId, int userId)
         {
-            if (db.Items.Any(i => i.id == itemId && i.UsersItems.Any(ui=>ui.user_id == userId)))
+            if (db.Items.Any(i => i.id == itemId) 
+                && (db.Offers.Any(o=>o.Routes.UsersRoutes.Any(ur=>ur.user_id == userId))) 
+                || db.Offers.Any(o=>o.Items.UsersItems.Any(item=>item.user_id == userId)))
             {
                 Offers offer = db.Offers.Where(o => o.item_id == itemId && o.route_id == routeId).First();
 
                 db.Offers.Remove(offer);
+
+                var message = new Messages
+                {
+                    from = userId,
+                    to = db.UsersItems.Where(ui => ui.item_id == itemId).First().user_id,
+                    date = DateTime.Now,
+                    message = "Your offer was declined =" + routeId + "=" + itemId + "=" + db.Items.Where(i => i.id == itemId).First().title,
+                    statusId = 1
+                };
+
+                db.Messages.Add(message);
+                db.UsersMessages.Add(new UsersMessages { userId = userId, messageId = message.id });
+                db.UsersMessages.Add(new UsersMessages { userId = db.UsersItems.Where(ui => ui.item_id == itemId).First().user_id, messageId = message.id });
             }
 
 
@@ -114,6 +129,11 @@ namespace Package2Go5.Models.ObjectManager
                 status.Add(new SelectListItem { Text = stat.title, Value = stat.title });
             }
             return new SelectList(status, "Value", "Text");
+        }
+
+        public List<OffersView> GetAll() 
+        {
+            return Mapper.Map<List<Offers>, List<OffersView>>(db.Offers.ToList());
         }
 
     }

@@ -1,33 +1,101 @@
 ﻿@model SelectList
 
 @{
-    ViewBag.Title = "FindRoute";
+    ViewBag.Title = "Find Route";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>FindRoute</h2>
+<h2>Find Route</h2>
 
-<input type="text" name="itemFrom" value="" placeholder="Routes near" />
-<input type="button" name="routesNear" value="Search" onclick="FindNear();" />
+<input type="text" name="itemFrom" placeholder="Routes near" />
+<input type="button" name="routesNear" value="Search" onclick="FindNear();" /><br/>
+<input type="text" name="itemTo" placeholder="Routes near" />
+
+@if(User.Identity.IsAuthenticated){
+    <div>
+        <span>Item Address </span><input id="ItemAddress" type="checkbox">
+    </div>
+}
 
 <div>
     <input type="text" name="distance" value="50" /> km
 </div>
 
-@*<h4>Your Items </h4>*@
-<div class="ItemsDropDown">
-    @Html.DropDownList("action", Model)
-</div>
+@if(User.Identity.IsAuthenticated){
+    <div class="ItemsDropDown">
+        @Html.DropDownList("action", Model)
+    </div>
+}
+
+<div class="notification"></div>
 
 @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
 
 <script type="text/javascript">
 
     $(document).ready(function () {
+
+        var Items = null;
+        var directionsService = new google.maps.DirectionsService();
+        var directionsRenderer = null;
+
+        $.getJSON(
+        "/Home/FindItems?my=1", {},
+        function (data) {
+            if(data.length > 1)
+                Items = $.parseJSON(data);
+            $('#ItemAddress').change(function () {
+                if (this.checked) {
+                    $('input[name=itemFrom]').val(Items[$('#action').val()].address);
+                    $('input[name=itemTo]').val(Items[$('#action').val()].delivery_address);
+                    $('input[name=itemFrom]').prop("readonly", true);
+                    $('input[name=itemTo]').prop("readonly", true);
+                } else {
+                    $('input[name=itemFrom]').val("");
+                    $('input[name=itemTo]').val("");
+                    $('input[name=itemFrom]').prop("readonly", false);
+                    $('input[name=itemTo]').prop("readonly", false);
+                }
+            });
+
+            $('#action').change(function () {
+                if (document.getElementById('ItemAddress').checked) {
+                    $('input[name=itemFrom]').val(Items[$(this).val()].address);
+                    $('input[name=itemTo]').val(Items[$(this).val()].delivery_address);
+                    FindNear();
+                }
+            });
+        }).done(function () {
+            drawItemRoute();
+            $('#action').change(function () {
+                directionsRenderer.setMap(null);
+                drawItemRoute();
+            });
+        })
+
         new google.maps.places.Autocomplete(document.getElementsByName("itemFrom")[0]);
-        //GetRoutesMarkers();
+        new google.maps.places.Autocomplete(document.getElementsByName("itemTo")[0]);
+
+        function drawItemRoute()
+        {
+            if (Items != null) {
+                directionsService.route({
+                    origin: Items[$('#action').val()].address,
+                    destination: Items[$('#action').val()].delivery_address,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                }, function (result) {
+                    directionsRenderer = new google.maps.DirectionsRenderer({ polylineOptions: new google.maps.Polyline({
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.5,
+                        strokeWeight: 6
+                    })});
+                    directionsRenderer.setMap(map);
+                    directionsRenderer.setDirections(result);
+                });
+            }
+        }
+
     });
 
 </script>

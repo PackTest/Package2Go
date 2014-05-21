@@ -16,10 +16,11 @@ namespace Package2Go5
     {
         public UserProfile()
         {
+            this.Comments = new HashSet<Comments>();
             this.UsersItems = new HashSet<UsersItems>();
             this.UsersRoutes = new HashSet<UsersRoutes>();
             this.Roles = new HashSet<Roles>();
-            this.Comments = new HashSet<Comments>();
+            this.UsersMessages = new HashSet<UsersMessages>();
         }
     
         public int UserId { get; set; }
@@ -34,10 +35,11 @@ namespace Package2Go5
         public string image_url { get; set; }
         public int currency_id { get; set; }
     
+        public virtual ICollection<Comments> Comments { get; set; }
         public virtual Currencies Currencies { get; set; }
         public virtual ICollection<UsersItems> UsersItems { get; set; }
         public virtual ICollection<UsersRoutes> UsersRoutes { get; set; }
         public virtual ICollection<Roles> Roles { get; set; }
-        public virtual ICollection<Comments> Comments { get; set; }
+        public virtual ICollection<UsersMessages> UsersMessages { get; set; }
     }
 }

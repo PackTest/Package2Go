@@ -13,6 +13,7 @@
         @Html.DropDownList("user", new List<SelectListItem>())
         @Html.JQueryUI().Datepicker("dateFrom", null, new { @placeholder="Date From" })
         @Html.JQueryUI().Datepicker("dateTill", null, new { @placeholder="Date Till" })
+        @Html.DropDownList("type", (SelectList)@ViewBag.type)
 
         <div>
             <input type="button" onclick="filter()" value="Filter" />
@@ -23,16 +24,20 @@
     <ul id="messagesList">
     @foreach (var item in Model) {
         <li>
+            @Html.Hidden("id", item.id)
             <p>
                 <b>@Html.DisplayNameFor(model => model.from):</b> <a href="/UserProfile/Profile?username=@item.from">@Html.DisplayFor(modelItem => item.from)</a>
             </p>
             <p>
                 <b>@Html.DisplayNameFor(model => model.date):</b> <span>@Html.DisplayFor(modelItem => item.date)</span>
             </p>
-            <p>
+            <p class="message">
                 <b>@Html.DisplayNameFor(model => model.message):</b><br /><span>@Html.DisplayFor(modelItem => item.message)</span>
             </p>
-            <div><a href="#" title="replay">Replay</a></div>
+            <div>
+                <a href="#" title="replay">Replay</a>
+                <a href="#" title="remove">Remove</a>
+            </div>
             <hr>
         </li>
     }
@@ -47,12 +52,20 @@
             var user = $('#user').val();
             var dateFrom = Date.parse($('input[name=dateFrom]').val());
             var dateTo = Date.parse($('input[name=dateTill]').val());
+            var type = $('#type').val();
 
             $("#messagesList li").each(function () {
-                var date = Date.parse($(this).find('p:nth-child(2) span').text().split(' ')[0]);
+
+                var liType = "2";
+                if ($(this).find('.message:contains("Notification")').length > 0)
+                    liType = "1";
+
+                var date = Date.parse($(this).find('p:nth-child(3) span').text().split(' ')[0]);
+
                 if (user != "" && $(this).find('a:first').text() != user
                     || dateFrom != "" && date < dateFrom
-                    || dateTo != "" && date > dateTo)
+                    || dateTo != "" && date > dateTo
+                    || type != "" && liType != type)
                     $(this).hide();
                 else
                     $(this).show();
@@ -63,6 +76,7 @@
             $('#user').val("");
             $('input[name=dateFrom]').val("");
             $('input[name=dateTill]').val("");
+            $('#type').val("");
 
             filter();
         }
@@ -90,6 +104,56 @@
                     $('#filter').css("display", "block");
                 else
                     $('#filter').css("display", "none");
+            });
+
+            $('#messagesList li').each(function () {
+
+                if ($(this).find('p:nth-child(4) span').text().indexOf("Your offer was declined") >= 0) {
+
+                    var message = $(this).find('p:nth-child(4) span').text().split('=');
+                    var newMessage = '<a href="/Routes/Details/' + message[1] + '">route</a>';
+
+                    $(this).find('p:nth-child(4)').html("<b>Notification:</b> Your <a href='/Items/Details/" + message[2] + "'>" + message[3] + "</a> offer was declined from " + newMessage);
+                }
+
+                if ($(this).find('p:nth-child(4) span').text().indexOf("was added to route") >= 0) {
+
+                    var message = $(this).find('p:nth-child(4) span').text().split('=');
+                    var newMessage = '<a href="/Routes/Details/' + message[1] + '">route</a>';
+
+                    $(this).find('p:nth-child(4)').html("<b>Notification:</b> Your item <a href='/Items/Details/" + message[2] + "'>" + message[3] + "</a> was added to " + newMessage);
+                }
+
+                if ($(this).find('p:nth-child(4)').text().indexOf("Your item was removed from route") >= 0) {
+
+                    var message = $(this).find('p:nth-child(4)').text().split('=');
+                    $(this).find('p:nth-child(4)').html("<b>Notification:</b>Your item <a href='/Items/Details/" + message[2] + "'>" + message[3] + "</a> was removed from <a href='/Routes/Details/" + message[1] + "'>route</a>");
+                }
+
+                if ($(this).find('p:nth-child(4) span').text().indexOf("was removed from your route") >= 0) {
+
+                    var message = $(this).find('p:nth-child(4) span').text().split('=');
+                    $(this).find('p:nth-child(4)').html("<b>Notification:</b> " + message[0] + "" + '<a href="/Items/Details/' + message[1] + '">'
+                        + message[2] + '</a>' + ' was removed from your route ' + '<a href="/Routes/Details/' + message[4] + '">route</a>');
+                }
+
+                if ($(this).find('p:nth-child(4) span').text().indexOf("Did your item arrived") >= 0) {
+
+                    var message = $(this).find('p:nth-child(4) span').text().split('=');
+                    $(this).find('p:nth-child(4)').html("<b>Notification:</b> " + "Did your item " + '<a href="/Items/Details/' + message[2] + '">'
+                        + message[3] + '</a>' + ' arrived from ' + '<a href="/Routes/Details/' + message[1] + '">route</a>?');
+                }
+            });
+
+            $('a[title=remove]').click(function (e) {
+                e.preventDefault();
+
+                var url = "/Messages/Delete/" + $(this).parent().parent().find('#id').val();
+                $.get(url, null, function (data) {
+                    if (data) {
+                        window.location.reload(true);
+                    }
+                });
             });
         });
     </script>

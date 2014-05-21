@@ -13,7 +13,6 @@
         @Html.DropDownList("item", new List<SelectListItem>())
         @Html.JQueryUI().Datepicker("dateFrom", null, new { @placeholder="Date From" })
         @Html.JQueryUI().Datepicker("dateTill", null, new { @placeholder="Date Till" })
-        @*@Html.DropDownList("status", new List<SelectListItem>())*@
         @Html.DropDownList("status", (System.Web.Mvc.SelectList)@ViewBag.status)
 
         
@@ -64,7 +63,6 @@
 
             $("#offersList li").each(function () {
                 var date = Date.parse($(this).find('p:nth-child(3) span').text().split(' ')[0]);
-                console.log($(this).find('p:nth-child(4) span').text());
                 if (item != "" && $(this).find('p:nth-child(2) a').text() != item
                     || status != "" && $(this).find('p:nth-child(4) span').text() != status
                     || dateFrom != "" && date < dateFrom

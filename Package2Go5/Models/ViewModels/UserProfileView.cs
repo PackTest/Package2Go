@@ -20,6 +20,10 @@ namespace Package2Go5.Models.ViewModels
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,20}$", ErrorMessage = "Password is invalid. It must contain 1 number, 1 Uppercase letter, 1 Lowercase letter and be a minimum of 6, maximum 20 charachters")]
         public string password { get; set; }
 
+        [Display(Name = "Confirm Password")]
+        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "Password and Confirm Password should be the same")]
+        public string confirmPassword { get; set; }
+
         [Required]
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "name")]
         public string name { get; set; }

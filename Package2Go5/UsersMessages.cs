@@ -19,5 +19,6 @@ namespace Package2Go5
         public int messageId { get; set; }
     
         public virtual Messages Messages { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

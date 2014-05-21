@@ -32,13 +32,98 @@
 
     </div>
 
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <script type="text/javascript">
 
+        var geocoder, map;
+
+        var Lithuania = new google.maps.LatLng(55.00, 25.15);
+        var mapOptions = {
+            zoom: 8,
+            center: Lithuania,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
         $(document).ready(function () {
-            $('a[title=messages]').append(" " + ($('#messages li').length-1))
+            $('a[title=messages]').append(" (" + ($('#messages li').length-1) + ")")
 
             $('#messages li:gt(2)').hide();
             $('#messages .ShowAll').show();
+
+            $('#messages li').each(function(){
+                if (!$(this).hasClass("offer"))
+                {
+                    if ($(this).find('p:nth-child(4)').text().indexOf("Your offer was declined") >= 0) {
+
+                        var message = $(this).find('p:nth-child(4)').text().split('=');
+                        $(this).find('p:nth-child(4)').text("Your offer " + message[3] + " was declined");
+
+                        $(this).find('a[title=messageDetails]').attr("href", "/Routes/Details/" + message[1] + "?i=" + message[2]);
+                        $(this).find('a[title=messageDetails]').text("Route");
+
+                        $(this).find('a[title=replay]').attr("href", "/Items/Details/" + message[2]);
+                        $(this).find('a[title=replay]').text("Item");
+                        $(this).find('a[title=replay]').attr("title", "");
+                    }
+
+                    if ($(this).find('p:nth-child(4)').text().indexOf("was added to route") >= 0)
+                    {
+
+                        var message = $(this).find('p:nth-child(4)').text().split('=');
+                        $(this).find('p:nth-child(4)').text("Your item "+ message[3] +" was added to route");
+
+                        $(this).find('a[title=messageDetails]').attr("href", "/Routes/Details/" + message[1] + "?i=" + message[2]);
+                        $(this).find('a[title=messageDetails]').text("Route");
+
+                        $(this).find('a[title=replay]').attr("href", "/Items/Details/"+ message[2]);
+                        $(this).find('a[title=replay]').text("Item");
+                        $(this).find('a[title=replay]').attr("title", "");
+                    }
+
+                    if ($(this).find('p:nth-child(4)').text().indexOf("Your item was removed from route") >= 0) {
+
+                        var message = $(this).find('p:nth-child(4)').text().split('=');
+                        $(this).find('p:nth-child(4)').text("Your item " + message[3] + " was removed from route");
+
+                        $(this).find('a[title=messageDetails]').attr("href", "/Routes/Details/" + message[1]);
+                        $(this).find('a[title=messageDetails]').text("Route");
+
+                        $(this).find('a[title=replay]').attr("href", "/Items/Details/" + message[2]);
+                        $(this).find('a[title=replay]').text("Item");
+                        $(this).find('a[title=replay]').attr("title", "");
+                    }
+
+                    if ($(this).find('p:nth-child(4)').text().indexOf("was removed from your route") >= 0) {
+
+                        var message = $(this).find('p:nth-child(4)').text().split('=');
+                        $(this).find('p:nth-child(4)').text(message[0] + "" + message[2] + message[3]);
+
+                        $(this).find('a[title=messageDetails]').attr("href", "/Items/Details/" + message[1]);
+                        $(this).find('a[title=messageDetails]').text("Item");
+                        $(this).find('a[title=messageDetails]').attr("title", "");
+
+                        $(this).find('a[title=replay]').attr("href", "/Routes/Edit/" + message[4]);
+                        $(this).find('a[title=replay]').text("Route");
+                        $(this).find('a[title=replay]').attr("title", "");
+                    }
+
+                    if ($(this).find('p:nth-child(4)').text().indexOf("Did your item arrived ") >= 0) {
+
+                        var message = $(this).find('p:nth-child(4)').text().split('=');
+                        $(this).find('p:nth-child(4)').text("Did your item " + message[3] + " arrived?");
+
+                        $(this).find('a[title=messageDetails]').attr("href", "/Items/Details/" + message[2]);
+                        $(this).find('a[title=messageDetails]').text("Item");
+                        $(this).find('a[title=messageDetails]').attr("title", "");
+
+                        $(this).find('a[title=replay]').attr("href", "/Routes/Details/" + message[1]);
+                        $(this).find('a[title=replay]').text("Route");
+                        $(this).find('a[title=replay]').attr("title", "");
+                    }
+                }
+            });
 
             $('a[title=messages]').click(function (e) {
                 e.preventDefault();
@@ -52,14 +137,13 @@
                     $('#message').show()
             });
 
-            $("input[name=to]").change(function () {
-                console.log($(this).val());
-            });
-
             $.getJSON(
             "/Home/FindUsers", {},
             function (myData) {
                 $("#to").autocomplete({
+                    source: myData
+                });
+                $("input[name=findUser]").autocomplete({
                     source: myData
                 });
             });
@@ -68,54 +152,51 @@
                 e.preventDefault();
                 $("#messages").hide();
                 $('#message').show();
-                $('#message').find('input[name=to]').val($(this).parent().prev().prev().prev().children().text());
+                $('#message').find('input[name=to]').val($(this).parent().prev().prev().prev().find('a').text());
             });
         });
 
         $('a[title=hide]').click(function (e) {
             e.preventDefault();
+            hideMessagesOffers(this);
+        });
 
-            if ($(this).parent().parent().hasClass("offer")) {
-                var url = "/Offers/Edit/" + $(this).parent().prev().prev().prev().prev().val();
-                $.get(url, null, function () { });
-            }
-            else {
-                var url = "/Messages/Edit/" + $(this).parent().prev().prev().prev().prev().val();
-                $.get(url, null, null);
-            }
-
-            $(this).parent().parent().remove();
-            var messagesA = $('a[title=messages]');
-            messagesA.text(messagesA.text().split(" ")[0] + " " + (messagesA.text().split(" ")[1] - 1));
-
-            $('#messages li:hidden:first').show();
+        $('a[title=messageDetails]').click(function (e) {
+            hideMessagesOffers($(this).next());
         });
         
         $('a[title=Accept]').click(function (e) {
             e.preventDefault();
 
             var itemId = $(this).parent().parent().find('.itemId').val();
-
             var url = "/Routes/AcceptOrder?r=" + $(this).parent().parent().find('.routeId').val() + "&i=" + itemId;
             $.get(url, null, function () { });
-            //$(this).parent().parent().remove();
-
-
 
             var i = 0;
             $('#messages li').each(function () {
-                if ($(this).hasClass("offer") && $(this).find('.itemId').val() == itemId)
+                if ($(this).hasClass("offer"))
                 {
-                    $(this).remove();
-                    i += 1;
-                    $('#messages li:hidden:first').show();
+                    if($(this).find('.itemId').val() == itemId){
+                        $(this).remove();
+                        i += 1;
+                        $('#messages li:hidden:first').show();
+                    }
                 }
             });
 
             var messagesA = $('a[title=messages]');
-            messagesA.text(messagesA.text().split(" ")[0] + " " + (messagesA.text().split(" ")[1] - 1*i));
+            messagesA.text(messagesA.text().split(" ")[0] + "(" + (messagesA.text().split("(")[1].replace(")", "")- 1*i) + ")");
+        });
 
-            
+        $('a[title=Decline]').click(function (e) {
+            e.preventDefault();
+            var itemId = $(this).parent().parent().find('.itemId').val();
+            var url = "/Offers/Delete/?i=" + itemId + "&r=" + $(this).parent().parent().find('.routeId').val();
+            $.get(url, null, function () { });
+            $(this).parent().parent().remove();
+
+            var messagesA = $('a[title=messages]');
+            messagesA.text(messagesA.text().split(" ")[0] + " (" + (messagesA.text().split("(")[1].replace(")","") - 1) + ")");
         });
 
         //Hide Messages and new message
@@ -126,6 +207,33 @@
             if (!$("#message").is(e.target) && $("#message").has(e.target).length === 0)
                 $("#message").hide();
         });
+
+        $('input[name=findUser]').bind("enterKey", function (e) {
+            $(location).attr('href', '/UserProfile/Profile?username='+$(this).val());
+        });
+        $('input[name=findUser]').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+
+        function hideMessagesOffers(element)
+        {
+            if ($(element).parent().parent().hasClass("offer")) {
+                var url = "/Offers/Edit/" + $(this).parent().prev().prev().prev().prev().val();
+                $.get(url, null, function () { });
+            }
+            else {
+                var url = "/Messages/Edit/" + $(element).parent().prev().prev().prev().prev().val();
+                $.get(url, null, null);
+            }
+
+            $(element).parent().parent().remove();
+            var messagesA = $('a[title=messages]');
+            messagesA.text(messagesA.text().split(" ")[0] + " (" + (messagesA.text().split("(")[1].replace(")", "") - 1) + ")");
+
+            $('#messages li:hidden:first').show();
+        }
 
     </script>
 

@@ -109,7 +109,7 @@ function calculatePaymentsForService()
     var paymentsForService = 0;
     var rows = $("#Items").dataTable().fnGetNodes();
     for (var i = 0; i < rows.length; i++) {
-        if ($(rows[i]).find("td:eq(9)").children().html() == "Remove") {
+        if ($(rows[i]).find("td:eq(8)").children().html() == "Remove") {
             if (currencies[$(rows[i]).find("td:eq(6)").text()] == null) {
                 currencies[$(rows[i]).find("td:eq(6)").text()] = parseInt($(rows[i]).find("td:eq(5)").text());
             }
@@ -144,7 +144,7 @@ function Datatable()
               '<option value="-1">All</option>' +
               '</select> records'
         },
-        "aoColumns": [null, null, null, null, null, null, null, null, null, null]
+        "aoColumns": [null, null, null, null, null, null, null, null, null]
     });
 
     //Offer filter
@@ -211,7 +211,7 @@ function AddItemToRoute(item)
 function RemoveItemFromRoute(item)
 {
     var id = $(item).attr("title");
-    if ($('#waypoints li').size() > 2 && id != "") {
+    if ((id != 0 && $('#waypoints li').size() > 3) || (id == 0 && $('#waypoints li').size() > 2)){
 
         if ($(item).prev().attr("id") != 0) {
             $('input[name=Items][value=' + id + ']').remove();
@@ -239,7 +239,8 @@ function RemoveItemFromRoute(item)
         $(item).text("Add");
         RedrawTable();
         calcRoute();
-    }
+    }else
+        alert("Should be at least one end point.");
 }
 
 function MinMax(class1, class2, index, oTable)
@@ -284,7 +285,7 @@ function RedrawTable() {
                   '<option value="-1">All</option>'+
                   '</select> records'
             },
-            "aoColumns": [null, null, null, null, null, null, null, null, null, null]
+            "aoColumns": [null, null, null, null, null, null, null, null, null]
         });
     }
 }
@@ -326,8 +327,10 @@ function WayPoints() {
         e.preventDefault();
     });
 
-    $('#waypoints').on('click', '#remWaypoint', function (e) {
-        if ($('#waypoints li').size() > 2) {
+    $('#waypoints').on('click', '.remWaypoint', function (e) {
+        var id = $(this).prev().attr("id");
+
+        if ((id != 0 && $('#waypoints li').size() > 3) || (id == 0 && $('#waypoints li').size() > 2)){
 
             if (typeof input != "undefined") {
                 input = $('.infoWindow').find('input');
@@ -335,8 +338,6 @@ function WayPoints() {
                 if (typeof input.attr("onclick") != "undefined")
                     input.attr("onclick", "AddItem" + input.attr("onclick").substring(input.attr("onclick").indexOf("("), input.attr("onclick").length));
             }
-
-            var id = $(this).prev().attr("id");
 
             if (id != 0) {
                 $('input[name=Items][value=' + id + ']').remove();
@@ -354,9 +355,13 @@ function WayPoints() {
                     $('#' + id+'_1').parent('li').remove();
             }
 
+            $('#itemList').find('a[title=item' + id + ']').remove();
+
             RedrawTable();
             calcRoute();
         }
+        else
+            alert("Should be at least one end point.");
     });
 }
 
@@ -389,7 +394,7 @@ function generateWaypoints(value, start)
         if (array[0] != 0) {
             $(newLast).find('input').attr("id", array[0]);
             $(newLast).find('.dragImage').html("<span>" + array[0] + "</span>")
-            $('fieldset').append('<input type=hidden name=Items value="'+ array[0] + '"/>');
+            
 
             //Change buttons in ItemsList
             $('a[title=' + array[0] + ']').text("Remove");
@@ -408,7 +413,7 @@ function generateWaypoints(value, start)
             $(newLast).find('input').addClass("start");
             $(newLast).find('input').attr("id", array[0]+"_1");
             addedItems.push(array[0]);
-
+            $('fieldset').append('<input type=hidden name=Items value="' + array[0] + '"/>');
             $('#itemList').append("<a title='item" + array[0] + "' href='/Items/Details/" + array[0] + "'> | " + Items[array[0]].title + "</a>");
         }
     }
@@ -416,13 +421,14 @@ function generateWaypoints(value, start)
         $(newLast).find('input').val("");
 
     if (last.index() == 0)
-        newLast.append('<a id="remWaypoint"><img src="/Images/erase.png" alt="erase"/></a>');
+        newLast.append('<a class="remWaypoint"><img src="/Images/erase.png" alt="erase"/></a>');
 
     $('#waypoints').append(newLast);
 
     new google.maps.places.Autocomplete(document.getElementsByName(name)[0]);
     
-    reSort();
+    //Bugina
+    //reSort();
 }
 
 //Google Maps
@@ -462,16 +468,10 @@ function calcRoute() {
 
     var waypts = [];
 
-    //var array = $(".waypoint").map(function () {
-    //    return $(this).val();
-    //}).get();
-
     var array = [];
     $(".waypoint").each(function () {
         array.push($(this).val());
     });
-
-    console.log(array);
 
     if(array.length > 1)
     {
@@ -531,7 +531,7 @@ function calcRoute() {
 
             maxDistance = totalDistance/1000;
 
-            $('#totalDirection_panel').html("");
+            $('#totalDirection_panel').html('<h5>Payments By Currencies</h5><ul id="paymentsByCurrencies"></ul>');
             document.getElementById('totalDirection_panel').innerHTML += "<span>Total distance: </span><span id='distance'>" + Math.round(totalDistance / 1000) + '</span> KM<br><br>'
             + "<span>Total duration: </span>" + Math.floor(totalDuraction / 60 / 60) % 60 + ' hours ' + Math.round(totalDuraction / 60) % 60 + ' mins<br><br>';
             

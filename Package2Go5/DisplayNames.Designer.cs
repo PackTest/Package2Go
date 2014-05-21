@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delivery Date.
+        /// </summary>
+        public static string delivery_date {
+            get {
+                return ResourceManager.GetString("delivery_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delivery Price.
         /// </summary>
         public static string delivery_price {
@@ -165,6 +174,15 @@ namespace Resources {
         public static string item_id {
             get {
                 return ResourceManager.GetString("item_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Items Quantity.
+        /// </summary>
+        public static string itemCount {
+            get {
+                return ResourceManager.GetString("itemCount", resourceCulture);
             }
         }
         

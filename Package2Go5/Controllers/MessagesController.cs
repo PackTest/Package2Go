@@ -9,15 +9,27 @@ namespace Package2Go5.Controllers
 {
     public class MessagesController : Controller
     {
-        UserProfileManager userManager = new UserProfileManager();
-        MessagesManager messagesManager = new MessagesManager();
+        private UserProfileManager userManager = new UserProfileManager();
+        private MessagesManager messagesManager = new MessagesManager();
+        private int userId = 0;
 
         //
         // GET: /Messages/
         [Authorize]
         public ActionResult Index()
         {
+            List<SelectListItem> type = new List<SelectListItem>();
+            type.Add(new SelectListItem{ Text = "Type", Value = "" });
+            type.Add(new SelectListItem { Text = "Notification", Value = "1" });
+            type.Add(new SelectListItem { Text = "Messages", Value = "2" });
+            ViewBag.type = new SelectList(type, "Value", "Text");
             return View(messagesManager.GetAllUserMessages(User.Identity.Name));
+        }
+
+        [Authorize]
+        public ActionResult Messages()
+        {
+            return View(messagesManager.GetAllMessages());
         }
 
         //
@@ -28,6 +40,7 @@ namespace Package2Go5.Controllers
             return View(messagesManager.GetUserMessagesById(id));
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             try
@@ -75,22 +88,31 @@ namespace Package2Go5.Controllers
         //
         // GET: /Messages/Delete/5
 
-        public ActionResult Delete(int id)
+        public bool Delete(int id)
         {
-            return View();
+            try
+            {
+                messagesManager.Remove(id);
+                return true;
+            }
+            catch {
+                return false;
+            }
         }
 
         //
         // POST: /Messages/Delete/5
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Authorize]
+        public ActionResult DeleteMessage(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (Request.Cookies["UserId"] != null)
+                    userId = Int32.Parse(Request.Cookies["UserId"].Value);
+                if (User.Identity.IsAuthenticated && userManager.getRole(userId) == 1)
+                    messagesManager.Remove(id);
+                return RedirectToAction("Messages");
             }
             catch
             {

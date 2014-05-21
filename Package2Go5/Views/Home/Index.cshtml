@@ -5,11 +5,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    @Scripts.Render("~/bundles/jqueryGMAPAPI")
     <script type="text/javascript" src="~/Scripts/ShowMarkers.js"></script>
     <script type="text/javascript">
         
-        $('#over_map').css("display", "none");
+        $(document).ready(function () {
+            $('#over_map').css("display", "none");
+            showAll = true;
+            GetRoutesMarkers();
+            GetItemsMarkers();
+        });
 
     </script>
 }

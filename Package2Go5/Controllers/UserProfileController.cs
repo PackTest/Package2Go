@@ -17,25 +17,36 @@ namespace Package2Go5.Controllers
     public class UserProfileController : Controller
     {
 
-        UserProfileManager manager = new UserProfileManager();
-        CurrencyManager currencyManager = new CurrencyManager();
-        CommentsManager commentManager = new CommentsManager();
+        private UserProfileManager manager = new UserProfileManager();
+        private CurrencyManager currencyManager = new CurrencyManager();
+        private CommentsManager commentManager = new CommentsManager();
+        private int userId = 0;
 
         //
         // GET: /UserProfile/
         [Authorize]
         public ActionResult Index()
         {
-            UserProfile user = manager.Get(User.Identity.Name);
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
 
-            var userView = Mapper.Map<UserProfile, UserProfileView>(user);
+            if (User.Identity.IsAuthenticated && manager.getRole(userId) == 1) 
+            {
+                return View(manager.GetAllUsers());
+            }
+            else
+                return RedirectToAction("Edit");
 
-            var comments = commentManager.GetComments(userView.Username);
+            //UserProfile user = manager.Get(User.Identity.Name);
 
-            userView.commentCount = comments.Count();
-            userView.comments = comments.Take(10).ToList();
+            //var userView = Mapper.Map<UserProfile, UserProfileView>(user);
 
-            return View(userView);
+            //var comments = commentManager.GetComments(userView.Username);
+
+            //userView.commentCount = comments.Count();
+            //userView.comments = comments.Take(10).ToList();
+
+            //return View(userView);
         }
 
         //
@@ -136,28 +147,29 @@ namespace Package2Go5.Controllers
 
         //
         // GET: /UserProfile/Delete/5
-        [Authorize]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         //
         // POST: /UserProfile/Delete/5
 
-        [HttpPost]
         [Authorize]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (Request.Cookies["UserId"] != null)
+                    userId = Int32.Parse(Request.Cookies["UserId"].Value);
+                if (userId != 0 && User.Identity.IsAuthenticated && manager.getRole(userId) == 1)
+                    manager.Delete(id);
+                return View("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
 
@@ -188,6 +200,13 @@ namespace Package2Go5.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+
+            HttpCookie currentUserCookie = HttpContext.Request.Cookies["userId"];
+            HttpContext.Response.Cookies.Remove("userId");
+            currentUserCookie.Expires = DateTime.Now.AddDays(-10);
+            currentUserCookie.Value = null;
+            HttpContext.Response.SetCookie(currentUserCookie);
+
             return RedirectToAction("Index", "Home");
         }
 

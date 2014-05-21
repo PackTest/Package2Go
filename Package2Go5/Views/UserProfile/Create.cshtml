@@ -29,6 +29,14 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.confirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.confirmPassword)
+            @Html.ValidationMessageFor(model => model.confirmPassword)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.name)
         </div>
         <div class="editor-field">
@@ -79,12 +87,20 @@
             @Html.TextBoxFor(model => model.phone_nr)
             @Html.ValidationMessageFor(model => model.phone_nr)
         </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.image)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.image, new { type = "file", accept = "image/*" })
+            @Html.ValidationMessageFor(model => model.image)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

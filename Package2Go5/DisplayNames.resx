@@ -215,4 +215,10 @@
   <data name="item_id" xml:space="preserve">
     <value>Item</value>
   </data>
+  <data name="itemCount" xml:space="preserve">
+    <value>Items Quantity</value>
+  </data>
+  <data name="delivery_date" xml:space="preserve">
+    <value>Delivery Date</value>
+  </data>
 </root>

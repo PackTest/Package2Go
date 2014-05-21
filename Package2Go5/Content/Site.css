@@ -207,7 +207,7 @@ header, footer, nav, section {
     /*display:none;*/
 }
 
-#Routes, #Items {
+#Routes, #Items, #Users, #Messages {
     box-shadow:0 0 10px;
 }
 
@@ -220,7 +220,7 @@ header, footer, nav, section {
     margin-right:5px;
 }
 
-#Routes td, #Routes th, #Items td, #Items th, #Items select{
+#Routes td, #Routes th, #Items td, #Items th, #Items select, #Users td, #Users th, #Messages td, #Messages th{
     border:2px solid #f1f1f1;
     min-width:60px;
 }
@@ -229,21 +229,25 @@ tfoot th:first-child, tbody td:first-child, thead th:first-child {
     display:none;
 }
 
-#Routes thead, #Items thead {
+#Routes thead, #Items thead, #Users thead, #Messages thead {
     background:#3c3c3c;
     color:#fff;
 }
 
-#Routes thead th, #Items thead th {
+#Routes thead th, #Items thead th, #Users thead th, #Messages thead th {
     text-align:center;
 }
 
-#Routes tbody tr:nth-child(2n+1), #Items tbody tr:nth-child(2n+1) {
+#Routes tbody tr:nth-child(2n+1), #Items tbody tr:nth-child(2n+1), #Users tbody tr:nth-child(2n+1), #Messages tbody tr:nth-child(2n+1) {
     background:#fff;
 }
 
-#Routes tbody tr:nth-child(2n), #Items tbody tr:nth-child(2n) {
+#Routes tbody tr:nth-child(2n), #Items tbody tr:nth-child(2n), #Users tbody tr:nth-child(2n), #Messages tbody tr:nth-child(2n) {
     background:#dcdcdc;
+}
+
+#Items th:nth-child(9), #Users th:nth-child(13), #Messages th:nth-child(7){
+    width:140px;
 }
 
 tfoot input, tfoot select{
@@ -487,4 +491,9 @@ a[title=showFilter] {
 .route img{
     display:block;
     margin: 0 auto;
+}
+
+input[name=decline] {
+    display:none;
+    margin:10px 0;
 }
