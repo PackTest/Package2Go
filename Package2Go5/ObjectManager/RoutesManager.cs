@@ -34,7 +34,7 @@ namespace Package2Go5.Models.ObjectManager
 
             route.departure_time = routeView.departure_time;
             route.delivery_time = routeView.delivery_time;
-            route.status_id = routeView.status_id;
+            route.status_id = 1;
 
             db.UsersRoutes.Add(new UsersRoutes { user_id = userId, route_id = route.id });
 
@@ -52,6 +52,11 @@ namespace Package2Go5.Models.ObjectManager
             route.status_id = routeView.status_id;
             route.delivery_time = routeView.delivery_time;
             route.departure_time = routeView.departure_time;
+
+            //if (routeView.delivery_time < routeView.departure_time || routeView.departure_time < DateTime.Now) 
+            //{
+            //    throw new Exception();
+            //}
 
             if (route.status_id == 1)
             {
@@ -150,7 +155,7 @@ namespace Package2Go5.Models.ObjectManager
                 }
                 route.waypoints = HttpUtility.HtmlEncode(waypoints.Substring(0, waypoints.Length - 1));
             }
-            else
+            else if (routeView.Items != null)
             {
                 var messages = new List<Messages>();
                 foreach (Items item in routeView.Items) 
@@ -237,7 +242,7 @@ namespace Package2Go5.Models.ObjectManager
             bool selected = false;
 
             if (status_id == -1)
-                status.Add(new SelectListItem { Text = "Status", Value = "", Selected = selected });
+                status.Add(new SelectListItem { Text = "All", Value = "", Selected = selected });
 
             foreach (RouteStatus stat in db.RouteStatus)
             {
@@ -294,20 +299,29 @@ namespace Package2Go5.Models.ObjectManager
                 string[] address;
                 string[] city;
 
-                if (waypoint.Contains("County") && waypoint.Split(',').Length > 2)
-                    address = waypoint.Split(',').Reverse().Skip(2).First().Split(':');
-                else
-                    address = waypoint.Split(',').Reverse().Skip(1).First().Split(':');
-                
-                if(address.Length > 1)
-                    city = address[1].Split(' ');
-                else
-                    city = address[0].Split(' ');
+                try
+                {
+                    if (waypoint.Contains("County") && waypoint.Split(',').Length > 2)
+                        address = waypoint.Split(',').Reverse().Skip(2).First().Split(':');
+                    else
+                    {
+                        address = waypoint.Split(',').Reverse().Skip(1).First().Split(':');
+                    }
 
-                if (city.Length > 1)
-                    waypoints += city[1] + separator;
-                else
-                    waypoints += city[0] + separator;
+                    if (address.Length > 1)
+                        city = address[1].Split(' ');
+                    else
+                        city = address[0].Split(' ');
+
+                    if (city.Length > 1)
+                        waypoints += city[1] + separator;
+                    else
+                        waypoints += city[0] + separator;
+                }
+                catch 
+                {
+                    waypoints += waypoint.Split(':')[1];
+                }
             }
             waypoints = waypoints.Remove(waypoints.Length - separator.Length, separator.Length);
 

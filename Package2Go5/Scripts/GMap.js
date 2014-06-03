@@ -1,4 +1,6 @@
 ﻿jQuery(document).ready(function ($) {
+    var oTable;
+
     Initialize();
 
     sort();
@@ -132,7 +134,7 @@ function calculatePaymentsForService()
 
 function Datatable()
 {
-    var oTable = $('#Items').dataTable({
+    oTable = $('#Items').dataTable({
         "aaSorting": [[4, "desc"]],
         "sDom": '<"top"l>rt<"bottom"ip>',
         "iDisplayLength": 5,
@@ -189,7 +191,7 @@ function Datatable()
 
     $("tbody").on("click", "#Remove", function (e) {
         e.preventDefault();
-        //Should be at least one waypoint
+        //Should be at least one waypointa
         RemoveItemFromRoute(this);
     });
 }
@@ -293,7 +295,6 @@ function RedrawTable() {
 function WayPoints() {
 
     var addresses = $('input[name=waypoints]').val();
-
     if (typeof addresses != "undefined") {
 
         var array = addresses.split(';');
@@ -436,6 +437,7 @@ var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var map;
 var geocoder = new google.maps.Geocoder();
+var RouteWaypoints;
 
 function Initialize() {
     
@@ -543,6 +545,16 @@ function calcRoute() {
                 $('#totalCost').text("Estimated price: " + Math.ceil(cost) + " " + $('#currency').val());
                 $('#travelCost').text("Travel Cost: " + (Math.ceil(cost) - parseInt($('#payments').text())) + " " + $('#currency').val());
             }
+
+            RouteWaypoints = new Array();
+            maxDistance = $('#ItemRange').val();
+            var iteration = route.overview_path.length / (Math.round(route.legs[0].distance.value / 1000 / maxDistance) + 1);
+            var length = route.overview_path.length;
+            for (var i = 0; i < length; i += iteration) {
+                console.log(route.overview_path[Math.round(i)]);
+                RouteWaypoints.push(route.overview_path[Math.round(i)]);
+            }
+            markItems();
         }
     });
 

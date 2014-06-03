@@ -1,25 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="4697486f-a74f-4c0c-bf13-75f8864ff150" name="UMLComponentDiagram1" linkedPackageId="7e45dc54-1c04-48bd-8b48-6e7ce41d21b2" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="3dd0a9a9-5939-46bd-ab66-83b6d9caf065">
-      <profileInstance Id="f2c9b66f-9b3d-4132-ac56-647c746fe156" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="5f0bac4e-32ae-47ed-a045-c3be5bff848b">
-      <profileInstance Id="f11be077-e8fb-4eae-9f0c-229df799e99b" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="21067c05-fb26-485b-badf-06a482f40940">
-      <profileInstance Id="489d8fbc-32d9-42c5-b0b2-1d41c96ebd84" name="CSharpProfile">
-        <elementDefinition Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7" />
-      </profileInstance>
-      <elementDefinition Id="95d987d5-c773-40b9-904e-2eb342cc2526" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm12="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="4697486f-a74f-4c0c-bf13-75f8864ff150" name="UMLComponentDiagram1" linkedPackageId="7e45dc54-1c04-48bd-8b48-6e7ce41d21b2" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
   <packagedElements>
     <componentModelHasComponents>
       <component Id="8fed101e-a6c5-4216-a998-bd73cd9fb2d1" name="Controllers" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -83,8 +63,216 @@
         <elementDefinition Id="bed69f8d-3dd1-4b11-a569-27f043648796" />
       </component>
     </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="74f996c4-d6d7-43d0-a4cc-54b5429ae99d" name="&quot;Package2Go&quot; sistema" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ef27d83a-c642-4888-8278-f7c935ed71be" />
+        <suppliersInternal>
+          <dependency Id="4e3c0ad0-02b8-4e4e-96af-2ccc33ae7e61">
+            <componentMoniker Id="ec7b1fa2-8414-4258-8d75-bef6d2597c28" LastKnownName="Google Map API" />
+            <elementDefinition Id="cee296ed-5673-4734-b3e6-0ac413553fe8" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <part Id="57c3bf93-5bf6-4e6c-a2d5-da280fed5d3d" name="Models" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="02a4582a-9934-445e-a8e9-96a86a1c70ac" />
+            <type_NamedElement>
+              <componentMoniker Id="ed5622fe-d387-48d8-873a-ed9f3d1ec4a9" />
+            </type_NamedElement>
+          </part>
+          <part Id="9e45fec9-f854-40fa-bc8c-278bb6416179" name="vw_models" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="368f987d-a1a0-477b-bae9-863fa035268f" />
+            <type_NamedElement>
+              <componentMoniker Id="ccfa6ac3-bb98-4fe3-a63e-70de1ea899f2" />
+            </type_NamedElement>
+          </part>
+          <part Id="24dab3da-aac3-4932-b094-8d2c3fdf697b" name="ViewModels" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="f918dd29-1008-49bd-bf89-c3294ecc1b55" />
+            <targetNamedElementsInternal>
+              <connector Id="bbd6ad23-4f7e-43ba-b732-e58021469be1" isLeaf="false" isStatic="false">
+                <partMoniker Id="57c3bf93-5bf6-4e6c-a2d5-da280fed5d3d" LastKnownName="Models" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="dae0a8c4-c062-45a7-a0a3-5b26efb99014">
+                      <elementDefinition Id="2a7f85db-f204-451a-866b-9e68ff62e594" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="8c159e9a-663c-4837-ac41-8f88937b0738">
+                      <elementDefinition Id="9a8a5d2b-3e14-42e7-ab7b-ec0aab6538b7" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="b2f4a499-40d1-45bb-ab53-1b166b5c4f1c" />
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker Id="3375a126-9566-4e59-a1d6-81619d0d5411" />
+            </type_NamedElement>
+          </part>
+          <part Id="86128441-bc5f-4aa0-aabd-fceddd4e9466" name="ObjectsManagers" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="d1d92b02-e365-4f69-b275-17f6bf23ee24" />
+            <targetNamedElementsInternal>
+              <connector Id="754dce8f-7956-4217-9f40-74a4bccb47dc" isLeaf="false" isStatic="false">
+                <partMoniker Id="24dab3da-aac3-4932-b094-8d2c3fdf697b" LastKnownName="ViewModels" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="75717e4f-680c-4eca-8cba-5d3022422bf2">
+                      <elementDefinition Id="0f9ba7c6-fc1a-49c7-add9-8eba12569d69" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="b1256ddb-6b0b-4e81-9ce6-272fcaa8d9fb">
+                      <elementDefinition Id="3e0754e1-a300-41da-9596-3430de7a9cc5" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="467f996b-a64a-4a7b-915e-941985ce2d45" />
+              </connector>
+              <connector Id="e3a8acac-093a-4116-8d2d-12edc90e1aef" isLeaf="false" isStatic="false">
+                <partMoniker Id="57c3bf93-5bf6-4e6c-a2d5-da280fed5d3d" LastKnownName="Models" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="b96abb9e-36df-4646-8bfb-bee812ca943b">
+                      <elementDefinition Id="e946d27e-422a-4d02-82d8-24afd9bca5c1" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="b8c76713-c953-4478-b0a6-7f92972fe529">
+                      <elementDefinition Id="34772ac5-b66f-4586-8814-20ef7cc5aad5" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="8ec938b9-dbfc-4b9f-95ce-13038f571650" />
+              </connector>
+              <connector Id="b45bafc3-26be-407e-a491-04d64595ee85" isLeaf="false" isStatic="false">
+                <partMoniker Id="9e45fec9-f854-40fa-bc8c-278bb6416179" LastKnownName="vw_models" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="8f46cb31-915d-43eb-be09-6b00650d1d10">
+                      <elementDefinition Id="9929d898-a133-4f48-b8b3-ded3934aabb4" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="0995ce67-3de4-4399-a555-3888217fab83">
+                      <elementDefinition Id="084ad38c-1346-4cff-9cb9-55597774e8a0" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="8ebcb531-111b-4f79-a13a-fff89a0253f5" />
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker Id="bb55e619-f8d7-4151-b399-952eebb04a65" />
+            </type_NamedElement>
+          </part>
+          <part Id="6cbd57b8-b30d-49ca-bf05-60d8dc1777ec" name="Controllers" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="38286d5b-b841-4aea-908c-931af48de5d7" />
+            <targetNamedElementsInternal>
+              <connector Id="91a1bb0b-24ac-4e21-9756-22191ab12188" isLeaf="false" isStatic="false">
+                <partMoniker Id="86128441-bc5f-4aa0-aabd-fceddd4e9466" LastKnownName="ObjectsManagers" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="f5010ce1-655d-4409-8b24-62de9a8ed399">
+                      <elementDefinition Id="14514291-e761-4abe-9379-e030f279f907" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="1f020004-22e2-402a-89db-db4ff71b18ff">
+                      <elementDefinition Id="86c78837-c9ef-491c-aaf9-210b9e0b4e0d" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="fb4513f4-5f53-451d-87f3-93114d1d1b35" />
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker Id="a00a87cf-4eeb-4c83-afbc-ea4e2c4fb29b" />
+            </type_NamedElement>
+          </part>
+          <part Id="95d775fa-011a-4dfd-81a9-4c17efbac85f" name="Views" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="5dd5fd11-3843-4402-be73-907c0106340b" />
+            <targetNamedElementsInternal>
+              <connector Id="6104e37f-89c9-4130-a3fd-aa7f77e8a014" isLeaf="false" isStatic="false">
+                <partMoniker Id="6cbd57b8-b30d-49ca-bf05-60d8dc1777ec" LastKnownName="Controllers" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="6dccfa08-48a1-4556-a713-e79bddf451e2">
+                      <elementDefinition Id="88bb123c-7af8-4806-a49a-4609e0496505" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="1ac0ff91-6187-4095-8cc2-ae7eaaea4872">
+                      <elementDefinition Id="a130e033-dee2-4f30-b960-bd879ea926af" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="ea9beceb-595b-4833-95d1-34bf4b73d3be" />
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker Id="e4cf5ffa-48a6-48a3-a572-82a2941f4f43" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ed5622fe-d387-48d8-873a-ed9f3d1ec4a9" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="96c1b8b9-9eec-4a2d-8500-949071a06291" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ccfa6ac3-bb98-4fe3-a63e-70de1ea899f2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0ca73f69-071a-4433-9406-35563336362c" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="3375a126-9566-4e59-a1d6-81619d0d5411" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3f586349-0419-4d9d-a971-079938e482cb" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="bb55e619-f8d7-4151-b399-952eebb04a65" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="db2d0e81-8d86-4a61-b5c4-4129f820ac35" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="a00a87cf-4eeb-4c83-afbc-ea4e2c4fb29b" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f682227c-fdbb-4879-8535-f576d8b34c49" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="e4cf5ffa-48a6-48a3-a572-82a2941f4f43" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="fac63aab-c393-4cd4-b925-60ce6b18687c" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ec7b1fa2-8414-4258-8d75-bef6d2597c28" name="Google Map API" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5b5bc1e5-3ed1-4109-ba56-3deb01b9b42d" />
+      </component>
+    </componentModelHasComponents>
   </packagedElements>
   <package Id="7e45dc54-1c04-48bd-8b48-6e7ce41d21b2" name="UML">
     <elementDefinition Id="d53373ca-f83a-469b-8193-67fcc14f467b" />
+    <profileInstances>
+      <packageHasProfileInstances Id="3dd0a9a9-5939-46bd-ab66-83b6d9caf065">
+        <profileInstance Id="f2c9b66f-9b3d-4132-ac56-647c746fe156" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="5f0bac4e-32ae-47ed-a045-c3be5bff848b">
+        <profileInstance Id="f11be077-e8fb-4eae-9f0c-229df799e99b" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="21067c05-fb26-485b-badf-06a482f40940">
+        <profileInstance Id="489d8fbc-32d9-42c5-b0b2-1d41c96ebd84" name="CSharpProfile">
+          <elementDefinition Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7" />
+        </profileInstance>
+        <elementDefinition Id="95d987d5-c773-40b9-904e-2eb342cc2526" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </componentModel>

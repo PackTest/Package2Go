@@ -50,19 +50,9 @@ namespace Package2Go5.Models.ObjectManager
 
         public void Delete(int id) 
         {
-            foreach (UsersItems ui in db.UsersItems.Where(ui => ui.item_id == id)) 
-            {
-                db.UsersItems.Remove(ui);
-            }
-
-            foreach (ItemsRoutes ir in db.ItemsRoutes.Where(ir => ir.item_id == id)) 
-            {
-                db.ItemsRoutes.Remove(ir);                
-            }
-            foreach (Offers o in db.Offers.Where(o => o.item_id == id)) 
-            {
-                db.Offers.Remove(o);
-            }
+            db.UsersItems.RemoveRange(db.UsersItems.Where(ui => ui.item_id == id));
+            db.ItemsRoutes.RemoveRange(db.ItemsRoutes.Where(ir => ir.item_id == id));
+            db.Offers.RemoveRange(db.Offers.Where(o => o.item_id == id));
 
             db.Items.Remove(db.Items.Where(i=>i.id==id).First());
             db.SaveChanges();
@@ -112,7 +102,7 @@ namespace Package2Go5.Models.ObjectManager
 
         public List<Items> GetAllUserItems(int userId)
         {
-            return db.Items.Where(i => i.UsersItems.Any(ui=>ui.user_id == userId) && i.status_id != 3).ToList();
+            return db.Items.Where(i => i.UsersItems.Any(ui=>ui.user_id == userId)).ToList();
         }
 
         public SelectList GetNotUsedUserItemsList(int userId)
@@ -176,6 +166,16 @@ namespace Package2Go5.Models.ObjectManager
             }
 
             return new SelectList(status, "Value", "Text");
+        }
+
+        public void deliveredItem(int id, int user_id)
+        {
+            Items item = db.Items.Where(i => i.id == id).FirstOrDefault();
+            if(item.UsersItems.Any(ui=>ui.user_id == user_id))
+            {
+                item.status_id = 3;
+            }
+            db.SaveChanges();
         }
     }
 }

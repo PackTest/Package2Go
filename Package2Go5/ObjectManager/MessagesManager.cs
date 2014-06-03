@@ -31,7 +31,9 @@ namespace Package2Go5.Models.ObjectManager
 
         public void Update(int id)
         {
-            db.Messages.Where(m => m.id == id).First().statusId = 2;
+            Messages message = db.Messages.Where(m => m.id == id).FirstOrDefault();
+            if (message.statusId != 3)
+                message.statusId = 2;
 
             db.SaveChanges();
         }

@@ -7,7 +7,6 @@
 }
 
 <h2>Items</h2>
-
 <table id="Items">
     <thead>
         <tr>
@@ -41,7 +40,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Items) {
+        @if (Model.Items != null) {
+            foreach (var item in Model.Items)
+            {
             <tr>
                 <td>@Html.Raw(item.id)</td>
                 <td>@Html.Raw(item.title)</td>
@@ -62,6 +63,7 @@
                     }
                 </td>
             </tr>
+            }
         }
     </tbody>
     <tfoot>
@@ -109,7 +111,6 @@
         <legend>Routes</legend>
 
         <a href="#" id="showItems">Show Items</a>
-
         @Html.HiddenFor(model => model.id)
         @Html.HiddenFor(model => model.waypoints, new { id="" })
         <input type="hidden" id="currency" value="@ViewBag.userCurrency"/>
@@ -124,9 +125,6 @@
             </ul>
         </div>
         <a href="#" id="addWaypoint">Add Another Input Box</a>
-@*        <p>
-            Optimal route? <input name="optimized" type="checkbox" />
-        </p>*@
 
         <div id="itemList">
             <b>Items: </b>
@@ -155,6 +153,13 @@
             @Html.DropDownListFor(model => model.status_id, (SelectList)@ViewBag.status)
             @Html.ValidationMessageFor(model => model.status_id)
         </div>
+        <div class="editor-label">
+            <label>Max item Distance, km</label>
+        </div>
+        <div class="editor-field">
+            <input type="text" id="ItemRange" placeholder="Max item distance" value="50" />
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
@@ -195,9 +200,9 @@
 
             GetItemsMarkers();
 
-            $('input[name=optimized]').change(function () {
-                calcRoute();
-            });
+            //$('input[name=optimized]').change(function () {
+            //    calcRoute();
+            //});
 
             $('#showItems').click(function (e) {
                 e.preventDefault();
@@ -250,6 +255,11 @@
                     $(this).text("Show Calculated Costs");
                 }
             });
+
+            $('#ItemRange').change(function () {
+                markItems();
+            });
+
         });
 
         $('#over_map').hide();

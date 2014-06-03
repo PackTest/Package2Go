@@ -24,6 +24,7 @@ namespace Package2Go5.Controllers
         private OffersManager offersManager = new OffersManager();
         private CommentsManager commentsManager = new CommentsManager();
 
+        [Authorize]
         public ActionResult Index()
         {
             int userId = 0;
@@ -63,7 +64,7 @@ namespace Package2Go5.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.status = manager.GetStatus(0);
+            //ViewBag.status = manager.GetStatus(0);
             return View();
         }
 
@@ -128,6 +129,7 @@ namespace Package2Go5.Controllers
         public ActionResult Edit(int id, RoutesView routesView)
         {
             ViewBag.status = manager.GetStatus(routesView.status_id);
+            ViewBag.actionList = manager.GetActionList();
 
             foreach (string key in Request.Form.AllKeys)
             {
@@ -146,7 +148,7 @@ namespace Package2Go5.Controllers
             }
             catch
             {
-                return View();
+                return View(routesView);
             }
 
         }

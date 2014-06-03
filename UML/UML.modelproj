@@ -22,6 +22,13 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
+    <Content Include="Copy of UMLUseCaseDiagram.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Copy of UMLUseCaseDiagram.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Copy of UMLUseCaseDiagram.usecasediagram</DependentUpon>
+    </Content>
     <Content Include="ModelDefinition\Package10_2342.uml">
       <SubType>Content</SubType>
     </Content>
@@ -139,6 +146,13 @@
     <Content Include="UMLUseCaseDiagram.usecasediagram.layout">
       <SubType>Content</SubType>
       <DependentUpon>UMLUseCaseDiagram.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="UMLUseCaseDiagram1.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLUseCaseDiagram1.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLUseCaseDiagram1.usecasediagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\UML.uml">

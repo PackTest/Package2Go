@@ -140,5 +140,15 @@ namespace Package2Go5.Controllers
 
             return View(manager.GetAllHistory(userId));
         }
+
+        [Authorize]
+        public void DeliveredItem(int id) 
+        {
+            int userId = 0;
+            if (Request.Cookies["UserId"] != null)
+                userId = Int32.Parse(Request.Cookies["UserId"].Value);
+
+            manager.deliveredItem(id, userId);
+        }
     }
 }

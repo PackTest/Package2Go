@@ -45,13 +45,13 @@
         @Html.ValidationMessageFor(model => model.delivery_time)
     </div>
 
-    <div class="editor-label">
+@*    <div class="editor-label">
         @Html.LabelFor(model => model.status_id)
     </div>
     <div class="editor-field">
         @Html.DropDownListFor(model => model.status_id, (System.Web.Mvc.SelectList)ViewBag.status)
         @Html.ValidationMessageFor(model => model.status_id)
-    </div>
+    </div>*@
 
     <p>
         <input type="submit" value="Create" />

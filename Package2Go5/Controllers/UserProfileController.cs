@@ -59,8 +59,10 @@ namespace Package2Go5.Controllers
 
             UserProfileView user = Mapper.Map<UserProfile, UserProfileView>(manager.Get(username));
 
-            var comments = commentManager.GetComments(username);
+            if (user == null)
+                return RedirectToAction("Index", "Home");
 
+            var comments = commentManager.GetComments(username);
             user.commentCount = comments.Count();
             user.comments = comments.Take(10).ToList();
 

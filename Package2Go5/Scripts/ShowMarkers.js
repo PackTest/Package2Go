@@ -100,27 +100,40 @@ function markRoutesPoints(markerIcon, address, delivery, id) {
 
         var latlng = new google.maps.LatLng(p.lat, p.lng);
         
+        var RoutesMNearIStart = new Array();
+
         if (showAll || itemFrom != null && isItClose(p.lat, p.lng, itemFrom.lat, itemFrom.lng)
-                || itemTo != null && isItClose(p.lat, p.lng, itemTo.lat, itemTo.lng)) {
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                icon: markerIcon
+            || itemTo != null && isItClose(p.lat, p.lng, itemTo.lat, itemTo.lng)) {
+
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + delivery + '&sensor=false', null, function (data) {
+                var p = data.results[0].geometry.location;
+
+                if (showAll || itemFrom != null && isItClose(p.lat, p.lng, itemFrom.lat, itemFrom.lng)
+                    || itemTo != null && isItClose(p.lat, p.lng, itemTo.lat, itemTo.lng)) {
+
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        icon: markerIcon
+                    });
+                    markersArray.push(marker);
+
+                    var offer = "";
+
+                    if (!showAll && $('a[title=logout]').length > 0)
+                        offer = "<input type='button' value='Offer' onclick='OfferRoute(" + id + ")'/> ";
+
+                    addInfoWindow(marker,
+                    "<div class='infoWindow'><h4>Route</h4><p>FROM: " + address + "</p><p>TO: " + delivery + "</p>"
+                    + "<p>Date From: " + Routes[id].date_from.split(" ")[0] + "</p>"
+                    + "<p>Date Till: " + Routes[id].date_till.split(" ")[0] + "</p>"
+                    + offer
+                    + "<a href='/Routes/Details/" + id + "'>More</a>"
+                    + "</div>", address, delivery, id, false);
+                }
             });
-            markersArray.push(marker);
 
-            var offer = "";
 
-            if (!showAll && $('a[title=logout]').length > 0)
-                offer = "<input type='button' value='Offer' onclick='OfferRoute(" + id + ")'/> ";
-
-            addInfoWindow(marker,
-            "<div class='infoWindow'><h4>Route</h4><p>FROM: " + address + "</p><p>TO: " + delivery + "</p>"
-            + "<p>Date From: " + Routes[id].date_from.split(" ")[0] + "</p>"
-            + "<p>Date Till: " + Routes[id].date_till.split(" ")[0] + "</p>"
-            + offer
-            + "<a href='/Routes/Details/" + id + "'>More</a>"
-            + "</div>", address, delivery, id, false);
         }
 
     });
@@ -141,19 +154,39 @@ function OfferRoute(id)
 }
 
 function rad(x) { return x * Math.PI / 180; }
-function isItClose(aLat, aLng, searchLat,  searchLng) {
+function isItClose2(aLat, aLng, searchLat, searchLng) {
     var lat = searchLat;
     var lng = searchLng;
+
     var R = 6371; // radius of earth in km
     var distances = 0;
     var dLat = rad(aLat - lat);
     var dLong = rad(aLng - lng);
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(rad(lat)) * Math.cos(rad(lat)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat)) * Math.cos(rad(lat)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
-
     return d < maxDistance || maxDistance == 0;
+}
+
+function isItClose(aLat, aLng, searchLat, searchLng) {
+
+    var isNear = false;
+    if (searchLat != -1 && searchLng != -1) {
+        $.each(ItemWaypoints, function (index, value) {
+            isNear = isItClose2(value.lat(), value.lng(), aLat, aLng);
+            if (isNear)
+                return false;
+        });
+    } else
+    {
+        $.each(RouteWaypoints, function (index, value) {
+            isNear = isItClose2(value.lat(), value.lng(), aLat, aLng);
+            if (isNear)
+                return false;
+        });
+    }
+    return isNear;
 }
 
 function showDestForRoutes(id) {
@@ -227,71 +260,97 @@ function showDestForRoutes(id) {
     function markItemsPoints(markerIcon, id) {
         $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + Items[id].address + '&sensor=false', null, function (data) {
             var p = data.results[0].geometry.location;
-            var latlng = new google.maps.LatLng(p.lat, p.lng);
 
-            var i = Items[id].address.hashCode();
-            if (typeof itemsArray[i] === "undefined")
-            {
-                itemsArray[i] = "";
-            }
+            Items[id].sp = p;
+            Items[id].markerIcon = markerIcon;
 
-            itemsArray[i] += id+":"+Items[id].delivery_address + ";";
+            $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + Items[id].delivery_address + '&sensor=false', null, function (data) {
+                var p = data.results[0].geometry.location;
+                var latlng = new google.maps.LatLng(p.lat, p.lng);
+                Items[id].ep = p;
+            });
 
-            var isInfoWindow = false;
+        });
 
-            var content = null;
+    }
 
-            infoWindows.forEach(function (data) {
-                if ($(data.content).find('.address').html() == Items[id].address) {
+    function markItems()
+    {
+        maxDistance = $('#ItemRange').val();
 
-                    content = $(data.content);
-                    content.find('select').append("<option class='AddItem itemOpt' value='" + id + "'>" + Items[id].title + "</option>");
-                    
-                    data.setMap(null);
+        $.each(markersArray, function (i, v) {
+            v.setMap(null);
+        });
+
+        $.each(Items, function (index, value) {
+            if (isItClose(value.sp.lat, value.sp.lng, -1, -1)
+                && isItClose(value.ep.lat, value.ep.lng, -1, -1)
+                ) {
+
+                var latlng = new google.maps.LatLng(value.sp.lat, value.sp.lng);
+
+                var i = value.address.hashCode();
+                if (typeof itemsArray[i] === "undefined") {
+                    itemsArray[i] = "";
                 }
-            });
 
-            var marker = new google.maps.Marker({
-                position: latlng,
-                map: map,
-                icon: markerIcon
-            });
+                if (itemsArray[i] == "")
+                    itemsArray[i] += index + ":" + value.delivery_address + ";";
 
-            markersArray.push(marker);
+                var isInfoWindow = false;
 
-            var className = "";
+                var content = null;
 
-            if (content != null) {
-                addInfoWindow(marker, content.html(), Items[id].address, Items[id].delivery_address, id, true);
-            } else {
-                var add = "";
-                var option = "<option class='AddItem itemOpt' value='" + id + "'>" + Items[id].title + "</option>";
-                if ($.inArray(id, addedItems) > -1)
-                    option = "<option class='RemoveItem itemOpt' value='" + id + "'>" + Items[id].title + "</option>";
+                infoWindows.forEach(function (data) {
+                    if ($(data.content).find('.address').html() == value.address) {
 
-                if (!showAll) {
-                    if (!$.inArray(id, addedItems) > -1)
-                        add = "<input name='add' type='button' value='Add' onclick='AddItem(" + id + ")'/>";
-                    else {
-                        add = "<input name='add' type='button' value='Remove' onclick='RemoveItem(" + id + ")'/>";
+                        content = $(data.content);
+                        content.find('select').append("<option class='AddItem itemOpt' value='" + index + "'>" + value.title + "</option>");
+
+                        data.setMap(null);
                     }
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    icon: value.markerIcon
+                });
+
+                markersArray.push(marker);
+
+                var className = "";
+
+                if (content != null) {
+                    addInfoWindow(marker, content.html(), value.address, value.delivery_address, index, true);
+                } else {
+                    var add = "";
+                    var option = "<option class='AddItem itemOpt' value='" + index + "'>" + value.title + "</option>";
+                    if ($.inArray(id, addedItems) > -1)
+                        option = "<option class='RemoveItem itemOpt' value='" + index + "'>" + value.title + "</option>";
+
+                    if (!showAll) {
+                        if (!$.inArray(id, addedItems) > -1)
+                            add = "<input name='add' type='button' value='Add' onclick='AddItem(" + index + ")'/>";
+                        else {
+                            add = "<input name='add' type='button' value='Remove' onclick='RemoveItem(" + index + ")'/>";
+                        }
+                    }
+
+                    addInfoWindow(marker,
+                            "<div class='infoWindow'>"
+                                + "<h4>Items</h4>"
+                                + "<p>FROM: <span class='address'>" + value.address + "</span></p>"
+                                + "<p>To: <span class='delivery_addr'>" + value.delivery_address + "</span></p>"
+                                + "<p>Delivery Date: <span class='delivery_date'>" + value.date.split(" ")[0] + "</span></p>"
+                                + "<p>Price: <span class='delivery_price'>" + value.price + "</span></p>"
+                                + "<select class='infoSelect'>" + option + "</select>"
+                                + add
+                                + " <a href='/Items/Details/" + index + "'>More</a>"
+                            + "</div>",
+                    value.address, value.delivery_address, index, true);
                 }
-
-                addInfoWindow(marker,
-                        "<div class='infoWindow'>"
-                            + "<h4>Items</h4>"
-                            + "<p>FROM: <span class='address'>" + Items[id].address + "</span></p>"
-                            + "<p>To: <span class='delivery_addr'>" + Items[id].delivery_address + "</span></p>"
-                            + "<p>Delivery Date: <span class='delivery_date'>" + Items[id].date.split(" ")[0] + "</span></p>"
-                            + "<p>Price: <span class='delivery_price'>" + Items[id].price + "</span></p>"
-                            + "<select class='infoSelect'>" + option + "</select>"
-                            + add
-                            + " <a href='/Items/Details/" + id + "'>More</a>"
-                        + "</div>",
-                Items[id].address, Items[id].delivery_address, id, true);
             }
-
-                
         });
     }
 
@@ -375,21 +434,17 @@ function showDestForRoutes(id) {
         });
         dirRenderer = [];
 
-        $('tbody tr').each(function () {
-            var item = $(this).last().find('a');
-            if (item.attr("title") == id) {
-                AddItemToRoute(item);
-            }
-        });
+        oTable.fnFilter("^\\s*" + id + "\\s*$", 0, true);
+        AddItemToRoute($('tbody tr').last().find('a'));
+        oTable.fnFilter("", 0, true);
     }
 
     function RemoveItem(id) {
         addedItems.splice(addedItems.indexOf(id) > -1, 1);
-        $('tbody tr').each(function () {
-            var item = $(this).last().find('a');
-            if (item.attr("title") == id)
-                RemoveItemFromRoute(item);
-        });
+
+        oTable.fnFilter("^\\s*" + id + "\\s*$", 0, true);
+        RemoveItemFromRoute($('tbody tr').last().find('a'));
+        oTable.fnFilter("", 0, true);
     }
 
 //#Both functions ----------------------------------------------------------------------------------
@@ -438,7 +493,7 @@ function addInfoWindow(marker, message, address, delivery, id, isItem) {
 
             var index = address.hashCode();
             var deliveryAddresses = itemsArray[index].split(';');
-
+            
             for (var i = 0; i < deliveryAddresses.length - 1; i++) {
                 var addr = deliveryAddresses[i].split(":");
                 showDestForItems(address, addr[1], addr[0], i);

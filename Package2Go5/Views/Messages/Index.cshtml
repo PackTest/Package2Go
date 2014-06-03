@@ -142,7 +142,14 @@
                     var message = $(this).find('p:nth-child(4) span').text().split('=');
                     $(this).find('p:nth-child(4)').html("<b>Notification:</b> " + "Did your item " + '<a href="/Items/Details/' + message[2] + '">'
                         + message[3] + '</a>' + ' arrived from ' + '<a href="/Routes/Details/' + message[1] + '">route</a>?');
+                    
+                    $(this).find('div').append('<a href="' + message[2] + '" title=ItemIsDelivered>Yes</a>');
                 }
+            });
+
+            $('a[title=ItemIsDelivered]').click(function (e) {
+                e.preventDefault();
+                $.get('Items/DeliveredItem/' + $(this).attr("href"), null, function () { });
             });
 
             $('a[title=remove]').click(function (e) {

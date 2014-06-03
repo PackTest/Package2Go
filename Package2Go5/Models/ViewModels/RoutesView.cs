@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace Package2Go5.Models.ViewModels
 {
-    public class RoutesView
+    public class RoutesView //: IValidatableObject
     {
 
         public int id { get; set; }
@@ -24,6 +25,7 @@ namespace Package2Go5.Models.ViewModels
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "delivery_time")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [GreaterThanOrEqualTo("departure_time")]
         public System.DateTime delivery_time { get; set; }
 
         [Display(ResourceType = typeof(Resources.DisplayNames), Name = "status_id")]
@@ -46,5 +48,15 @@ namespace Package2Go5.Models.ViewModels
         public int itemCount { get; set; }
 
         public List<string> waypointsList { get; set; }
+
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    List<ValidationResult> result = new List<ValidationResult>();
+        //    if (delivery_time < departure_time)
+        //    {
+        //        result.Add(new ValidationResult("Delivery date must be greater than departure date"));
+        //    }
+        //    return result;
+        //}
     }
 }

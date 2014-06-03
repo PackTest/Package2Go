@@ -114,15 +114,27 @@
                         var message = $(this).find('p:nth-child(4)').text().split('=');
                         $(this).find('p:nth-child(4)').text("Did your item " + message[3] + " arrived?");
 
-                        $(this).find('a[title=messageDetails]').attr("href", "/Items/Details/" + message[2]);
-                        $(this).find('a[title=messageDetails]').text("Item");
-                        $(this).find('a[title=messageDetails]').attr("title", "");
+                        //$(this).find('a[title=messageDetails]').attr("href", "/Items/Details/" + message[2]);
+                        //$(this).find('a[title=messageDetails]').text("Item");
+                        //$(this).find('a[title=messageDetails]').attr("title", "");
 
-                        $(this).find('a[title=replay]').attr("href", "/Routes/Details/" + message[1]);
-                        $(this).find('a[title=replay]').text("Route");
-                        $(this).find('a[title=replay]').attr("title", "");
+                        //$(this).find('a[title=replay]').attr("href", "/Routes/Details/" + message[1]);
+                        //$(this).find('a[title=replay]').text("Route");
+                        //$(this).find('a[title=replay]').attr("title", "");
+
+                        $(this).find('a[title=messageDetails]').remove();
+                        $(this).find('a[title=replay]').remove();
+                        $(this).find('a[title=hide]').text("No");
+
+                        $(this).find('.clearfix').append('<a href="' + message[2] + '" title="ItemIsDelivered">Yes</a>');
                     }
                 }
+            });
+
+            $('a[title=ItemIsDelivered]').click(function (e) {
+                e.preventDefault();
+                $.get('Items/DeliveredItem/' + $(this).attr("href"), null, function () { });
+                hideMessagesOffers(this);
             });
 
             $('a[title=messages]').click(function (e) {

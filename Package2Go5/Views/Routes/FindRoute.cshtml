@@ -34,9 +34,12 @@
 
 <script type="text/javascript">
 
+    var ItemWaypoints;
+
     $(document).ready(function () {
 
         var Items = null;
+        
         var directionsService = new google.maps.DirectionsService();
         var directionsRenderer = null;
 
@@ -63,6 +66,7 @@
                 if (document.getElementById('ItemAddress').checked) {
                     $('input[name=itemFrom]').val(Items[$(this).val()].address);
                     $('input[name=itemTo]').val(Items[$(this).val()].delivery_address);
+
                     FindNear();
                 }
             });
@@ -76,7 +80,7 @@
 
         new google.maps.places.Autocomplete(document.getElementsByName("itemFrom")[0]);
         new google.maps.places.Autocomplete(document.getElementsByName("itemTo")[0]);
-
+        
         function drawItemRoute()
         {
             if (Items != null) {
@@ -85,6 +89,9 @@
                     destination: Items[$('#action').val()].delivery_address,
                     travelMode: google.maps.DirectionsTravelMode.DRIVING
                 }, function (result) {
+
+                    var route = result.routes[0];
+
                     directionsRenderer = new google.maps.DirectionsRenderer({ polylineOptions: new google.maps.Polyline({
                         strokeColor: '#FF0000',
                         strokeOpacity: 0.5,
@@ -92,7 +99,22 @@
                     })});
                     directionsRenderer.setMap(map);
                     directionsRenderer.setDirections(result);
+
+                    itemRouteWaypoints(route);
+                    
                 });
+            }
+
+        }
+
+        function itemRouteWaypoints(route)
+        {
+            ItemWaypoints = new Array();
+            var iteration = route.overview_path.length / (Math.round(route.legs[0].distance.value / 1000 / maxDistance) + 1);
+            var length = route.overview_path.length;
+            for (var i = 0; i < length; i += iteration)
+            {
+                ItemWaypoints.push(route.overview_path[Math.round(i)]);
             }
         }
 

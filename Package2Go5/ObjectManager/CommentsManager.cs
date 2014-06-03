@@ -53,8 +53,9 @@ namespace Package2Go5.Models.ObjectManager
 
             foreach (CommentsView comment in commnetsView) 
             {
-                comment.user = comments.Where(up => up.user_id == comment.user_id).First().UserProfile.Username;
-                comment.writer = comments.Where(up => up.writer_id == comment.writer_id).First().UserProfile.Username;
+                //comment.user = comments.Where(up => up.user_id == comment.user_id).First().UserProfile.Username;
+                //comment.writer = comments.Where(up => up.writer_id == comment.writer_id).First().UserProfile.Username;
+                comment.writer = db.UserProfile.Where(up => up.UserId == comment.writer_id).First().Username;
             }
 
             return commnetsView;

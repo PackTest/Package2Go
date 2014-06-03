@@ -66,6 +66,9 @@
       <HintPath>..\packages\jQueryUIHelpers.Mvc4.2.1.0\lib\net40\JQueryUIHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MVC Foolproof Validation">
+      <HintPath>C:\Users\Vytautas\Downloads\MVC Foolproof Validation.dll</HintPath>
+    </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.4.14\lib\net45\MvcSiteMapProvider.dll</HintPath>
     </Reference>
@@ -382,6 +385,7 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\Vytautas.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

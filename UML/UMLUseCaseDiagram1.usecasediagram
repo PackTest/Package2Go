@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="f80f5ecd-b55c-413d-a39a-32dfee0908c2" name="UMLUseCaseDiagram1" linkedPackageId="d976b874-2fa4-42aa-ae17-3b99d779c7a9" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="2ca91d85-d320-4bbb-8edd-debec3b8013c">
+      <profileInstance Id="3c46b074-602e-427b-8abd-02bafa1177b8" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="a467ffaa-62ac-4585-88ec-34589a9f13e8">
+      <profileInstance Id="17476327-a5ca-4b02-b3b9-b112cd2b3ab3" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="623871a1-1687-4d45-bbf9-d994872db39c">
+      <profileInstance Id="89bc65dc-8a7c-439c-9a3d-4d0b1d6dfc6a" name="CSharpProfile">
+        <elementDefinition Id="fbf15c7f-8d8e-4269-9d9e-b06a67b8c3d7" />
+      </profileInstance>
+      <elementDefinition Id="95d987d5-c773-40b9-904e-2eb342cc2526" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="50f27c3e-b011-4016-ae55-435836a65d9f" name="Svečias1" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3ba3ec13-2d77-4c22-b32c-4044623c2ef2" />
+        <targetEnds>
+          <association Id="2f3c3a87-91f2-4848-be19-718af1cd21b5" isDerived="false" sourceEndRoleName="Svečias" targetEndRoleName="Maršrutų, paketų žymeklių atvaizdavimas" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0ac4441d-41f9-42e6-a5ac-ab75b903e611" LastKnownName="Atvaizduoti maršrutų, paketų žymeklius" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="01389daf-bb61-418c-9b8d-030a61d84eab" name="Svečias" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3cabdda1-e9b5-4df4-90eb-2f148033d69f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="93d5a191-2605-4266-a20f-cb5f5004f2cd" name="Maršrutų, paketų žymeklių atvaizdavimas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3c7f7f61-4fc2-4421-9e6d-667792ee929d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0dae8f8b-4a1a-4f62-bf9d-88e26fbdbf65" />
+          </association>
+          <association Id="5bafe231-ff65-4329-ab08-8f78eaf9d2b0" isDerived="false" sourceEndRoleName="Svečias" targetEndRoleName="Vartotojo registravimasis" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="cf623736-8e53-4f77-a3b0-99551e6f6f55" LastKnownName="Registruoti naują vartotoją" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="75c60fe8-4b5b-4bf2-9125-9e7f22453d4d" name="Svečias" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6097ceea-eb43-4b7f-9794-b3d1db63ae1c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fbb66a1a-bc82-4f16-a8ba-2670b82b866b" name="Vartotojo registravimasis" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="70cb3f7e-94be-4b95-8d2c-c3f719766f15" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a1aa4a70-e87b-4e9c-90d1-90839eb8f385" />
+          </association>
+          <association Id="ae09a947-7710-4f9c-b9a8-92be6db41461" isDerived="false" sourceEndRoleName="Svečias" targetEndRoleName="Prisijungimas prie sistemos" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="2eaf6093-0a88-4ffe-ba49-9d089d0cb056" LastKnownName="Prisijungti prie sistemos" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ca0d6898-7edc-446d-bbcd-906ba38d35a1" name="Svečias" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3972617a-b8a9-4d4a-a2f1-36bf94bc1e56" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="680a0da5-bc78-46a1-9b5b-3a5b1c707c10" name="Prisijungimas prie sistemos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="279e06b4-2cfd-4f1a-af03-7a575fbba00c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d88ae8fc-f833-4029-9868-f9a7afdea4ca" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="a26cfa23-23e3-4156-a77f-359f38c9cd98" name="Vartotojas1" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8da6eba6-58e7-4daa-915e-747bfb9e8153" />
+        <generalsInternal>
+          <generalization Id="67ce7b46-d158-4099-8ee3-8ef95de95520" isSubstitutable="false">
+            <actorMoniker Id="50f27c3e-b011-4016-ae55-435836a65d9f" LastKnownName="Svečias1" />
+            <elementDefinition Id="9ba8f5d4-1403-4ce0-8bf6-ad0677028276" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="ee0df00f-a622-4595-afe0-dc57fa880d99" isDerived="false" sourceEndRoleName="Vartotojas" targetEndRoleName="Komentaro, įvertinimo kūrimas" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c149fe4f-bfd6-4d72-a7a8-361fc7b2bbc1" LastKnownName="Kurti komentarus, įvertinimus" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8d712142-6e87-4d99-88ee-4bdb2d476d50" name="Vartotojas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="921107bd-cac6-4b10-b36b-02b23f590af2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6461da9a-9645-4e3c-9b81-42966fd57f46" name="Komentaro, įvertinimo kūrimas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c5615acd-94cc-450b-aab1-04e656b2318f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a17aab86-30d8-42a2-a053-5f9000795608" />
+          </association>
+          <association Id="fe6c9599-dc7d-4a7a-bfc4-9600e171ef4a" isDerived="false" sourceEndRoleName="Vartotojas" targetEndRoleName="Paketo valdymas" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="eebf1b0d-cc57-44bf-97e7-b5199d6b11a3" LastKnownName="Valdyti paketus" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1965eb0f-b7b1-4ceb-a708-19abf985bfa5" name="Vartotojas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7307136a-e2b9-4207-bf32-82e745482c7d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="044e7419-3412-4526-b236-c99fdbee7f7f" name="Paketo valdymas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="348a3cba-633f-4d52-846f-7ec031a1c8ad" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b333316a-ca55-4002-943d-42d822a58947" />
+          </association>
+          <association Id="248ac2b3-ab44-4dba-b4bd-51d57e1c912d" isDerived="false" sourceEndRoleName="Vartotojas" targetEndRoleName="Vartotojo paskyros valdymas" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="6ece1591-3fc3-4459-b26e-15a6d7eac85c" LastKnownName="Valdyti vartotojo paskyrą" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a05f5d36-4375-444c-ac28-06bb56f1ced9" name="Vartotojas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6b40fdb0-58a4-4bd2-8082-ff942e583f46" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="850528b6-35cf-4efb-bd25-6ed14d08cf17" name="Vartotojo paskyros valdymas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="702d118d-d3f5-409b-9ded-c0f0592d7329" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="618dd73f-82b7-4222-bf51-bd6539d8bf38" />
+          </association>
+          <association Id="4ec5f5d0-7c51-408c-b486-c813cfecf084" isDerived="false" sourceEndRoleName="Vartotojas" targetEndRoleName="Žinutės" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="242801bd-468d-4483-9cc8-0860b2926a82" LastKnownName="Valdyti žinutes" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cae3860e-1d83-417d-847a-9c364ff647b5" name="Vartotojas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="55525360-3eb8-4d5c-bbc3-a4ebdec6e06c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="11797c6a-68be-4b21-b3b8-8e11c5b20999" name="Žinutės" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3662b480-ae9d-4879-906d-ea86c629cc1e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="451f257a-d27a-4daa-b930-037a560822cc" />
+          </association>
+          <association Id="854ff080-fc63-46ae-a6a7-4e752043eb48" isDerived="false" sourceEndRoleName="Vartotojas" targetEndRoleName="Valdyti maršrutus" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="12136715-1c2d-4ae2-9681-c1f80e0ff7de" LastKnownName="Valdyti maršrutus" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4cfeb588-7f6a-4491-8c9c-e710278a506c" name="Vartotojas" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="22b4913f-ba45-46dc-a7d8-f25d9906ac9b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b2c4f8a8-0a5a-43a5-9146-bbf5e2c8ee1b" name="Valdyti maršrutus" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="25b1bb84-46dc-4b0e-9936-05bbe710a258" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5a06ffe7-cb8b-4867-9de3-407b9d0a6ac0" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" name="&quot;Package2Go&quot;" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2c859d71-7fff-41ef-a7a0-925a244a271d" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0ac4441d-41f9-42e6-a5ac-ab75b903e611" name="Atvaizduoti maršrutų, paketų žymeklius" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="19e571f9-0f81-42d5-97b4-84ed8167d34e" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="12136715-1c2d-4ae2-9681-c1f80e0ff7de" name="Valdyti maršrutus" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9436d21c-c36a-4bcb-8973-936fde7dbd35" />
+        <additions>
+          <include Id="2a180c66-6940-4571-9919-d82cc6ab72f8">
+            <useCaseMoniker Id="d5dc3f90-742d-49b3-b1ab-767087790672" LastKnownName="Kurti naują maršrutą" />
+            <elementDefinition Id="6e9a2a7f-293e-46bc-bd9a-ab943b75c153" />
+          </include>
+          <include Id="e3e487b4-d523-413f-b1a3-1f7c2a01b555">
+            <useCaseMoniker Id="9e472df1-769e-45e0-9b92-dd7e68230dab" LastKnownName="Redaguoti maršrutą" />
+            <elementDefinition Id="7e565529-5c73-43a6-884a-fcb03287e05f" />
+          </include>
+          <include Id="ec7361bb-b7ad-4326-be1b-1dea38f56369">
+            <useCaseMoniker Id="f67a6220-5c01-4e58-91a0-eb2fc240451c" LastKnownName="Šalinti" />
+            <elementDefinition Id="26f8a966-b812-4655-81f4-226a556ca109" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="242801bd-468d-4483-9cc8-0860b2926a82" name="Valdyti žinutes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ac99fae6-5679-4c36-8ff3-a69de35af033" />
+        <additions>
+          <include Id="4cd753ad-9fde-4820-95cd-6178f57469ad">
+            <useCaseMoniker Id="3097e68e-ef2a-4eab-b549-cfbe8f362562" LastKnownName="Siųsti žinutes" />
+            <elementDefinition Id="51c83013-4eda-461d-8a85-2b3e7d2276f8" />
+          </include>
+          <include Id="9b349711-240a-4df5-af11-32d779209fd2">
+            <useCaseMoniker Id="625c72c9-18be-4505-91c9-6e692e4a4062" LastKnownName="Peržiūrėti žinučių sąrašą" />
+            <elementDefinition Id="a34a556e-eb39-4619-ba52-82965031dbcb" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="6ece1591-3fc3-4459-b26e-15a6d7eac85c" name="Valdyti vartotojo paskyrą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="341c5f73-a23f-45d7-b329-d308c5af8f94" />
+        <additions>
+          <include Id="c865139e-1da6-4dcd-b06c-de7b065e3d7b">
+            <useCaseMoniker Id="ceb22f30-9f01-41a4-acef-6d73d37d7294" LastKnownName="Peržiūrėti paskyrą" />
+            <elementDefinition Id="6abada46-a1e8-48f6-90ea-53ce5e8c95d4" />
+          </include>
+          <include Id="82233792-9840-4b81-a756-7e914ab86e73">
+            <useCaseMoniker Id="0dd3a924-a0d0-43bb-876a-9e697e0dcfc1" LastKnownName="Redaguoti" />
+            <elementDefinition Id="734d79cb-e548-434f-91f9-da621c1ed722" />
+          </include>
+          <include Id="c50978aa-45d8-4f95-a42b-098d288e7509">
+            <useCaseMoniker Id="0c42df10-ea66-46d6-9245-e015f39fd42a" LastKnownName="Atsijungti nuo paskyros" />
+            <elementDefinition Id="607381ee-4cd4-4fc7-ab83-a60b1df10577" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c149fe4f-bfd6-4d72-a7a8-361fc7b2bbc1" name="Kurti komentarus, įvertinimus" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="675d1ac8-fe8b-4866-a534-17c508b6b80d" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="d5dc3f90-742d-49b3-b1ab-767087790672" name="Kurti naują maršrutą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b6e3bb1d-6df9-4632-8b57-cebbc5d83890" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="9e472df1-769e-45e0-9b92-dd7e68230dab" name="Redaguoti maršrutą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8334de91-54f2-4474-9ad0-63104037498a" />
+        <additions>
+          <include Id="750161ac-7b1a-4006-be16-3325296969fa">
+            <useCaseMoniker Id="743f12cb-2e7a-4eef-a5b9-69244624ae8b" LastKnownName="Pridėti arba pašalinti paketus" />
+            <elementDefinition Id="7bd84176-c22b-4fa2-bbcb-75cc533dbf28" />
+          </include>
+          <include Id="16cd839a-c31a-4feb-807b-7befc60c9ab8">
+            <useCaseMoniker Id="bf6e17d8-376d-426d-94eb-87ad3a0bed81" LastKnownName="Peržiūrėti paketų  sąrašą" />
+            <elementDefinition Id="3bc29b95-797f-49b7-8f88-e7318312e225" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f67a6220-5c01-4e58-91a0-eb2fc240451c" name="Šalinti" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5e7e8d2f-42bb-407e-b833-7e64eb7e500b" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="743f12cb-2e7a-4eef-a5b9-69244624ae8b" name="Pridėti arba pašalinti paketus" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="942dd211-3556-4988-8ea9-a7a8c2d2ff05" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="bf6e17d8-376d-426d-94eb-87ad3a0bed81" name="Peržiūrėti paketų  sąrašą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="599d7fda-7aba-4347-92b9-394a185cf83c" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="eebf1b0d-cc57-44bf-97e7-b5199d6b11a3" name="Valdyti paketus" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d1bcd3e1-5d70-40e1-8fcb-a5ee71260608" />
+        <additions>
+          <include Id="7c7b28a7-cf39-4558-bbb1-c079b07c462b">
+            <useCaseMoniker Id="4c13cb43-25ae-49df-84a9-9e7b51821fe7" LastKnownName="Kurti" />
+            <elementDefinition Id="f4f429b4-d75e-4158-9ab3-48c8da67962f" />
+          </include>
+          <include Id="b27a9716-487e-401f-ad63-d7238be1b735">
+            <useCaseMoniker Id="46c461d8-fcb9-4e2a-97e3-27076a09cd7d" LastKnownName="Šalinti" />
+            <elementDefinition Id="1885b549-a8fc-45f9-af01-7b97b0e0f1dd" />
+          </include>
+          <include Id="575c37ea-3042-46d7-994f-53f6bab09da4">
+            <useCaseMoniker Id="db2a4c43-817f-44ae-a004-e44a34dfc92e" LastKnownName="Redaguoti" />
+            <elementDefinition Id="c184f774-6418-4df5-a430-888a9aff9a3f" />
+          </include>
+          <include Id="3809e238-01f9-4262-9100-297d27d95d90">
+            <useCaseMoniker Id="a49ec003-85fa-48c2-beb9-524b087f055c" LastKnownName="Peržiūrėti savo paketų sąrašą" />
+            <elementDefinition Id="617b036b-1567-4e37-9a3d-cd132e98934c" />
+          </include>
+          <include Id="5becba5e-7e85-49a8-a7d1-9eeab0d8e361">
+            <useCaseMoniker Id="a16259aa-e34e-492b-ad08-e1ed09d3252f" LastKnownName="Surasti arti peketo esančius maršrutus" />
+            <elementDefinition Id="018a0e25-c814-4375-a3a7-7aa91c2b2538" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="4c13cb43-25ae-49df-84a9-9e7b51821fe7" name="Kurti" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5de78ca0-1e7e-46e5-91f9-d8480df70bb2" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="46c461d8-fcb9-4e2a-97e3-27076a09cd7d" name="Šalinti" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e2bd5e23-fdfe-4fd6-9881-c9a4cf1c2c7f" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="a49ec003-85fa-48c2-beb9-524b087f055c" name="Peržiūrėti savo paketų sąrašą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4674b068-5429-445f-a64f-06f583632f7f" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="db2a4c43-817f-44ae-a004-e44a34dfc92e" name="Redaguoti" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d9a78264-8207-40dc-8364-7d00b6fe634e" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="cf623736-8e53-4f77-a3b0-99551e6f6f55" name="Registruoti naują vartotoją" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7a33dc21-c3de-47c5-9f00-2ab6e591ec4a" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="2eaf6093-0a88-4ffe-ba49-9d089d0cb056" name="Prisijungti prie sistemos" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bbf1172a-741a-4cbe-8185-91b41d7fe5f2" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="ceb22f30-9f01-41a4-acef-6d73d37d7294" name="Peržiūrėti paskyrą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fa4ebe04-62a7-4f6e-a0bd-5e25e16d772c" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0dd3a924-a0d0-43bb-876a-9e697e0dcfc1" name="Redaguoti" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b3701567-6dd1-442a-816f-71b47117dd81" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3097e68e-ef2a-4eab-b549-cfbe8f362562" name="Siųsti žinutes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="caa32ff6-d46b-4628-80c4-09e0aa4acaa5" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="625c72c9-18be-4505-91c9-6e692e4a4062" name="Peržiūrėti žinučių sąrašą" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="25eab28f-8d5f-4e08-9f6f-e9abc8404392" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0c42df10-ea66-46d6-9245-e015f39fd42a" name="Atsijungti nuo paskyros" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="422f51c2-91bf-48cf-8714-2279118cb285" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="a16259aa-e34e-492b-ad08-e1ed09d3252f" name="Surasti arti peketo esančius maršrutus" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d6a745ec-e1b2-4fc2-8770-bf9b1f98d14e" />
+        <subjects>
+          <subsystemMoniker Id="25c266b6-162e-4d2b-a5b8-b885cbfa7a0e" LastKnownName="&quot;Package2Go&quot;" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="d976b874-2fa4-42aa-ae17-3b99d779c7a9" name="UML">
+    <elementDefinition Id="d53373ca-f83a-469b-8193-67fcc14f467b" />
+  </package>
+</useCaseModelRoot>

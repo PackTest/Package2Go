@@ -31,6 +31,9 @@
                 @Html.DisplayNameFor(model => model.delivery_price)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.currency)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.note)
             </th>
             <th>
@@ -70,6 +73,9 @@
                     @Html.DisplayFor(modelItem => item.delivery_price)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.currency)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.note)
                 </td>
                 <td>
@@ -78,7 +84,12 @@
                 <td>
                     @if(item.route_id != 0)
                     {
-                        @Html.ActionLink("Show Route", "Details/" + item.route_id, "Routes", new { i = item.id }, null )
+                        if(item.status_id != 3){
+                            @Html.ActionLink("Show Route", "Details/" + item.route_id, "Routes", new { i = item.id }, null )
+                        }
+                        else{
+                            @Html.ActionLink("Show Route", "Details/" + item.route_id, "Routes")                
+                        }            
                     }
                 </td>
                 <td>
@@ -121,6 +132,9 @@
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.delivery_price)"/>
             </th>
             <th>
+                <input type="text" placeholder="@Html.DisplayNameFor(model => model.currency)"/>
+            </th>
+            <th>
                 <input type="text" placeholder="@Html.DisplayNameFor(model => model.note)"/>
             </th>
             <th>
@@ -153,7 +167,7 @@
             var oTable = $('#Items').dataTable({
                 "aaSorting": [[4, "desc"]],
                 "sDom": '<"top"l>rt<"bottom"ip>',
-                "aoColumns": [null, null, null, null, null, null, null, null, null, null, { "bSortable": false }],
+                "aoColumns": [null, null, null, null, null, null, null, null, null, null, null, { "bSortable": false }],
                 "iDisplayLength": 5,
                 "oLanguage": {
                     "sLengthMenu": 'Display <select>' +

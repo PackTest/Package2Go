@@ -21,45 +21,45 @@ namespace Package2Go5.Controllers
             return View();
         }
 
-        public JsonResult FindTripsPoints(int show)
-        {
-            var points = "";
+        //public JsonResult FindTripsPoints(int show)
+        //{
+        //    var points = "";
 
-            if (show == 0 || show == 1)
-            {
-                foreach (Routes route in db.Routes)
-                {
-                    points += route.id + ":" + routesManager.GetOnlyCities(route.from, ",") + ","
-                            + routesManager.GetOnlyCities(route.waypoints, ",") + ",";
-                }
-            }
+        //    if (show == 0 || show == 1)
+        //    {
+        //        foreach (Routes route in db.Routes)
+        //        {
+        //            points += route.id + ":" + routesManager.GetOnlyCities(route.from, ",") + ","
+        //                    + routesManager.GetOnlyCities(route.waypoints, ",") + ",";
+        //        }
+        //    }
 
-            if (show == 0 || show == 2)
-            {
-                points += "items,";
-                IEnumerable<Items> items;
-                int userId = 0;
+        //    if (show == 0 || show == 2)
+        //    {
+        //        points += "items,";
+        //        IEnumerable<Items> items;
+        //        int userId = 0;
 
-                if (Request.Cookies["UserId"] != null)
-                    userId = int.Parse(Request.Cookies["UserId"].Value);
+        //        if (Request.Cookies["UserId"] != null)
+        //            userId = int.Parse(Request.Cookies["UserId"].Value);
 
-                if (show == 2)
-                {
-                    items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
-                }else{
-                    items = db.Items;  
-                }
+        //        if (show == 2)
+        //        {
+        //            items = db.Items.Where(i => i.UsersItems.Any(ui => ui.user_id != userId));
+        //        }else{
+        //            items = db.Items;  
+        //        }
 
-                foreach (Items item in items)
-                {
-                    points += item.id + ":" + routesManager.GetOnlyCities(item.delivery_address, ",") + ",";
-                }
-            }
+        //        foreach (Items item in items)
+        //        {
+        //            points += item.id + ":" + routesManager.GetOnlyCities(item.delivery_address, ",") + ",";
+        //        }
+        //    }
 
-            points = points.Substring(0, points.Length - 1);
+        //    points = points.Substring(0, points.Length - 1);
 
-            return Json(points, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(points, JsonRequestBehavior.AllowGet);
+        //}
 
         public JsonResult FindItems(int my = 0) 
         {

@@ -137,7 +137,7 @@
             $("#Routes").on("dblclick", "tr", function () {
                 var iPos = oTable.fnGetPosition(this);
                 var aData = oTable.fnGetData(iPos);
-                window.location.href = 'Routes/Details/' + aData[0];
+                window.location.href = 'Routes/Details/' + $(aData[0]).val();
             });
 
             //Offers
